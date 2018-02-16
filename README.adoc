@@ -1,0 +1,97 @@
+// Copyright (c) 2017 IBM Corporation and others.
+// Licensed under Creative Commons Attribution-NoDerivatives
+// 4.0 International (CC BY-ND 4.0)
+//   https://creativecommons.org/licenses/by-nd/4.0/
+//
+// Contributors:
+//   IBM Corporation
+:projectid: microprofile-openapi
+:page-layout: guide
+:page-duration: 15 minutes
+// :page-releasedate: 2017-12-11
+:page-description: yay
+:page-tags: ['MicroProfile', 'OpenAPI']
+:page-permalink: /guides/{projectid}
+:page-related-guides: ['cdi-intro']
+:common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
+:source-highlighter: prettify
+= OpenAPI
+
+Learn how to
+
+
+:inv-url: http://localhost:9080/inventory/systems
+:sys-url: http://localhost:9080/system/properties
+
+
+== What you'll learn
+
+
+
+// =================================================================================================
+// Getting Started
+// =================================================================================================
+
+include::{common-includes}/gitclone.adoc[]
+
+
+=== Try what you'll build
+
+The `finish` directory in the root directory of this guide contains two services that have been configured
+to use MicroProfile OpenTracing. Feel free to give them a try before you proceed.
+
+To try out the services, first navigate to the `finish` directory and then execute the following
+Maven goals to build the services and run them in two instances of Open Liberty:
+
+```
+mvn install liberty:start-server
+```
+
+Point your browser to
+
+Once you are done checking out the services, stop both Open Liberty servers:
+
+```
+mvn liberty:stop-server
+```
+
+Now, navigate back to the `start` directory to begin.
+
+
+// =================================================================================================
+// Building the application
+// =================================================================================================
+
+include::{common-includes}/mvnbuild.adoc[]
+
+You can find the `inventory` and `system` services at:
+
+- {inv-url}
+- {sys-url}
+
+include::{common-includes}/mvnpackage.adoc[]
+
+
+// =================================================================================================
+// Main
+// =================================================================================================
+
+
+// =================================================================================================
+// Testing the services
+// =================================================================================================
+
+
+
+// =================================================================================================
+// Great work! You're done!
+// =================================================================================================
+
+== Great work! You're done!
+
+You have just
+
+Feel free to try one of the related MicroProfile guides. They demonstrate new technologies that you can learn and
+expand on top what you built here.
+
+include::{common-includes}/finish.adoc[]
