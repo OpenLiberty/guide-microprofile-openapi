@@ -19,25 +19,19 @@ import io.openliberty.guides.inventory.model.InventoryList;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import org.eclipse.microprofile.opentracing.Traced;
-
-import io.opentracing.Span;
-import io.opentracing.Tracer;
-
 @ApplicationScoped
 public class InventoryManager {
 
     private InventoryList invList = new InventoryList();
 
     public Properties get(String hostname) {
-        SystemClient systemClient = new SystemClient(hostname, 9080);
+        SystemClient systemClient = new SystemClient(hostname);
 
         Properties properties = systemClient.getProperties();
         if (properties != null) {
-                invList.addToInventoryList(hostname, properties);
-            }
+            invList.addToInventoryList(hostname, properties);
+        }
         return properties;
-
     }
 
     public InventoryList list() {

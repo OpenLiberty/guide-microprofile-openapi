@@ -26,8 +26,6 @@ import javax.ws.rs.core.Response;
 
 import io.openliberty.guides.inventory.model.InventoryList;
 
-import org.eclipse.microprofile.opentracing.Traced;
-
 @RequestScoped
 @Path("systems")
 public class InventoryResource {

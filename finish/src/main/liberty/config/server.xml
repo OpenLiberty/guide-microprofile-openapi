@@ -4,16 +4,12 @@
     <feature>jaxrs-2.0</feature>
     <feature>jsonp-1.0</feature>
     <feature>cdi-1.2</feature>
-    <feature>mpOpentracing-1.0</feature>
-    <feature>usr:opentracingZipkin-0.30</feature>
+    <feature>mpOpenAPI-1.0</feature>
   </featureManager>
-
-  <opentracingZipkin host="localhost"/>
 
   <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}"
       id="defaultHttpEndpoint" host="*" />
 
-  <!-- <logging traceSpecification="com.ibm.ws.opentracing.cdi.*=all"/> -->
+  <webApplication location="mp-openapi.war" contextRoot="/" />
 
-  <webApplication location="system-service.war" contextRoot="/"/>
 </server>
