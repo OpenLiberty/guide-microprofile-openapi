@@ -59,6 +59,31 @@ Now, navigate back to the `start` directory to begin.
 
 
 // =================================================================================================
+// Main
+// =================================================================================================
+
+https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps
+
+Annotations:
+1. Enable the feature to see the skeleton document generated
+2. Demonstrate annotating simple methods (list method)
+3. Demonstrate annotating slightly more complex methods, with multiple responses (system/<hostname>)
+4. Demonstrate annotating a POJO (InvList?)
+
+Static OpenAPI files:
+
+Programming model:
+
+Filter:
+
+Processing rules:
+
+other:
+- talk about limitations (restriction to one app) + everything else in section 5
+- link to existing demo apps
+- cannot have more than one jax-rs application
+
+// =================================================================================================
 // Building the application
 // =================================================================================================
 
@@ -71,10 +96,6 @@ You can find the `inventory` and `system` services at:
 
 include::{common-includes}/mvnpackage.adoc[]
 
-
-// =================================================================================================
-// Main
-// =================================================================================================
 
 
 // =================================================================================================
