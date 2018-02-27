@@ -44,7 +44,7 @@ public class InventoryResource {
     @APIResponses(value = {
         @APIResponse(
             responseCode = "404",
-            description = "Invalid hostname or the system service may not be running on the host.",
+            description = "Missing description - to be filtered.",
             content = @Content(
                 mediaType = "none")),
         @APIResponse(

@@ -9,23 +9,32 @@
 :page-layout: guide
 :page-duration: 15 minutes
 // :page-releasedate: 2017-12-11
-:page-description: yay
+:page-description: Learn how to expose and filter RESTful APIs from code or static files using MicroProfile OpenAPI.
 :page-tags: ['MicroProfile', 'OpenAPI']
 :page-permalink: /guides/{projectid}
 :page-related-guides: ['cdi-intro']
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
 :source-highlighter: prettify
-= OpenAPI
+= Exposing RESTful APIs
 
-Learn how to
+Learn how to expose and filter RESTful APIs from code or static files using MicroProfile OpenAPI.
 
 
+:openapi-url: http://localhost:9080/openapi
 :inv-url: http://localhost:9080/inventory/systems
-:sys-url: http://localhost:9080/system/properties
+:sys-url: http://localhost:9080/inventory/properties
 
 
 == What you'll learn
 
+You will learn how to expose and filter APIs of RESTful web services from annotations, static OpenAPI files,
+and/or OpenAPI trees using MicroProfile OpenAPI.
+
+
+
+What is openapi?
+What is mpopenapi?
+What you will do/configure?
 
 
 // =================================================================================================
@@ -71,12 +80,17 @@ Annotations:
 4. Demonstrate annotating a POJO (InvList?)
 
 Static OpenAPI files:
+- show how this can be done for the system service
 
 Programming model:
 
 Filter:
+- filter description for APIResponse and change it
+- mention that in order to get rid of an element, then null can be returned.
+
 
 Processing rules:
+- dont need to talk about these?
 
 other:
 - talk about limitations (restriction to one app) + everything else in section 5
