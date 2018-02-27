@@ -27,14 +27,21 @@ Learn how to expose and filter RESTful APIs from code or static files using Micr
 
 == What you'll learn
 
-You will learn how to expose and filter APIs of RESTful web services from annotations, static OpenAPI files,
-and/or OpenAPI trees using MicroProfile OpenAPI.
+You will learn how to expose and filter RESTful APIs from annotations, static OpenAPI files, and/or
+OpenAPI trees using MicroProfile OpenAPI.
 
+The OpenAPI specification (previously known as the Swagger specification) defines a standard interface
+for exposing RESTful APIs which enables both humans and computers to understand the functionalities of
+services without requiring direct access to the source code or documentation. The MicroProfile OpenAPI
+specification, aims to provide a set of Java interfaces and programming models which allow Java developers
+to natively produce OpenAPI v3 documents from their JAX-RS applications.
 
-
-What is openapi?
-What is mpopenapi?
-What you will do/configure?
+You will expose the RESTful APIs of the provided `inventory` service. Note, if you have read through
+some of the other MicroProfile guides, you may recognize the code you will be working with. While the
+application still functions the same way, the `system` service has been merged into the `inventory`
+service due a current limitation of MicroProfile OpenAPI v1.0 of supporting multiple JAX-RS applications.
+As a result, the `properties` resource of the `system` service is now served at `inventory/properties`
+rather than `system/properties`.
 
 
 // =================================================================================================
@@ -46,17 +53,22 @@ include::{common-includes}/gitclone.adoc[]
 
 === Try what you'll build
 
-The `finish` directory in the root directory of this guide contains two services that have been configured
-to use MicroProfile OpenTracing. Feel free to give them a try before you proceed.
+The `finish` directory in the root directory of this guide contains contains the fully exposed `inventory`
+service. Feel free to give it a try before you proceed.
 
-To try out the services, first navigate to the `finish` directory and then execute the following
-Maven goals to build the services and run them in two instances of Open Liberty:
+To try out the service, navigate to the `finish` directory and then run the Maven `install` and
+`liberty:start-server` goals to build and run the service in Open Liberty:
 
 ```
+cd finish
 mvn install liberty:start-server
 ```
 
-Point your browser to
+// I think here I can say "you'll see" because its still part of the same sentence and its assumed that
+// the user will finish reading the sentence first before doing anything. If it were two sentences, then
+// it would be "You see".
+Next, point your browser to {openapi-url} and you'll see the RESTful APIs of the `inventory` service.
+You can also point to {openapi-url}/ui for a more interactive view of the deployed APIs.
 
 Once you are done checking out the services, stop both Open Liberty servers:
 
