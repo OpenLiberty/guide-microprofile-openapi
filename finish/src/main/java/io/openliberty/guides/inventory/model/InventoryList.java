@@ -46,8 +46,10 @@ public class InventoryList {
     @Schema(name="System", description="POJO that represents a single inventory entry.")
     class System {
 
-        @Schema(required = true) private final String hostname;
-        @Schema(required = true) private final Properties properties;
+        @Schema(required = true) 
+        private final String hostname;
+        @Schema(required = true) 
+        private final Properties properties;
 
         public System(String hostname, Properties properties) {
             this.hostname = hostname;

@@ -1,9 +1,18 @@
 openapi: 3.0.0
 info:
-  title: Deployed APIs
-  version: 1.0.0
+  title: Inventory App
+  description: Application for storing JVM system properties of various hosts.
+  license:
+    name: Eclipse Public License - v 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  version: "1.0"
 servers:
-- url: http://localhost:9080
+- url: http://localhost:{port}
+  description: Simple Open Liberty.
+  variables:
+    port:
+      description: Server HTTP port.
+      default: "9080"
 paths:
   /inventory/systems/{hostname}:
     get:
@@ -21,7 +30,8 @@ paths:
         example: foo
       responses:
         404:
-          description: Missing description - to be filtered.
+          description: Invalid hostname or the system service may not be running on
+            the particular host.
           content:
             none: {}
         200:

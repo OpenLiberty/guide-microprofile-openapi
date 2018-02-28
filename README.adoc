@@ -33,7 +33,7 @@ OpenAPI trees using MicroProfile OpenAPI.
 The OpenAPI specification (previously known as the Swagger specification) defines a standard interface
 for exposing RESTful APIs which enables both humans and computers to understand the functionalities of
 services without requiring direct access to the source code or documentation. The MicroProfile OpenAPI
-specification, aims to provide a set of Java interfaces and programming models which allow Java developers
+specification aims to provide a set of Java interfaces and programming models which allow Java developers
 to natively produce OpenAPI v3 documents from their JAX-RS applications.
 
 You will expose the RESTful APIs of the provided `inventory` service. Note, if you have read through
@@ -64,24 +64,201 @@ cd finish
 mvn install liberty:start-server
 ```
 
-// I think here I can say "you'll see" because its still part of the same sentence and its assumed that
-// the user will finish reading the sentence first before doing anything. If it were two sentences, then
-// it would be "You see".
+// I think here I can say "you'll see" because its still part of the same sentence and its assumed that the user
+// will finish reading the sentence first before doing anything. If it were two sentences, then it would be "You see".
 Next, point your browser to {openapi-url} and you'll see the RESTful APIs of the `inventory` service.
 You can also point to {openapi-url}/ui for a more interactive view of the deployed APIs.
 
-Once you are done checking out the services, stop both Open Liberty servers:
+Once you are done checking out the service and its APIs, stop Open Liberty:
 
 ```
 mvn liberty:stop-server
 ```
 
-Now, navigate back to the `start` directory to begin.
+
+// =================================================================================================
+// Generating APIs
+// =================================================================================================
+
+== Generating the OpenAPI document for the inventory service
+
+There are a variety of ways to go about generating the resulting OpenAPI document. First of all, because
+all JAX-RS annotations are processed by default, you can augment your existing JAX-RS annotations with
+OpenAPI annotations to enrich your APIs with minimal amount of work. Second, you can use a set of predefined
+models to manually create all elements of the OpenAPI tree. Finally, you can filter various elements of the
+OpenAPI tree, changing them to your liking or removing them entirely.
+
+Before you proceed, try deploying the current `inventory` service and checking the resulting document.
+Because the JAX-RS framework handles basic API generation for JAX-RS annotations, you will see a skeleton
+of your OpenAPI tree. To do this, navigate to the `start` directory in the root directory of the guide,
+then build and run the service using Maven:
+
+```
+cd start
+mvn clean install liberty:start-server
+```
+
+The `install` goal builds the application and creates a `.war` file in the `target` directory. It also
+configures and installs Open Liberty into the `target/liberty/wlp` directory. The `liberty:start-server`
+goals starts the built application in Open Liberty.
+
+Now point to {openapi-url} to see the generated OpenAPI document.
+
+
+=== Augmenting the existing JAX-RS annotations with OpenAPI annotations
+
+As mentioned previously, because all JAX-RS annotations are processed by default, you can augment your
+existing JAX-RS annotations with OpenAPI annotations without having to re-write portions of the OpenAPI
+document that are already covered by the JAX-RS framework.
+
+Add OpenAPI annotations to the two JAX-RS methods in the `InventoryResource` class:
+
+[source, Java]
+----
+include::finish/src/main/java/io/openliberty/guides/inventory/InventoryResource.java[tags=**;!copyright]
+----
+
+Let's break down the new annotations:
+
+[cols="35, 200"]
+|===
+| *Annotation*    | *Description*
+| `@APIResponses` | A container for multiple responses from an API operation. This annotation is
+optional, but it can be helpful to organize a method with multiple responses.
+| `@APIResponse`  | Describes a single response from an API operation.
+| `@Content`      | Provides schema and examples for a particular media type.
+| `@Schema`       | Allows the definition of input and output data types.
+| `@Operation`    | Describes an operation or typically a HTTP method against a specific path.
+| `@Parameter`    | Describes a single operation parameter.
+|===
+
+At this point, you can run the `mvn package` command to rebuild the application. Then refresh {openapi-url}
+to see the updated OpenAPI tree. The two endpoint your JAX-RS methods are served at will now be more
+meaningful:
+
+[source, YAML, role="no_copy"]
+----
+/inventory/systems/{hostname}:
+  get:
+    summary: Get JVM system properties for particular host
+    description: Retrieves and returns the JVM system properties from the system
+      service running on the particular host.
+    operationId: getPropertiesForHost
+    parameters:
+    - name: hostname
+      in: path
+      description: The host for whom to retrieve the JVM system properties for.
+      required: true
+      schema:
+        type: string
+      example: foo
+    responses:
+      404:
+        description: Missing description - to be filtered.
+        content:
+          none: {}
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Properties'
+/inventory/systems:
+  get:
+    summary: List inventory contents.
+    description: Returns the currently stored host:properties pairs in the inventory.
+    operationId: listContents
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/InventoryList'
+----
+
+You may also add OpenAPI annotation to POJOs. Augment the `InventoryList` POJO with OpenAPI annotations:
+
+[source, Java]
+----
+include::finish/src/main/java/io/openliberty/guides/inventory/model/InventoryList.java[tags=**;!copyright]
+----
+
+Once again, run `mvn package` and refresh {openapi-url} to see the updated OpenAPI tree:
+
+[source, YAML, role="no_copy"]
+----
+components:
+  schemas:
+    InventoryList:
+      required:
+      - systems
+      type: object
+      properties:
+        systems:
+          type: array
+          items:
+            $ref: '#/components/schemas/System'
+        total:
+          type: integer
+      description: POJO that represents the inventory contents.
+    Properties:
+      type: object
+      additionalProperties:
+        type: string
+    System:
+      required:
+      - hostname
+      - properties
+      type: object
+      properties:
+        hostname:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+      description: POJO that represents a single inventory entry.
+----
+
+
+=== Bootstrapping the OpenAPI tree using the `OASFactory`
+
+Alternatively to using OpenAPI annotations, you can use the `OASFactory` class to manually create any
+elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models` package.
+
+Notice that your current OpenAPI document doesn't provide much information on the application itself,
+as well as on what server and port it runs (`info` and `servers` elements). This part of the OpenAPI
+tree can be defined using the `OASFactory` like so:
+
+[source, Java, indent=0]
+----
+include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[tags=oasfactory]
+----
+
+For now, hold off from copying this code anywhere. It will fit nicely into the class you'll create
+in the next section.
+
+While you can create parts of the OpenAPI tree using the `OASFactory` class, you can also create the
+entire tree by implementing the `OASModelReader` interface. However, because this class would turn out
+to be be extremely long, you will not be creating it here. Instead, feel free to take a look at the
+following example in the official MicroProfile OpenAPI GitHub repository:
+
+https://github.com/arthurdm/microprofile-open-api/blob/master/tck/src/main/java/org/eclipse/microprofile/openapi/reader/MyOASModelReaderImpl.java
+
+
+=== Filtering the OpenAPI tree elements
+
 
 
 // =================================================================================================
-// Main
+// Pre-generated APIs
 // =================================================================================================
+
+== Using pre-generated OpenAPI documents
+
+As an alternative to generating the OpenAPI model tree from code, you can
+
 
 https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps
 
@@ -95,11 +272,13 @@ Static OpenAPI files:
 - show how this can be done for the system service
 
 Programming model:
+- see filter point 2
 
 Filter:
-- filter description for APIResponse and change it
+- edit description of 404
+- add info and servers
+- mention that `filterOpenAPI()` must be executed last
 - mention that in order to get rid of an element, then null can be returned.
-
 
 Processing rules:
 - dont need to talk about these?

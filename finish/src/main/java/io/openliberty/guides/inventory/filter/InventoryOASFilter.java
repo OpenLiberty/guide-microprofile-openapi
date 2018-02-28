@@ -10,7 +10,7 @@
  *     IBM Corporation - Initial implementation
  *******************************************************************************/
 // end::copyright[]
-package io.openliberty.guides.filter;
+package io.openliberty.guides.inventory.filter;
 
 import java.util.Arrays;
 
@@ -36,6 +36,7 @@ public class InventoryOASFilter implements OASFilter {
     
     @Override
     public void filterOpenAPI(OpenAPI openAPI) {
+        // tag::oasfactory[]
         openAPI.setInfo(OASFactory.createObject(Info.class)
                 .title("Inventory App")
                 .version("1.0")
@@ -51,6 +52,7 @@ public class InventoryOASFilter implements OASFilter {
                         .addServerVariable("port", OASFactory.createObject(ServerVariable.class)
                                 .description("Server HTTP port.")
                                 .defaultValue("9080")))));
+        // end::oasfactory[]
     }
 
 }
