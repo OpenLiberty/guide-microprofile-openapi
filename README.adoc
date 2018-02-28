@@ -307,7 +307,15 @@ include::{common-includes}/mvnpackage.adoc[]
 // Testing the services
 // =================================================================================================
 
+== Testing the service
 
+A few tests have been included for you to test the basic functionality of the `inventory` service. If a test
+failure occurs, then you must have introduced a bug into your code. These tests will run automatically
+as a part of the Maven build process (when you run `mvn install`). You can also run these tests separately
+from the build using the `mvn verify` command, but make sure that the server is stopped beforehand.
+
+No explicit tests exist to verify the correctness of the generated OpenAPI tree. This can be verified
+manually by visiting {openapi-url} or {openapi-url}/ui.
 
 // =================================================================================================
 // Great work! You're done!
