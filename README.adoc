@@ -43,6 +43,9 @@ service due a current limitation of MicroProfile OpenAPI v1.0 of supporting mult
 As a result, the `properties` resource of the `system` service is now served at `inventory/properties`
 rather than `system/properties`.
 
+You can find the complete MicroProfile OpenAPI spec on its official GitHub repistory:
+https://github.com/eclipse/microprofile-open-api/blob/master/spec/src/main/asciidoc/microprofile-openapi-spec.adoc
+
 
 // =================================================================================================
 // Getting Started
@@ -111,7 +114,7 @@ As mentioned previously, because all JAX-RS annotations are processed by default
 existing JAX-RS annotations with OpenAPI annotations without having to re-write portions of the OpenAPI
 document that are already covered by the JAX-RS framework.
 
-Add OpenAPI annotations to the two JAX-RS methods in the `InventoryResource` class:
+Add OpenAPI annotations to the two JAX-RS methods in the `src/main/java/io/openliberty/guides/inventory/InventoryResource.java` class:
 
 [source, Java]
 ----
@@ -177,7 +180,8 @@ meaningful:
                 $ref: '#/components/schemas/InventoryList'
 ----
 
-You may also add OpenAPI annotation to POJOs. Augment the `InventoryList` POJO with OpenAPI annotations:
+You may also add OpenAPI annotation to POJOs. Augment the `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
+POJO with OpenAPI annotations:
 
 [source, Java]
 ----
@@ -228,8 +232,8 @@ Alternatively to using OpenAPI annotations, you can use the `OASFactory` class t
 elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models` package.
 
 Notice that your current OpenAPI document doesn't provide much information on the application itself,
-as well as on what server and port it runs (`info` and `servers` elements). This part of the OpenAPI
-tree can be defined using the `OASFactory` like so:
+as well as what server and port it runs on (`info` and `servers` elements). This can be defined like so
+using the `OASFactory`:
 
 [source, Java, indent=0]
 ----
@@ -249,6 +253,60 @@ https://github.com/arthurdm/microprofile-open-api/blob/master/tck/src/main/java/
 
 === Filtering the OpenAPI tree elements
 
+There may be scenarios where you may wish to update or remove certain elements and fields of the OpenAPI
+document. This can be done using the `OASFilter` interface.
+
+Implement `OASFilter` in the `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java` class:
+
+[source, Java, indent=0]
+----
+include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[tags=**;!copyright]
+----
+
+The `filterAPIResponse()` method allows filtering of a particular `APIResponse`. In this case, you are
+filling in the previously missing description for the `404` response returned by the `/inventory/systems/<badhostname>`
+endpoint. To remove an `APIResponse`, or any other filterable element in general, return `null`.
+
+The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Recall the `OASFactory`
+example from the previous section. Use that code in this method to create the missing `Info` and `Server`
+elements. Note that this is the only element which cannot be removed. Note also that this method is
+always called last for a given filter. Hence, make sure that it doesn't overwrite any other filter
+operations that are called before it.
+
+Each filtering method is called once for each corresponding element in the model tree. You can think
+of each such method as a callback for various key OpenAPI elements.
+
+Next, you must register your newly created filter class in order to use it. This can be done using MicroProfile Config.
+Create the following configuration file `src/main/webapp/META-INF/microprofile-config.properties`:
+
+```
+mp.openapi.filter = io.openliberty.guides.inventory.filter.InventoryOASFilter
+```
+
+By passing in the fully qualified name of the filter class into the `mp.openapi.filter` configuration key,
+you are registering your filter.
+
+Finally, run `mvn package` and refresh {openapi-url} to see the updated OpenAPI tree:
+[source, yaml, role="no_copy"]
+----
+info:
+  title: Inventory App
+  description: Application for storing JVM system properties of various hosts.
+  license:
+    name: Eclipse Public License - v 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  version: "1.0"
+servers:
+- url: http://localhost:{port}
+  description: Simple Open Liberty.
+  variables:
+    port:
+      description: Server HTTP port.
+      default: "9080"
+----
+
+To learn more about what elements you can filter, visit the official MicroProfile OpenAPI GitHub repistory:
+https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFilter.java
 
 
 // =================================================================================================
@@ -257,50 +315,52 @@ https://github.com/arthurdm/microprofile-open-api/blob/master/tck/src/main/java/
 
 == Using pre-generated OpenAPI documents
 
-As an alternative to generating the OpenAPI model tree from code, you can
+As an alternative means to generating the OpenAPI model tree from code, you can include a valid pre-generated
+OpenAPI document. Depending on the scenario, the document may be fully complete or partially complete.
+Every such document is required to be named `openapi` with an extension of `yml`, `yaml`, or `json` and
+be provided under the `META-INF` directory. If more than one document is found that matches one of these
+extensions, then the behaviour for choosing this file is underfined.
 
+We are providing you with a complete OpenAPI document under `src/main/webapp/META-INF/openapi.yaml`.
+This document is the same as your current OpenAPI document, with the exception that it contains the
+missing APIs for the `/inventory/properties` endpoint. In order to use this document, you must set
+the `mp.openapi.scan.disable` property to `true` in the `microprofile-config.properties` file:
 
-https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps
+```
+mp.openapi.filter = io.openliberty.guides.inventory.filter.InventoryOASFilter
+mp.openapi.scan.disable = true
+```
 
-Annotations:
-1. Enable the feature to see the skeleton document generated
-2. Demonstrate annotating simple methods (list method)
-3. Demonstrate annotating slightly more complex methods, with multiple responses (system/<hostname>)
-4. Demonstrate annotating a POJO (InvList?)
+Run `mvn package` and refresh {openapi-url} to see the updated OpenAPI tree:
 
-Static OpenAPI files:
-- show how this can be done for the system service
+[source, yml, role="no_copy"]
+----
+/inventory/properties:
+  get:
+    summary: Get JVM system properties.
+    description: Returns the JVM system properties for the host running this service.
+    operationId: getProperties
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Properties'
+----
 
-Programming model:
-- see filter point 2
-
-Filter:
-- edit description of 404
-- add info and servers
-- mention that `filterOpenAPI()` must be executed last
-- mention that in order to get rid of an element, then null can be returned.
-
-Processing rules:
-- dont need to talk about these?
-
-other:
-- talk about limitations (restriction to one app) + everything else in section 5
-- link to existing demo apps
-- cannot have more than one jax-rs application
 
 // =================================================================================================
 // Building the application
 // =================================================================================================
 
-include::{common-includes}/mvnbuild.adoc[]
-
-You can find the `inventory` and `system` services at:
-
-- {inv-url}
-- {sys-url}
-
-include::{common-includes}/mvnpackage.adoc[]
-
+// include::{common-includes}/mvnbuild.adoc[]
+//
+// You can find the `inventory` and `system` services at:
+//
+// - {inv-url}
+// - {sys-url}
+//
+// include::{common-includes}/mvnpackage.adoc[]
 
 
 // =================================================================================================
@@ -310,12 +370,13 @@ include::{common-includes}/mvnpackage.adoc[]
 == Testing the service
 
 A few tests have been included for you to test the basic functionality of the `inventory` service. If a test
-failure occurs, then you must have introduced a bug into your code. These tests will run automatically
+failure occurs, then you must have introduced a bug into the code. These tests will run automatically
 as a part of the Maven build process (when you run `mvn install`). You can also run these tests separately
 from the build using the `mvn verify` command, but make sure that the server is stopped beforehand.
 
 No explicit tests exist to verify the correctness of the generated OpenAPI tree. This can be verified
 manually by visiting {openapi-url} or {openapi-url}/ui.
+
 
 // =================================================================================================
 // Great work! You're done!
@@ -323,9 +384,15 @@ manually by visiting {openapi-url} or {openapi-url}/ui.
 
 == Great work! You're done!
 
-You have just
+You have just exposed and filtered the APIs of the `inventory` service from both code and a static file
+using MicroProfile OpenAPI.
 
-Feel free to try one of the related MicroProfile guides. They demonstrate new technologies that you can learn and
-expand on top what you built here.
+Feel free to try one of the related MicroProfile guides. They demonstrate new technologies that you
+can learn and expand on top what you built here.
+
+For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications found on the official
+MicroProfile OpenAPI GitHub repository:
+https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps
+
 
 include::{common-includes}/finish.adoc[]
