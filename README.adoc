@@ -27,17 +27,17 @@ Learn how to expose and filter RESTful APIs from code or static files using Micr
 
 == What you'll learn
 
-You will learn how to expose and filter RESTful APIs from annotations, static OpenAPI files, and/or
-OpenAPI trees using MicroProfile OpenAPI.
+You will learn how to expose and filter RESTful APIs from annotations, POJOs, and/or static OpenAPI
+files using MicroProfile OpenAPI.
 
 The OpenAPI specification (previously known as the Swagger specification) defines a standard interface
-for exposing RESTful APIs which enables both humans and computers to understand the functionalities of
-services without requiring direct access to the source code or documentation. The MicroProfile OpenAPI
+for exposing RESTful APIs. This gives both humans and computers a better understanding of the functionalities of
+services without requiring direct access to their source code or documentation. The MicroProfile OpenAPI
 specification aims to provide a set of Java interfaces and programming models which allow Java developers
 to natively produce OpenAPI v3 documents from their JAX-RS applications.
 
 You will expose the RESTful APIs of the provided `inventory` service. Note, if you have read through
-some of the other MicroProfile guides, you may recognize the code you will be working with. While the
+some of the other MicroProfile guides, you may recognize this service. While the
 application still functions the same way, the `system` service has been merged into the `inventory`
 service due a current limitation of MicroProfile OpenAPI v1.0 of supporting multiple JAX-RS applications.
 As a result, the `properties` resource of the `system` service is now served at `inventory/properties`
@@ -180,7 +180,7 @@ meaningful:
                 $ref: '#/components/schemas/InventoryList'
 ----
 
-You may also add OpenAPI annotation to POJOs. Augment the `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
+You may also add OpenAPI annotations to POJOs. Augment the `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
 POJO with OpenAPI annotations:
 
 [source, Java]
@@ -240,6 +240,10 @@ using the `OASFactory`:
 include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[tags=oasfactory]
 ----
 
+The first block of code sets the `info` element of the OpenAPI tree to be the `Info` object created
+using the `OASFactory`. The second block of code is similar and it sets the `servers` element to be a
+list of `Server` objects.
+
 For now, hold off from copying this code anywhere. It will fit nicely into the class you'll create
 in the next section.
 
@@ -268,7 +272,7 @@ filling in the previously missing description for the `404` response returned by
 endpoint. To remove an `APIResponse`, or any other filterable element in general, return `null`.
 
 The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Recall the `OASFactory`
-example from the previous section. Use that code in this method to create the missing `Info` and `Server`
+example from the previous section. Use that code in this method to set the missing `info` and `servers`
 elements. Note that this is the only element which cannot be removed. Note also that this method is
 always called last for a given filter. Hence, make sure that it doesn't overwrite any other filter
 operations that are called before it.
@@ -316,15 +320,20 @@ https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/o
 == Using pre-generated OpenAPI documents
 
 As an alternative means to generating the OpenAPI model tree from code, you can include a valid pre-generated
-OpenAPI document. Depending on the scenario, the document may be fully complete or partially complete.
-Every such document is required to be named `openapi` with an extension of `yml`, `yaml`, or `json` and
+OpenAPI document. Every such document is required to be named `openapi` with an extension of `yml`, `yaml`, or `json` and
 be provided under the `META-INF` directory. If more than one document is found that matches one of these
-extensions, then the behaviour for choosing this file is underfined.
+extensions, then the behaviour for choosing this file is undefined. Depending on the scenario, the document
+may be fully complete or partially complete. If the document is fully complete, then annotation scanning
+can be disabled using the `mp.openapi.scan.disable` property. If the document is partially complete,
+then it can be augmented with code or filters.
 
 We are providing you with a complete OpenAPI document under `src/main/webapp/META-INF/openapi.yaml`.
 This document is the same as your current OpenAPI document, with the exception that it contains the
-missing APIs for the `/inventory/properties` endpoint. In order to use this document, you must set
-the `mp.openapi.scan.disable` property to `true` in the `microprofile-config.properties` file:
+missing APIs for the `/inventory/properties` endpoint. Open this document in your favourite text
+editor and uncomment all of its lines. Since this is a complete OpenAPI document, you
+no longer need to have any of the OpenAPI annotations you've defined previously. You don't have to
+remove these explicitly, instead simply set the `mp.openapi.scan.disable` property to `true` in the
+`src/main/webapp/META-INF/microprofile-config.properties` file:
 
 ```
 mp.openapi.filter = io.openliberty.guides.inventory.filter.InventoryOASFilter
