@@ -252,7 +252,7 @@ entire tree by implementing the `OASModelReader` interface. However, because thi
 to be be extremely long, you will not be creating it here. Instead, feel free to take a look at the
 following example in the official MicroProfile OpenAPI GitHub repository:
 
-https://github.com/arthurdm/microprofile-open-api/blob/master/tck/src/main/java/org/eclipse/microprofile/openapi/reader/MyOASModelReaderImpl.java
+https://github.com/eclipse/microprofile-open-api/blob/master/tck/src/main/java/org/eclipse/microprofile/openapi/reader/MyOASModelReaderImpl.java
 
 
 === Filtering the OpenAPI tree elements
