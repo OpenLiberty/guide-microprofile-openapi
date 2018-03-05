@@ -25,7 +25,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.provider.jsrjsonp.JsrJsonpProvider;
 
-public class EndpointTest {
+public class SystemEndpointTest {
 
     @Test
     public void testGetProperties() {
