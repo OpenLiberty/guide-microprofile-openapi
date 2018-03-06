@@ -114,7 +114,7 @@ As mentioned previously, because all JAX-RS annotations are processed by default
 existing JAX-RS annotations with OpenAPI annotations without having to re-write portions of the OpenAPI
 document that are already covered by the JAX-RS framework.
 
-Add OpenAPI annotations to the two JAX-RS methods in the `src/main/java/io/openliberty/guides/inventory/InventoryResource.java` class:
+Add OpenAPI annotations to the two JAX-RS methods in the `src/main/java/io/openliberty/guides/inventory/InventoryResource.java` file:
 
 [source, Java]
 ----
@@ -260,7 +260,7 @@ https://github.com/eclipse/microprofile-open-api/blob/master/tck/src/main/java/o
 There may be scenarios where you may wish to update or remove certain elements and fields of the OpenAPI
 document. This can be done using the `OASFilter` interface.
 
-Implement `OASFilter` in the `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java` class:
+Implement `OASFilter` in the `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java` file:
 
 [source, Java, indent=0]
 ----
