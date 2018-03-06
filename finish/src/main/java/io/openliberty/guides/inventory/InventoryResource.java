@@ -22,6 +22,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -53,8 +54,8 @@ public class InventoryResource {
                 schema = @Schema(implementation = Properties.class)))})
     @Operation(
         summary = "Get JVM system properties for particular host", 
-        description = "Retrieves and returns the JVM system properties from the system service running on "
-                    + "the particular host.")
+        description = "Retrieves and returns the JVM system properties from the system service "
+                    + "running on the particular host.")
     public Response getPropertiesForHost(
         @Parameter(
             name = "hostname",
@@ -66,8 +67,8 @@ public class InventoryResource {
         Properties props = manager.get(hostname);
         if (props == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                           .entity("ERROR: Unknown hostname or the system service may not be running on " 
-                                 + hostname)
+                           .entity("ERROR: Unknown hostname or the system service may not be "
+                                 + "running on " + hostname)
                            .build();
         }
         return Response.ok(props).build();
