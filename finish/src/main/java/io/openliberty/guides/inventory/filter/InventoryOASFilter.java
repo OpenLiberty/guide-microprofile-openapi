@@ -29,8 +29,8 @@ public class InventoryOASFilter implements OASFilter {
     @Override
     public APIResponse filterAPIResponse(APIResponse apiResponse) {
         if ("Missing description - to be filtered.".equals(apiResponse.getDescription())) {
-            apiResponse.setDescription("Invalid hostname or the system service may not be running on the "
-                                     + "particular host.");
+            apiResponse.setDescription("Invalid hostname or the system service may not be running " 
+                                     + "on the particular host.");
         }
         return apiResponse;
     }
