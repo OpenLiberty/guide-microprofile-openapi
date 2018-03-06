@@ -10,9 +10,9 @@
 :page-duration: 15 minutes
 // :page-releasedate: 2017-12-11
 :page-description: Learn how to expose and filter RESTful APIs from code or static files using MicroProfile OpenAPI.
-:page-tags: ['MicroProfile', 'OpenAPI', `microservices`, `@APIResponse`, `@Schema`, `@Content`, `@Operation`, `@Info`, `@Parameter`]
+:page-tags: ['MicroProfile', 'OpenAPI', 'microservices', '@APIResponse', '@Schema', '@Content', '@Operation', '@Info', '@Parameter']
 :page-permalink: /guides/{projectid}
-:page-related-guides: ['cdi-intro', `microprofile-config`]
+:page-related-guides: ['cdi-intro', 'microprofile-config']
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
 :source-highlighter: prettify
 = Exposing RESTful APIs
