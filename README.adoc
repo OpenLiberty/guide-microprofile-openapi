@@ -226,7 +226,7 @@ components:
 ----
 
 
-=== Bootstrapping the OpenAPI tree using the OASFactory
+=== Bootstrapping the OpenAPI tree using the `OASFactory`
 
 Alternatively to using OpenAPI annotations, you can use the `OASFactory` class to manually create any
 elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models` package.
