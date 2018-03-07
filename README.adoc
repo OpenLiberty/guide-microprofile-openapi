@@ -43,9 +43,6 @@ service due a current limitation of MicroProfile OpenAPI v1.0 of supporting mult
 As a result, the `properties` resource of the `system` service is now served at `inventory/properties`
 rather than `system/properties`.
 
-You can find the complete MicroProfile OpenAPI spec on its official GitHub repistory:
-https://github.com/eclipse/microprofile-open-api/blob/master/spec/src/main/asciidoc/microprofile-openapi-spec.adoc
-
 
 // =================================================================================================
 // Getting Started
