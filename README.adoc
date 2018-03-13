@@ -156,7 +156,7 @@ meaningful:
       404:
         description: Missing description - to be filtered.
         content:
-          none: {}
+          text/plain: {}
       200:
         content:
           application/json:
@@ -172,9 +172,7 @@ meaningful:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/InventoryList'
+              $ref: '#/components/schemas/InventoryList'
 ----
 
 You may also add OpenAPI annotations to POJOs. Augment the `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
@@ -288,6 +286,7 @@ By passing in the fully qualified name of the filter class into the `mp.openapi.
 you are registering your filter.
 
 Finally, run `mvn package` and refresh {openapi-url} to see the updated OpenAPI tree:
+
 [source, yaml, role="no_copy"]
 ----
 info:
@@ -304,6 +303,13 @@ servers:
     port:
       description: Server HTTP port.
       default: "9080"
+----
+
+[source, yaml, role="no_copy"]
+----
+404:
+  description: Invalid hostname or the system service may not be running on
+    the particular host.
 ----
 
 To learn more about what elements you can filter, visit the official MicroProfile OpenAPI GitHub repistory:

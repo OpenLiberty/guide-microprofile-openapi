@@ -14,17 +14,6 @@ servers:
       description: Server HTTP port.
       default: "9080"
 paths:
-  /inventory/systems:
-    get:
-      summary: List inventory contents.
-      description: Returns the currently stored host:properties pairs in the inventory.
-      operationId: listContents
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InventoryList'
   /inventory/systems/{hostname}:
     get:
       summary: Get JVM system properties for particular host
@@ -50,6 +39,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Properties'
+  /inventory/systems:
+    get:
+      summary: List inventory contents.
+      description: Returns the currently stored host:properties pairs in the inventory.
+      operationId: listContents
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryList'
   /inventory/properties:
     get:
       summary: Get JVM system properties.
