@@ -28,9 +28,9 @@ public class InventoryOASFilter implements OASFilter {
     
     @Override
     public APIResponse filterAPIResponse(APIResponse apiResponse) {
-        if ("Missing description - to be filtered.".equals(apiResponse.getDescription())) {
-            apiResponse.setDescription("Invalid hostname or the system service may not be running " 
-                                     + "on the particular host.");
+        if ("Missing description".equals(apiResponse.getDescription())) {
+            apiResponse.setDescription("Invalid hostname or the system service may not "
+                                     + "be running on the particular host.");
         }
         return apiResponse;
     }
@@ -39,20 +39,20 @@ public class InventoryOASFilter implements OASFilter {
     public void filterOpenAPI(OpenAPI openAPI) {
         // tag::oasfactory[]
         openAPI.setInfo(OASFactory.createObject(Info.class)
-                .title("Inventory App")
-                .version("1.0")
-                .description("Application for storing JVM system properties of various hosts.")
-                .license(OASFactory.createObject(License.class)
-                        .name("Eclipse Public License - v 1.0")
-                        .url("https://www.eclipse.org/legal/epl-v10.html")));
+            .title("Inventory App")
+            .version("1.0")
+            .description("App for storing JVM system properties of various hosts.")
+            .license(OASFactory.createObject(License.class)
+                .name("Eclipse Public License - v 1.0")
+                .url("https://www.eclipse.org/legal/epl-v10.html")));
         
         openAPI.setServers(Arrays.asList(OASFactory.createObject(Server.class)
-                .url("http://localhost:{port}")
-                .description("Simple Open Liberty.")
-                .variables(OASFactory.createObject(ServerVariables.class)
-                        .addServerVariable("port", OASFactory.createObject(ServerVariable.class)
-                                .description("Server HTTP port.")
-                                .defaultValue("9080")))));
+            .url("http://localhost:{port}")
+            .description("Simple Open Liberty.")
+            .variables(OASFactory.createObject(ServerVariables.class)
+                .addServerVariable("port", OASFactory.createObject(ServerVariable.class)
+                    .description("Server HTTP port.")
+                    .defaultValue("9080")))));
         // end::oasfactory[]
     }
 

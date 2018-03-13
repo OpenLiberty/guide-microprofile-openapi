@@ -154,7 +154,7 @@ meaningful:
       example: foo
     responses:
       404:
-        description: Missing description - to be filtered.
+        description: Missing description
         content:
           text/plain: {}
       200:
@@ -291,7 +291,7 @@ Finally, run `mvn package` and refresh {openapi-url} to see the updated OpenAPI 
 ----
 info:
   title: Inventory App
-  description: Application for storing JVM system properties of various hosts.
+  description: App for storing JVM system properties of various hosts.
   license:
     name: Eclipse Public License - v 1.0
     url: https://www.eclipse.org/legal/epl-v10.html
@@ -359,20 +359,6 @@ Run `mvn package` and refresh {openapi-url} to see the updated OpenAPI tree:
             schema:
               $ref: '#/components/schemas/Properties'
 ----
-
-
-// =================================================================================================
-// Building the application
-// =================================================================================================
-
-// include::{common-includes}/mvnbuild.adoc[]
-//
-// You can find the `inventory` and `system` services at:
-//
-// - {inv-url}
-// - {sys-url}
-//
-// include::{common-includes}/mvnpackage.adoc[]
 
 
 // =================================================================================================
