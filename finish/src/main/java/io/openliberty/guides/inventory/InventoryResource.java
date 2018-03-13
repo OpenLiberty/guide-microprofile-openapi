@@ -46,7 +46,7 @@ public class InventoryResource {
             responseCode = "404",
             description = "Missing description - to be filtered.",
             content = @Content(
-                mediaType = "none")),
+                mediaType = "text/plain")),
         @APIResponse(
             responseCode = "200",
             content = @Content(
@@ -58,11 +58,10 @@ public class InventoryResource {
                     + "running on the particular host.")
     public Response getPropertiesForHost(
         @Parameter(
-            name = "hostname",
             description = "The host for whom to retrieve the JVM system properties for.", 
             required = true,
             example = "foo",
-            schema = @Schema(type = SchemaType.STRING, implementation = String.class)) 
+            schema = @Schema(type = SchemaType.STRING)) 
         @PathParam("hostname") String hostname) {
         Properties props = manager.get(hostname);
         if (props == null) {
@@ -80,7 +79,7 @@ public class InventoryResource {
         responseCode = "200",
         content = @Content(
             mediaType = "application/json",
-            schema = @Schema(type = SchemaType.ARRAY, implementation = InventoryList.class)))
+            schema = @Schema(type = SchemaType.OBJECT, implementation = InventoryList.class)))
     @Operation(
         summary = "List inventory contents.",
         description = "Returns the currently stored host:properties pairs in the inventory.")
