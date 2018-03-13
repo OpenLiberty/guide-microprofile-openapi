@@ -271,7 +271,7 @@ endpoint. To remove an `APIResponse`, or any other filterable element in general
 The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Recall the `OASFactory`
 example from the previous section. Use that code in this method to set the missing `info` and `servers`
 elements. Note that this is the only element which cannot be removed. Note also that this method is
-always called last for a given filter. Hence, make sure that it doesn't overwrite any other filter
+always called last for a given filter. Hence, make sure that it doesn't override any other filter
 operations that are called before it.
 
 Each filtering method is called once for each corresponding element in the model tree. You can think
