@@ -244,9 +244,10 @@ The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element
 current OpenAPI document doesn't provide much information on the application itself, as well as what
 server and port it runs on (`info` and `servers` elements). You can use the `OASFactory` class to
 manually set these elements, and in general any elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models`
-package. Note that this is the only element which cannot be removed. Note also that this method is
-always called last for a given filter. Hence, make sure that it doesn't override any other filter
-operations that are called before it.
+package. Note, the `OpenAPI` element is the only element which cannot be removed since that would mean
+removing the whole OpenAPI tree. Note also that the `filterOpenAPI()` method is always called
+last for a given filter. Hence, make sure that it doesn't override any other filter operations that
+are called before it.
 
 Each filtering method is called once for each corresponding element in the model tree. You can think
 of each such method as a callback for various key OpenAPI elements.
@@ -258,7 +259,7 @@ Create the following configuration file `src/main/webapp/META-INF/microprofile-c
 mp.openapi.filter = io.openliberty.guides.inventory.filter.InventoryOASFilter
 ```
 
-By passing in the fully qualified name of the filter class into the `mp.openapi.filter` configuration key,
+By passing in the fully qualified name of the filter class into the `mp.openapi.filter` property,
 you are registering your filter.
 
 Finally, run `mvn package` and refresh {openapi-url} to see the updated OpenAPI tree:
@@ -289,8 +290,11 @@ servers:
     text/plain: {}
 ----
 
-To learn more about what elements you can filter, visit the official MicroProfile OpenAPI GitHub repistory:
+To learn more about what elements you can filter, visit the official MicroProfile OpenAPI GitHub repository:
 https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFilter.java
+
+To learn more about MicroProfile Config, visit the official MicroProfile GitHub https://github.com/eclipse/microprofile-config[repository]
+and try one of our MicroProfile Config guides.
 
 
 // =================================================================================================
@@ -304,8 +308,8 @@ OpenAPI document. Every such document is required to be named `openapi` with an 
 be provided under the `META-INF` directory. If more than one document is found that matches one of these
 extensions, then the behaviour for choosing this file is undefined. Depending on the scenario, the document
 may be fully complete or partially complete. If the document is fully complete, then annotation scanning
-can be disabled using the `mp.openapi.scan.disable` property. If the document is partially complete,
-then it can be augmented with code or filters.
+can be disabled using the `mp.openapi.scan.disable` MicroProfile Config property. If the document is
+partially complete, then it can be augmented with code or filters.
 
 We are providing you with a complete OpenAPI document under `src/main/webapp/META-INF/openapi.yaml`.
 This document is the same as your current OpenAPI document, with the exception that it contains the
@@ -345,10 +349,11 @@ Run `mvn package` and refresh {openapi-url} to see the updated OpenAPI tree:
 
 == Testing the service
 
-A few tests have been included for you to test the basic functionality of the `inventory` service. If a test
-failure occurs, then you must have introduced a bug into the code. These tests will run automatically
-as a part of the Maven build process (when you run `mvn install`). You can also run these tests separately
-from the build using the `mvn verify` command, but make sure that the server is stopped beforehand.
+A few tests are included for you to test the basic functionality of the `inventory` service, but not
+including the generated OpenAPI tree. If a test failure occurs, then you might have introduced a bug
+into the code. These tests will run automatically as a part of the Maven build process when you run
+`mvn install`. You can also run these tests separately from the build using the `mvn verify` command,
+but first make sure that the server is stopped.
 
 No explicit tests exist to verify the correctness of the generated OpenAPI tree. This can be verified
 manually by visiting {openapi-url} or {openapi-url}/ui.
