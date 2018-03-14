@@ -331,6 +331,7 @@ Run `mvn package` and refresh {openapi-url} to see the updated OpenAPI tree:
     operationId: getProperties
     responses:
       200:
+        description: JVM system properties of the host running this service.
         content:
           application/json:
             schema:
