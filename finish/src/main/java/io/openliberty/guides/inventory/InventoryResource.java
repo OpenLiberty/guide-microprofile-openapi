@@ -44,11 +44,12 @@ public class InventoryResource {
     @APIResponses(value = {
         @APIResponse(
             responseCode = "404",
-            description = "Missing description - to be filtered.",
+            description = "Missing description",
             content = @Content(
                 mediaType = "text/plain")),
         @APIResponse(
             responseCode = "200",
+            description = "JVM system properties of a particular host.",
             content = @Content(
                 mediaType = "application/json",
                 schema = @Schema(implementation = Properties.class)))})
@@ -77,6 +78,7 @@ public class InventoryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @APIResponse(
         responseCode = "200",
+        description = "host:properties pairs stored in the inventory.",
         content = @Content(
             mediaType = "application/json",
             schema = @Schema(

@@ -6,6 +6,14 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <repositories>
+        <repository>
+            <id>maven-staging</id>
+            <name>Open Liberty 18.0.0.1 GM test</name>
+            <url>https://oss.sonatype.org/content/repositories/ioopenliberty-1002/</url>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -104,17 +112,17 @@
                 <version>${version.liberty-maven-plugin}</version>
                 <configuration>
                     <!-- Temporarilty build from downloaded runtime until its 18.0.0.1 is realeased -->
-                    <install>
+<!--                     <install>
                         <runtimeUrl>https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/nightly/2018-03-12_0807/openliberty-all-18.0.0.1-201803120756.zip</runtimeUrl>
                         <licenseCode>L-SWIS-A99U5C</licenseCode>
-                    </install>
+                    </install> -->
                     <!-- <assemblyArchive>../../wlp.zip</assemblyArchive> -->
-<!--                     <assemblyArtifact>
+                    <assemblyArtifact>
                         <groupId>io.openliberty</groupId>
                         <artifactId>openliberty-runtime</artifactId>
                         <version>${version.openliberty-runtime}</version>
                         <type>zip</type>
-                    </assemblyArtifact> -->
+                    </assemblyArtifact>
                     <configFile>src/main/liberty/config/server.xml</configFile>
                     <include>usr</include>
                     <bootstrapProperties>

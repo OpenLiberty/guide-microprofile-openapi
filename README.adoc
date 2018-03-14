@@ -37,11 +37,12 @@ specification aims to provide a set of Java interfaces and programming models wh
 to natively produce OpenAPI v3 documents from their JAX-RS applications.
 
 You will expose the RESTful APIs of the provided `inventory` service. Note, if you have read through
-some of the other MicroProfile guides, you may recognize this service. While the
-application still functions the same way, the `system` service has been merged into the `inventory`
-service due a current limitation of MicroProfile OpenAPI v1.0 of supporting multiple JAX-RS applications.
-As a result, the `properties` resource of the `system` service is now served at `inventory/properties`
-rather than `system/properties`.
+some of the other MicroProfile guides, you may recognize this service. While the application still
+functions the same way, the `system` service has been merged into the `inventory` service due a requirement
+of MicroProfile OpenAPI that states "The 1.0 version of the MicroProfile OpenAPI specification does
+not define how the `/openapi` endpoint may be partitioned in the event that the MicroProfile runtime
+supports deployment of multiple applications". As a result, the `properties` resource of the `system`
+service is now served at `inventory/properties` rather than `system/properties`.
 
 
 // =================================================================================================
@@ -154,10 +155,11 @@ meaningful:
       example: foo
     responses:
       404:
-        description: Missing description
+        description: Missing description - to be filtered.
         content:
           text/plain: {}
       200:
+        description: JVM system properties of a particular host.
         content:
           application/json:
             schema:
@@ -169,6 +171,7 @@ meaningful:
     operationId: listContents
     responses:
       200:
+        description: host:properties pairs stored in the inventory.
         content:
           application/json:
             schema:
@@ -221,35 +224,6 @@ components:
 ----
 
 
-=== Bootstrapping the OpenAPI tree using the `OASFactory`
-
-Alternatively to using OpenAPI annotations, you can use the `OASFactory` class to manually create any
-elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models` package.
-
-Notice that your current OpenAPI document doesn't provide much information on the application itself,
-as well as what server and port it runs on (`info` and `servers` elements). This can be defined like so
-using the `OASFactory`:
-
-[source, Java, indent=0]
-----
-include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[tags=oasfactory]
-----
-
-The first block of code sets the `info` element of the OpenAPI tree to be the `Info` object created
-using the `OASFactory`. The second block of code is similar and it sets the `servers` element to be a
-list of `Server` objects.
-
-For now, hold off from copying this code anywhere. It will fit nicely into the class you'll create
-in the next section.
-
-While you can create parts of the OpenAPI tree using the `OASFactory` class, you can also create the
-entire tree by implementing the `OASModelReader` interface. However, because this class would turn out
-to be be extremely long, you will not be creating it here. Instead, feel free to take a look at the
-following example in the official MicroProfile OpenAPI GitHub repository:
-
-https://github.com/eclipse/microprofile-open-api/blob/master/tck/src/main/java/org/eclipse/microprofile/openapi/reader/MyOASModelReaderImpl.java
-
-
 === Filtering the OpenAPI tree elements
 
 There may be scenarios where you may wish to update or remove certain elements and fields of the OpenAPI
@@ -266,9 +240,11 @@ The `filterAPIResponse()` method allows filtering of a particular `APIResponse`.
 filling in the previously missing description for the `404` response returned by the `/inventory/systems/<badhostname>`
 endpoint. To remove an `APIResponse`, or any other filterable element in general, return `null`.
 
-The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Recall the `OASFactory`
-example from the previous section. Use that code in this method to set the missing `info` and `servers`
-elements. Note that this is the only element which cannot be removed. Note also that this method is
+The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Notice that your
+current OpenAPI document doesn't provide much information on the application itself, as well as what
+server and port it runs on (`info` and `servers` elements). You can use the `OASFactory` class to
+manually set these elements, and in general any elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models`
+package. Note that this is the only element which cannot be removed. Note also that this method is
 always called last for a given filter. Hence, make sure that it doesn't override any other filter
 operations that are called before it.
 
@@ -302,7 +278,6 @@ servers:
   variables:
     port:
       description: Server HTTP port.
-      default: "9080"
 ----
 
 [source, yaml, role="no_copy"]
@@ -310,6 +285,8 @@ servers:
 404:
   description: Invalid hostname or the system service may not be running on
     the particular host.
+  content:
+    text/plain: {}
 ----
 
 To learn more about what elements you can filter, visit the official MicroProfile OpenAPI GitHub repistory:
