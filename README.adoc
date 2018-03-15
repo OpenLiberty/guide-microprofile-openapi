@@ -8,7 +8,7 @@
 :projectid: microprofile-openapi
 :page-layout: guide
 :page-duration: 15 minutes
-// :page-releasedate: 2017-12-11
+:page-releasedate: 2018-03-16
 :page-description: Explore how to expose and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
 :page-tags: ['MicroProfile', 'OpenAPI', 'microservices', '@APIResponse', '@Schema', '@Content', '@Operation', '@Info', '@Parameter']
 :page-permalink: /guides/{projectid}
@@ -249,11 +249,11 @@ or another filterable element, simply return `null`.
 The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Unlike other filter
 methods, when you override `filterOpenAPI()`, it will be called only once as the last method
 for a given filter. Hence, make sure that it doesn't override any other filter operations that are
-called before it. Notice that your current OpenAPI document doesn't provide much information on the
-application itself or the server and port it runs on. This information is usually provided in the `info`
+called before it. Your current OpenAPI document doesn't provide much information on the application
+itself or on what server and port it runs on. This information is usually provided in the `info`
 and `servers` elements, which are currently missing. Use the `OASFactory` class to manually set these
-elements, and in general any element of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models`
-package. Note, the `OpenAPI` element is the only element that cannot be removed since that would mean
+and other elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models`
+package. The `OpenAPI` element is the only element that cannot be removed since that would mean
 removing the whole OpenAPI tree.
 
 Each filtering method is called once for each corresponding element in the model tree. You can think
