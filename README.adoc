@@ -297,9 +297,8 @@ servers:
 ----
 
 // Later this should be changed to:
-// For more information about which elements you can filter, read the official MicroProfile 1.3 API.
-// https://openliberty.io/docs/ref/microprofile/1.3/
-For more information about which elements you can filter, read the official `OASFilter` implementation
+// For more information about which elements you can filter, see the MicroProfile 1.3 API.
+For more information about which elements you can filter, see the `OASFilter`
 https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFilter.java[implementation].
 
 To learn more about MicroProfile Config, visit the official MicroProfile GitHub https://github.com/eclipse/microprofile-config[repository]
