@@ -318,7 +318,7 @@ be provided under the `META-INF` directory. If more than one document is found t
 extensions, then the behavior for choosing this file is undefined. Depending on the scenario, the document
 might be fully or partially complete. If the document is fully complete, then you can disable
 annotation scanning by setting the `mp.openapi.scan.disable` MicroProfile Config property to `true`.
-If the document is partially complete, then you can augmented it with further code or filters.
+If the document is partially complete, then you can augment it with further code or filters.
 
 You can access a complete OpenAPI document in the `src/main/webapp/META-INF/openapi.yaml` file.
 This document is the same as your current OpenAPI document, but it contains the missing APIs for the
@@ -379,7 +379,7 @@ file by using MicroProfile OpenAPI.
 Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you
 can learn and expand on top of what you built here.
 
-For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications found on the official
+For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications on the
 MicroProfile OpenAPI GitHub
 https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps[repository].
 
