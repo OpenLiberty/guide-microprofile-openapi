@@ -243,7 +243,7 @@ include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOA
 The `filterAPIResponse()` method allows filtering of a particular `APIResponse` element. When you
 override this method, it will be called once for every `APIResponse` element in the OpenAPI tree.
 In this case, you are matching the `404` response that is returned by the `/inventory/systems/{hostname}`
-endpoint and completing the previously missing description. To remove an `APIResponse` element
+endpoint and setting the previously missing description. To remove an `APIResponse` element
 or another filterable element, simply return `null`.
 
 The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Unlike other filter
