@@ -98,20 +98,21 @@ cd start
 mvn clean install liberty:start-server
 ```
 
-Because the JAX-RS framework handles basic API generation for JAX-RS annotations, you will see a skeleton
-of your OpenAPI tree.
-
 The `install` goal builds the application and creates a `.war` file in the `target` directory. It also
 configures and installs Open Liberty into the `target/liberty/wlp` directory. The `liberty:start-server`
 goal starts the built application in Open Liberty.
 
-Now, point to the {openapi-url} URL to see the generated OpenAPI document.
+Because the JAX-RS framework handles basic API generation for JAX-RS annotations, a skeleton OpenAPI
+tree will be generated from the `inventory` service. You can use this tree as a starting point and
+augment it with annotations and code to produce a complete OpenAPI document.
+
+Now, point to the {openapi-url} URL to see the generated OpenAPI tree.
 
 
 === Augmenting the existing JAX-RS annotations with OpenAPI annotations
 
 Because all JAX-RS annotations are processed by default, you can augment your existing JAX-RS annotations
-with OpenAPI annotations, and you do not need to rewrite portions of the OpenAPI document that are
+with OpenAPI annotations, and you do not have to rewrite portions of the OpenAPI document that are
 already covered by the JAX-RS framework.
 
 Add OpenAPI annotations to the two JAX-RS methods in the `src/main/java/io/openliberty/guides/inventory/InventoryResource.java` file:
@@ -228,8 +229,8 @@ components:
 
 === Filtering the OpenAPI tree elements
 
-You might want to update or remove certain elements and fields of the OpenAPI document. All of this
-can be done using the `OASFilter` interface.
+You might want to update or remove certain elements and fields of the OpenAPI document once its been
+generated. All of this can be done using the `OASFilter` interface.
 
 Implement the `OASFilter` interface in the `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java` file:
 
@@ -238,18 +239,21 @@ Implement the `OASFilter` interface in the `src/main/java/io/openliberty/guides/
 include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[tags=**;!copyright]
 ----
 
-Use the `filterAPIResponse()` method to filter a particular `APIResponse` element. In this case, you are
-filling in the previously missing description for the `404` response that is returned by the `/inventory/systems/<badhostname>`
-endpoint. To remove a `APIResponse` element, or another filterable element, return a `null` value.
+The `filterAPIResponse()` method allows filtering of a particular `APIResponse` element. When you
+override this method, it will be called once for every `APIResponse` element in the OpenAPI tree.
+In this case, you are matching the `404` response returned by the `/inventory/systems/{hostname}`
+endpoint and filling in its the previously missing description. To remove a `APIResponse` element,
+or another filterable element, simply return `null`.
 
-Use the `filterOpenAPI()` method the filter the singleton `OpenAPI` element. Notice that your
-current OpenAPI document doesn't provide much information on the application itself or the
-server and port it runs on. This information is provided in the `info` and `servers` elements, which
-are currently missing. You can use the `OASFactory` class to manually set these elements, and in general
-any element of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models` package. Note, the
-`OpenAPI` element is the only element that cannot be removed since that would mean removing the whole
-OpenAPI tree. This method is always called last for a given filter. Hence, make sure that it doesn't
-override any other filter operations that are called before it.
+The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Unlike other filter
+methods, when you override `filterOpenAPI()`, it will be called only once as the last method
+for a given filter. Hence, make sure that it doesn't override any other filter operations that are
+called before it. Notice that your current OpenAPI document doesn't provide much information on the
+application itself or the server and port it runs on. This information is usually provided in the `info`
+and `servers` elements, which are currently missing. Use the `OASFactory` class to manually set these
+elements, and in general any element of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models`
+package. Note, the `OpenAPI` element is the only element that cannot be removed since that would mean
+removing the whole OpenAPI tree.
 
 Each filtering method is called once for each corresponding element in the model tree. You can think
 of each method as a callback for various key OpenAPI elements.
@@ -261,8 +265,8 @@ configuration file with the following content:
 mp.openapi.filter = io.openliberty.guides.inventory.filter.InventoryOASFilter
 ```
 
-This configuration file uses MicroProfile Config and registers your filter by passing in the fully
-qualified name of the filter class into the `mp.openapi.filter` property.
+This configuration file is picked up automatically by MicroProfile Config and registers your filter
+by passing in the fully qualified name of the filter class into the `mp.openapi.filter` property.
 
 Finally, run the `mvn package` command and refresh the {openapi-url} URL to see the updated OpenAPI tree:
 
@@ -294,7 +298,7 @@ servers:
 
 // Later this should be changed to:
 // For more information about which elements you can filter, read the official MicroProfile 1.3 API.
-For more information about which elements you can filter, look at the official `OASFilter` implementation
+For more information about which elements you can filter, read the official `OASFilter` implementation
 https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFilter.java[implementation].
 
 To learn more about MicroProfile Config, visit the official MicroProfile GitHub https://github.com/eclipse/microprofile-config[repository]
@@ -352,14 +356,14 @@ Run the `mvn package` command and refresh the {openapi-url} URL to see the updat
 
 == Testing the service
 
-A few tests are included for you to test the basic functionality of the `inventory` service, but not
-including the generated OpenAPI tree. If a test failure occurs, then you might have introduced a bug
-into the code. These tests will run automatically as a part of the Maven build process when you run
-the `mvn install` command. You can also run these tests separately from the build by using the `mvn verify`
-command, but first make sure that the server is stopped.
+A few tests are included for you to test the basic functionality of the `inventory` service, but they
+do not test the correctness of the generated OpenAPIn document. If a test failure occurs, then you might
+have introduced a bug into the code. These tests will run automatically as a part of the Maven build
+process when you run the `mvn install` command. You can also run these tests separately from the build
+by using the `mvn verify` command, but first make sure that the server is stopped.
 
-No explicit tests exist to verify the correctness of the generated OpenAPI tree. Manually verify the
-tree by visiting the {openapi-url} or the {openapi-url}/ui URL.
+No explicit tests exist to verify the correctness of the generated OpenAPI document. Manually verify
+the document by visiting the {openapi-url} or the {openapi-url}/ui URL.
 
 
 // =================================================================================================
