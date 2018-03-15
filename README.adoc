@@ -49,7 +49,8 @@ service is now served at the `inventory/properties` endpoint rather than the `sy
 // Getting Started
 // =================================================================================================
 
-include::{common-includes}/gitclone.adoc[]
+// include::{common-includes}/gitclone.adoc[]
+include::{common-includes}/gitclonedraft.adoc[]
 
 
 === Try what you'll build
