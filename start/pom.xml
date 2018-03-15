@@ -10,7 +10,7 @@
         <repository>
             <id>maven-staging</id>
             <name>Open Liberty 18.0.0.1 GM test</name>
-            <url>https://oss.sonatype.org/content/repositories/ioopenliberty-1002/</url>
+            <url>https://oss.sonatype.org/content/repositories/ioopenliberty-1003/</url>
         </repository>
     </repositories>
 
