@@ -90,7 +90,7 @@ models to manually create all elements of the OpenAPI tree. Finally, you can fil
 OpenAPI tree, changing them to your liking or removing them entirely.
 
 Before you proceed, try deploying the current `inventory` service and checking the resulting document.
-Navigate to the `start` directory in the root directory of the guide. Then build and run the service
+Navigate to the `start` directory in the root directory of the guide. Then, build and run the service
 by using Maven:
 
 ```
@@ -229,8 +229,8 @@ components:
 
 === Filtering the OpenAPI tree elements
 
-You might want to update or remove certain elements and fields of the OpenAPI document once its been
-generated. All of this can be done using the `OASFilter` interface.
+You might want to update or remove certain elements and fields of the OpenAPI document once it's been
+generated. Use the `OASFilter` interface to accomplish these tasks.
 
 Implement the `OASFilter` interface in the `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java` file:
 
@@ -241,8 +241,8 @@ include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOA
 
 The `filterAPIResponse()` method allows filtering of a particular `APIResponse` element. When you
 override this method, it will be called once for every `APIResponse` element in the OpenAPI tree.
-In this case, you are matching the `404` response returned by the `/inventory/systems/{hostname}`
-endpoint and filling in its the previously missing description. To remove a `APIResponse` element,
+In this case, you are matching the `404` response that is returned by the `/inventory/systems/{hostname}`
+endpoint and filling in the previously missing description. To remove an `APIResponse` element
 or another filterable element, simply return `null`.
 
 The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Unlike other filter
@@ -258,7 +258,7 @@ removing the whole OpenAPI tree.
 Each filtering method is called once for each corresponding element in the model tree. You can think
 of each method as a callback for various key OpenAPI elements.
 
-Before you can use the filter class you created, create the `src/main/webapp/META-INF/microprofile-config.properties`
+Before you can use the filter class that you created, create the `src/main/webapp/META-INF/microprofile-config.properties`
 configuration file with the following content:
 
 ```
@@ -309,21 +309,21 @@ and try one of our MicroProfile Config guides.
 // Pre-generated APIs
 // =================================================================================================
 
-== Using pre-generated OpenAPI documents
+== Using pregenerated OpenAPI documents
 
-As an alternative to generating the OpenAPI model tree from code, you can include a valid pre-generated
+As an alternative to generating the OpenAPI model tree from code, you can include a valid pregenerated
 OpenAPI document. This document must be named `openapi` with a `yml`, `yaml`, or `json` extension and
 be provided under the `META-INF` directory. If more than one document is found that matches one of these
 extensions, then the behavior for choosing this file is undefined. Depending on the scenario, the document
-may be fully or partially complete. If the document is fully complete, then you can disable
+might be fully or partially complete. If the document is fully complete, then you can disable
 annotation scanning by setting the `mp.openapi.scan.disable` MicroProfile Config property to `true`.
 If the document is partially complete, then you can augmented it with further code or filters.
 
-We are providing you with a complete OpenAPI document in the `src/main/webapp/META-INF/openapi.yaml` file.
+You can access a complete OpenAPI document in the `src/main/webapp/META-INF/openapi.yaml` file.
 This document is the same as your current OpenAPI document, but it contains the missing APIs for the
 `/inventory/properties` endpoint. Open this document in your favorite text editor and uncomment all
-of its lines. Because this OpenAPI document is complete, you no longer need the OpenAPI annotations
-you defined previously. You don't have to explicitly remove these annotations. Instead simply set the
+of its lines. Because this OpenAPI document is complete, you no longer need the OpenAPI annotations that
+you defined previously. You don't have to explicitly remove these annotations. Instead, simply set the
 `mp.openapi.scan.disable` property to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file:
 
 ```
@@ -357,7 +357,7 @@ Run the `mvn package` command and refresh the {openapi-url} URL to see the updat
 == Testing the service
 
 A few tests are included for you to test the basic functionality of the `inventory` service, but they
-do not test the correctness of the generated OpenAPIn document. If a test failure occurs, then you might
+do not test the correctness of the generated OpenAPI document. If a test failure occurs, then you might
 have introduced a bug into the code. These tests will run automatically as a part of the Maven build
 process when you run the `mvn install` command. You can also run these tests separately from the build
 by using the `mvn verify` command, but first make sure that the server is stopped.
