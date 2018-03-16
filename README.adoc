@@ -17,7 +17,7 @@
 :source-highlighter: prettify
 = Documenting RESTful APIs
 
-Explore how to document and filterRESTful APIs from code or static files by using MicroProfile OpenAPI.
+Explore how to document and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
 
 
 :openapi-url: http://localhost:9080/openapi
