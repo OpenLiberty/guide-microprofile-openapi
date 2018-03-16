@@ -31,10 +31,11 @@ You will learn how to document and filter RESTful APIs from annotations, POJOs, 
 files by using MicroProfile OpenAPI.
 
 The OpenAPI specification, previously known as the Swagger specification, defines a standard interface
-for documenting and exposing RESTful APIs. This specification gives both humans and computers a better understanding
-of the functionalities of services without requiring direct access to source code or documentation.
-The MicroProfile OpenAPI specification provides a set of Java interfaces and programming models that
-allow Java developers to natively produce OpenAPI v3 documents from their JAX-RS applications.
+for documenting and exposing RESTful APIs. This specification allows both humans and computers to
+understand or process the functionalities of services without requiring direct access to underlying
+source code or documentation. The MicroProfile OpenAPI specification provides a set of Java interfaces
+and programming models that allow Java developers to natively produce OpenAPI v3 documents from their
+JAX-RS applications.
 
 You will document the RESTful APIs of the provided `inventory` service. If you have read through
 some of the other MicroProfile guides, you might recognize this service. While the application still
@@ -303,7 +304,7 @@ For more information about which elements you can filter, see the `OASFilter`
 https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFilter.java[implementation].
 
 To learn more about MicroProfile Config, visit the MicroProfile GitHub https://github.com/eclipse/microprofile-config[repository]
-and try one of the https://openliberty.io/guides/?search=Config[MicroProfile Config guides].
+and try one of the MicroProfile Config https://openliberty.io/guides/?search=Config[guides].
 
 
 // =================================================================================================
