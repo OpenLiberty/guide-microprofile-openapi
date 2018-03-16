@@ -6,14 +6,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <repositories>
-        <repository>
-            <id>maven-staging</id>
-            <name>Open Liberty 18.0.0.1 GM test</name>
-            <url>https://oss.sonatype.org/content/repositories/ioopenliberty-1003/</url>
-        </repository>
-    </repositories>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -22,7 +14,7 @@
 
         <!-- Plugins -->
         <version.maven-war-plugin>2.6</version.maven-war-plugin>
-        <version.liberty-maven-plugin>2.1.2</version.liberty-maven-plugin>
+        <version.liberty-maven-plugin>2.2</version.liberty-maven-plugin>
         <version.download-maven-plugin>1.4.0</version.download-maven-plugin>
         <!-- Tests -->
         <version.exec-maven-plugin>1.6.0</version.exec-maven-plugin>

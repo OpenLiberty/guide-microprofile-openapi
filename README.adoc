@@ -7,7 +7,7 @@
 //   IBM Corporation
 :projectid: microprofile-openapi
 :page-layout: guide
-:page-duration: 15 minutes
+:page-duration: 20 minutes
 :page-releasedate: 2018-03-16
 :page-description: Explore how to document and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
 :page-tags: ['MicroProfile', 'OpenAPI', 'microservices', '@APIResponse', '@Schema', '@Content', '@Operation', '@Info', '@Parameter']
@@ -31,7 +31,7 @@ You will learn how to document and filter RESTful APIs from annotations, POJOs, 
 files by using MicroProfile OpenAPI.
 
 The OpenAPI specification, previously known as the Swagger specification, defines a standard interface
-for exposing RESTful APIs. This specification gives both humans and computers a better understanding
+for documenting and exposing RESTful APIs. This specification gives both humans and computers a better understanding
 of the functionalities of services without requiring direct access to source code or documentation.
 The MicroProfile OpenAPI specification provides a set of Java interfaces and programming models that
 allow Java developers to natively produce OpenAPI v3 documents from their JAX-RS applications.
@@ -49,8 +49,7 @@ service is now served at the `inventory/properties` endpoint rather than the `sy
 // Getting Started
 // =================================================================================================
 
-// include::{common-includes}/gitclone.adoc[]
-include::{common-includes}/gitclonedraft.adoc[]
+include::{common-includes}/gitclone.adoc[]
 
 
 === Try what you'll build
@@ -299,11 +298,12 @@ servers:
 
 // Later this should be changed to:
 // For more information about which elements you can filter, see the MicroProfile 1.3 API.
+// https://openliberty.io/docs/ref/microprofile/1.3/
 For more information about which elements you can filter, see the `OASFilter`
 https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFilter.java[implementation].
 
 To learn more about MicroProfile Config, visit the MicroProfile GitHub https://github.com/eclipse/microprofile-config[repository]
-and try one of the MicroProfile Config guides.
+and try one of the https://openliberty.io/guides/?search=Config[MicroProfile Config guides].
 
 
 // =================================================================================================
@@ -357,14 +357,13 @@ Run the `mvn package` command and refresh the {openapi-url} URL to see the updat
 
 == Testing the service
 
-A few tests are included for you to test the basic functionality of the `inventory` service, but they
-do not test the correctness of the generated OpenAPI document. If a test failure occurs, then you might
-have introduced a bug into the code. These tests will run automatically as a part of the Maven build
-process when you run the `mvn install` command. You can also run these tests separately from the build
-by using the `mvn verify` command, but first make sure that the server is stopped.
-
 No explicit tests exist to verify the correctness of the generated OpenAPI document. Manually verify
 the document by visiting the {openapi-url} or the {openapi-url}/ui URL.
+
+A few tests are included for you to test the basic functionality of the `inventory` service. If a test
+failure occurs, then you might have introduced a bug into the code. These tests will run automatically
+as a part of the Maven build process when you run the `mvn install` command. You can also run these
+tests separately from the build by using the `mvn verify` command, but first make sure that the server is stopped.
 
 
 // =================================================================================================
