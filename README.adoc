@@ -9,15 +9,15 @@
 :page-layout: guide
 :page-duration: 15 minutes
 :page-releasedate: 2018-03-16
-:page-description: Explore how to expose and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
+:page-description: Explore how to document and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
 :page-tags: ['MicroProfile', 'OpenAPI', 'microservices', '@APIResponse', '@Schema', '@Content', '@Operation', '@Info', '@Parameter']
 :page-permalink: /guides/{projectid}
 :page-related-guides: ['cdi-intro', 'microprofile-config']
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
 :source-highlighter: prettify
-= Exposing RESTful APIs
+= Documenting RESTful APIs
 
-Explore how to expose and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
+Explore how to document and filterRESTful APIs from code or static files by using MicroProfile OpenAPI.
 
 
 :openapi-url: http://localhost:9080/openapi
@@ -27,7 +27,7 @@ Explore how to expose and filter RESTful APIs from code or static files by using
 
 == What you'll learn
 
-You will learn how to expose and filter RESTful APIs from annotations, POJOs, and static OpenAPI
+You will learn how to document and filter RESTful APIs from annotations, POJOs, and static OpenAPI
 files by using MicroProfile OpenAPI.
 
 The OpenAPI specification, previously known as the Swagger specification, defines a standard interface
@@ -36,7 +36,7 @@ of the functionalities of services without requiring direct access to source cod
 The MicroProfile OpenAPI specification provides a set of Java interfaces and programming models that
 allow Java developers to natively produce OpenAPI v3 documents from their JAX-RS applications.
 
-You will expose the RESTful APIs of the provided `inventory` service. If you have read through
+You will document the RESTful APIs of the provided `inventory` service. If you have read through
 some of the other MicroProfile guides, you might recognize this service. While the application still
 functions the same way, the `system` service has been merged into the `inventory` service because of
 a MicroProfile OpenAPI requirement that states "The 1.0 version of the MicroProfile OpenAPI specification
@@ -55,7 +55,7 @@ include::{common-includes}/gitclonedraft.adoc[]
 
 === Try what you'll build
 
-The `finish` directory in the root directory of this guide contains the fully exposed `inventory`
+The `finish` directory in the root directory of this guide contains the fully documented `inventory`
 service. Feel free to give it a try before you proceed.
 
 To try out the service, navigate to the `finish` directory and then run the Maven `install` and
@@ -373,7 +373,7 @@ the document by visiting the {openapi-url} or the {openapi-url}/ui URL.
 
 == Great work! You're done!
 
-You have just exposed and filtered the APIs of the `inventory` service from both the code and a static
+You have just documented and filtered the APIs of the `inventory` service from both the code and a static
 file by using MicroProfile OpenAPI.
 
 Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you
