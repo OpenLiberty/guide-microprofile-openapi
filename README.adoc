@@ -95,7 +95,7 @@ Navigate to the `start` directory in the root directory of the guide. Then, buil
 by using Maven:
 
 ```
-cd start
+cd ../start
 mvn clean install liberty:start-server
 ```
 
