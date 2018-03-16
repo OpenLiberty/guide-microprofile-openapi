@@ -357,8 +357,8 @@ Run the `mvn package` command and refresh the {openapi-url} URL to see the updat
 
 == Testing the service
 
-No explicit tests exist to verify the correctness of the generated OpenAPI document. Manually verify
-the document by visiting the {openapi-url} or the {openapi-url}/ui URL.
+No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually
+verify the document by visiting the {openapi-url} or the {openapi-url}/ui URL.
 
 A few tests are included for you to test the basic functionality of the `inventory` service. If a test
 failure occurs, then you might have introduced a bug into the code. These tests will run automatically
