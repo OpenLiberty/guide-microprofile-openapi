@@ -107,7 +107,7 @@ Because the JAX-RS framework handles basic API generation for JAX-RS annotations
 tree will be generated from the `inventory` service. You can use this tree as a starting point and
 augment it with annotations and code to produce a complete OpenAPI document.
 
-Now, point to the {openapi-url} URL to see the generated OpenAPI tree. As before, you can also point to 
+Now, point to the {openapi-url} URL to see the generated OpenAPI tree. As before, you can also point to
 the {openapi-url}/ui URL for a more interactive view of the APIs.
 
 
@@ -126,7 +126,7 @@ include::finish/src/main/java/io/openliberty/guides/inventory/InventoryResource.
 
 Let's break down the new annotations:
 
-[cols="35, 200"]
+[cols="35, 200", options="header"]
 |===
 | *Annotation*    | *Description*
 | `@APIResponses` | A container for multiple responses from an API operation. This annotation is
