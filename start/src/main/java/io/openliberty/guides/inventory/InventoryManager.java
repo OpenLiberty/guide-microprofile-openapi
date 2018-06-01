@@ -13,6 +13,9 @@
 package io.openliberty.guides.inventory;
 
 import java.util.Properties;
+import javax.inject.Inject;
+import javax.enterprise.context.ApplicationScoped;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import io.openliberty.guides.inventory.client.SystemClient;
 import io.openliberty.guides.inventory.model.InventoryList;
 import javax.enterprise.context.ApplicationScoped;
@@ -20,21 +23,30 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class InventoryManager {
 
-    private InventoryList invList = new InventoryList();
-    private SystemClient systemClient = new SystemClient();
+  private InventoryList invList = new InventoryList();
+  private InventoryUtils invUtils = new InventoryUtils();
 
-    public Properties get(String hostname) {
-        systemClient.init(hostname);
+  @Inject
+  @RestClient
+  private SystemClient defaultRestClient;
 
-        Properties properties = systemClient.getProperties();
-        if (properties != null) {
-            invList.addToInventoryList(hostname, properties);
-        }
-        return properties;
+  public Properties get(String hostname) {
+
+    Properties properties = null;
+    if (hostname.equals("localhost")) {
+      properties = invUtils.getPropertiesWithDefaultHostName(defaultRestClient);
+    } else {
+      properties = invUtils.getPropertiesWithGivenHostName(hostname);
     }
 
-    public InventoryList list() {
-        return invList;
+    if (properties != null) {
+      invList.addToInventoryList(hostname, properties);
     }
-    
+    return properties;
+  }
+
+  public InventoryList list() {
+    return invList;
+  }
+
 }
