@@ -14,6 +14,18 @@ servers:
       description: Server HTTP port.
       default: "9080"
 paths:
+  /inventory/systems:
+    get:
+      summary: List inventory contents.
+      description: Returns the currently stored host:properties pairs in the inventory.
+      operationId: listContents
+      responses:
+        200:
+          description: host:properties pairs stored in the inventory.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryList'
   /inventory/systems/{hostname}:
     get:
       summary: Get JVM system properties for particular host
@@ -40,30 +52,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Properties'
-  /inventory/systems:
-    get:
-      summary: List inventory contents.
-      description: Returns the currently stored host:properties pairs in the inventory.
-      operationId: listContents
-      responses:
-        200:
-          description: host:properties pairs stored in the inventory.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InventoryList'
   /inventory/properties:
     get:
-      summary: Get JVM system properties.
-      description: Returns the JVM system properties for the host running this service.
       operationId: getProperties
       responses:
-        200:
-          description: JVM system properties of the host running this service.
+        default:
+          description: default response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Properties'
+                type: object
+                additionalProperties:
+                  type: string
 components:
   schemas:
     InventoryList:
@@ -72,9 +72,11 @@ components:
       type: object
       properties:
         systems:
-          type: array
-          items:
-            $ref: '#/components/schemas/System'
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
         total:
           type: integer
       description: POJO that represents the inventory contents.
@@ -82,16 +84,3 @@ components:
       type: object
       additionalProperties:
         type: string
-    System:
-      required:
-      - hostname
-      - properties
-      type: object
-      properties:
-        hostname:
-          type: string
-        properties:
-          type: object
-          additionalProperties:
-            type: string
-      description: POJO that represents a single inventory entry.
