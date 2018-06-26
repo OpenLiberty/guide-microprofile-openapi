@@ -41,13 +41,13 @@ public class InventoryResource {
     @GET
     @Path("/{hostname}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPropertiesForHost(@PathParam("hostname") String hostname) {
+    public Response getPropertiesForHost(String hostname) {
         Properties props = manager.get(hostname);
         if (props == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                           .entity("ERROR: Unknown hostname or the system service may not be running on " 
-                                 + hostname)
-                           .build();
+                            .entity("ERROR: Unknown hostname or the system service may "
+                                + "not be running on " + hostname)
+                            .build();
         }
         return Response.ok(props).build();
     }
@@ -57,4 +57,5 @@ public class InventoryResource {
     public InventoryList listContents() {
         return manager.list();
     }
+
 }

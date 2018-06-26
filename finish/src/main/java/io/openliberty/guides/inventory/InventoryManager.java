@@ -23,30 +23,20 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class InventoryManager {
 
-  private InventoryList invList = new InventoryList();
-  private InventoryUtils invUtils = new InventoryUtils();
+    private InventoryList invList = new InventoryList();
+    private InventoryUtils invUtils = new InventoryUtils();
 
-  @Inject
-  @RestClient
-  private SystemClient defaultRestClient;
+    public Properties get(String hostname) {
+        Properties properties = invUtils.getProperties(hostname);
 
-  public Properties get(String hostname) {
-
-    Properties properties = null;
-    if (hostname.equals("localhost")) {
-      properties = invUtils.getPropertiesWithDefaultHostName(defaultRestClient);
-    } else {
-      properties = invUtils.getPropertiesWithGivenHostName(hostname);
+        if (properties != null) {
+            invList.addToInventoryList(hostname, properties);
+        }
+        return properties;
     }
 
-    if (properties != null) {
-      invList.addToInventoryList(hostname, properties);
+    public InventoryList list() {
+        return invList;
     }
-    return properties;
-  }
-
-  public InventoryList list() {
-    return invList;
-  }
 
 }
