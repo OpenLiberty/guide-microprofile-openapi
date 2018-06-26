@@ -35,60 +35,47 @@ import io.openliberty.guides.inventory.model.InventoryList;
 @Path("/systems")
 public class InventoryResource {
 
-    @Inject
-    InventoryManager manager;
+  @Inject
+  InventoryManager manager;
 
-    @GET
-    @Path("/{hostname}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @APIResponses(value = {
-        @APIResponse(
-            responseCode = "404",
-            description = "Missing description",
-            content = @Content(
-                mediaType = "text/plain")),
-        @APIResponse(
-            responseCode = "200",
-            description = "JVM system properties of a particular host.",
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(implementation = Properties.class)))})
-    @Operation(
-        summary = "Get JVM system properties for particular host", 
-        description = "Retrieves and returns the JVM system properties from the system "
-                    + "service running on the particular host.")
-    public Response getPropertiesForHost(
-        @Parameter(
-            description = "The host for whom to retrieve the JVM system properties for.", 
-            required = true,
-            example = "foo",
-            schema = @Schema(type = SchemaType.STRING)) 
-        @PathParam("hostname") String hostname) {
-        Properties props = manager.get(hostname);
-        if (props == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                           .entity("ERROR: Unknown hostname or the system service may "
-                                 + "not be running on " + hostname)
-                           .build();
-        }
-        return Response.ok(props).build();
+  @GET
+  @Path("/{hostname}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @APIResponses(value = {
+      @APIResponse(responseCode = "404", description = "Missing description",
+        content = @Content(mediaType = "text/plain")),
+      @APIResponse(responseCode = "200",
+        description = "JVM system properties of a particular host.",
+        content = @Content(mediaType = "application/json",
+          schema = @Schema(implementation = Properties.class))) })
+  @Operation(summary = "Get JVM system properties for particular host",
+    description = "Retrieves and returns the JVM system properties from the system "
+        + "service running on the particular host.")
+  public Response getPropertiesForHost(@Parameter(
+    description = "The host for whom to retrieve the JVM system properties for.",
+    required = true, example = "foo", schema = @Schema(
+      type = SchemaType.STRING)) @PathParam("hostname") String hostname) {
+    Properties props = manager.get(hostname);
+    if (props == null) {
+      return Response.status(Response.Status.NOT_FOUND)
+                     .entity("ERROR: Unknown hostname or the system service may "
+                         + "not be running on " + hostname)
+                     .build();
     }
+    return Response.ok(props).build();
+  }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @APIResponse(
-        responseCode = "200",
-        description = "host:properties pairs stored in the inventory.",
-        content = @Content(
-            mediaType = "application/json",
-            schema = @Schema(
-                type = SchemaType.OBJECT, 
-                implementation = InventoryList.class)))
-    @Operation(
-        summary = "List inventory contents.",
-        description = "Returns the currently stored host:properties pairs in the "
-                    + "inventory.")
-    public InventoryList listContents() {
-        return manager.list();
-    }
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @APIResponse(responseCode = "200",
+    description = "host:properties pairs stored in the inventory.",
+    content = @Content(mediaType = "application/json",
+      schema = @Schema(type = SchemaType.OBJECT,
+        implementation = InventoryList.class)))
+  @Operation(summary = "List inventory contents.",
+    description = "Returns the currently stored host:properties pairs in the "
+        + "inventory.")
+  public InventoryList listContents() {
+    return manager.list();
+  }
 }
