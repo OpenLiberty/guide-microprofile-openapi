@@ -88,9 +88,7 @@ public class InventoryEndpointTest {
         int actual = obj.getInt("total");
         assertEquals("The inventory should have one entry for localhost", expected, actual);
 
-        boolean localhostExists = obj.getJsonArray("systems").getJsonObject(0)
-                                                             .get("hostname").toString()
-                                                             .contains("localhost");
+        boolean localhostExists = obj.getJsonObject("systems").containsKey("localhost");
         assertTrue("A host was registered, but it was not localhost", localhostExists);
 
         response.close();
@@ -104,9 +102,8 @@ public class InventoryEndpointTest {
         this.assertResponse(baseUrl, sysResponse);
 
         JsonObject jsonFromInventory = (JsonObject) invResponse.readEntity(JsonObject.class)
-                                                               .getJsonArray("systems")
-                                                               .getJsonObject(0)
-                                                               .get("properties");
+                                                               .getJsonObject("systems")
+                                                               .getJsonObject("localhost");
 
         JsonObject jsonFromSystem = sysResponse.readEntity(JsonObject.class);
 
