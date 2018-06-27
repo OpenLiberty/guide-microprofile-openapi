@@ -44,6 +44,7 @@ public class InventoryList {
     class System {
 
         private final String hostname;
+        
         private final Properties properties;
 
         public System(String hostname, Properties properties) {

@@ -10,13 +10,18 @@
  *     IBM Corporation - Initial implementation
  *******************************************************************************/
 // end::copyright[]
-package io.openliberty.guides;
+package io.openliberty.guides.inventory.client;
 
-// JAX-RS
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+public class UnknownUrlException extends Exception {
 
-@ApplicationPath("inventory")
-public class InventoryApplication extends Application {
+  private static final long serialVersionUID = 1L;
 
+  public UnknownUrlException() {
+    super();
+  }
+
+  public UnknownUrlException(String message) {
+    super(message);
+  }
+  
 }
