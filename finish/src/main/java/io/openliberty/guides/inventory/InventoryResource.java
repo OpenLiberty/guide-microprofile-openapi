@@ -61,8 +61,7 @@ public class InventoryResource {
             description = "The host for whom to retrieve the JVM system properties for.",
             required = true, 
             example = "foo", 
-            schema = @Schema(
-                type = SchemaType.STRING)) 
+            schema = @Schema(type = SchemaType.STRING)) 
         @PathParam("hostname") String hostname) {
         Properties props = manager.get(hostname);
         if (props == null) {
@@ -81,8 +80,9 @@ public class InventoryResource {
         description = "host:properties pairs stored in the inventory.",
         content = @Content(
             mediaType = "application/json",
-            schema = @Schema(type = SchemaType.OBJECT,
-            implementation = InventoryList.class)))
+            schema = @Schema(
+                type = SchemaType.OBJECT,
+                implementation = InventoryList.class)))
     @Operation(
         summary = "List inventory contents.",
         description = "Returns the currently stored host:properties pairs in the "
