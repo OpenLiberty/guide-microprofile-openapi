@@ -41,7 +41,7 @@ public class InventoryResource {
     @GET
     @Path("/{hostname}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPropertiesForHost(String hostname) {
+    public Response getPropertiesForHost(@PathParam("hostname") String hostname) {
         Properties props = manager.get(hostname);
         if (props == null) {
             return Response.status(Response.Status.NOT_FOUND)

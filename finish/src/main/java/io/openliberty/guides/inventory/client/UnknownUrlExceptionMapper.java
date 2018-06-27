@@ -10,7 +10,6 @@
  *     IBM Corporation - Initial implementation
  *******************************************************************************/
 // end::copyright[]
-// tag::mapper[]
 package io.openliberty.guides.inventory.client;
 
 import java.util.logging.Logger;
@@ -20,8 +19,8 @@ import javax.ws.rs.ext.Provider;
 import org.eclipse.microprofile.rest.client.ext.ResponseExceptionMapper;
 
 @Provider
-public class UnknownUrlExceptionMapper
-    implements ResponseExceptionMapper<UnknownUrlException> {
+public class UnknownUrlExceptionMapper implements ResponseExceptionMapper<UnknownUrlException> {
+  
   Logger LOG = Logger.getLogger(UnknownUrlExceptionMapper.class.getName());
 
   @Override
@@ -34,5 +33,5 @@ public class UnknownUrlExceptionMapper
   public UnknownUrlException toThrowable(Response response) {
     return new UnknownUrlException();
   }
+
 }
-// end::mapper[]

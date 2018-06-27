@@ -10,7 +10,6 @@
  *     IBM Corporation - Initial implementation
  *******************************************************************************/
 // end::copyright[]
-// tag::exception[]
 package io.openliberty.guides.inventory.client;
 
 public class UnknownUrlException extends Exception {
@@ -24,5 +23,5 @@ public class UnknownUrlException extends Exception {
   public UnknownUrlException(String message) {
     super(message);
   }
+  
 }
-// end::exception[]
