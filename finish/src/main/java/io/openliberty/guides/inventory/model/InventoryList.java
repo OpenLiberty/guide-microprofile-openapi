@@ -48,6 +48,7 @@ public class InventoryList {
 
         @Schema(required = true) 
         private final String hostname;
+        
         @Schema(required = true) 
         private final Properties properties;
 
