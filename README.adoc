@@ -17,6 +17,9 @@
 :source-highlighter: prettify
 = Documenting RESTful APIs
 
+[.hidden]
+NOTE: This repository contains the guide documentation source. To view the guide in published form, view it on the https://openliberty.io/guides/{projectid}.html[Open Liberty website].
+
 Explore how to document and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
 
 
