@@ -188,12 +188,20 @@ served are now more meaningful:
 
 OpenAPI annotations can also be added to POJOs to describe what they represent. Currently, your OpenAPI 
 document doesn't have a very meaningful description of the `InventoryList` POJO and hence it's very 
-difficult to tell excatly what that POJO is used for. To describe the `InventoryList` POJO in more detail, augment the 
+difficult to tell exactly what that POJO is used for. To describe the `InventoryList` POJO in more detail, augment the 
 `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations:
 
 [source, Java]
 ----
 include::finish/src/main/java/io/openliberty/guides/inventory/model/InventoryList.java[tags=**;!copyright]
+----
+
+Your OpenAPI document also doesn't have a description of `SystemData`, similarly to `InventoryList`
+add some OpenAPI annotations to `src/main/java/io/openliberty/guides/inventory/model/SystemData.java`:
+
+[source, Java]
+----
+include::finish/src/main/java/io/openliberty/guides/inventory/model/SystemData.java[tags=**;!copyright]
 ----
 
 Again, run the `mvn compile` command and refresh the {openapi-url} URL to see the updated OpenAPI tree:
