@@ -18,30 +18,30 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Schema(name="SystemData", description="POJO that represents a single inventory entry.")
 public class SystemData {
 
-    @Schema(required = true) 
-    private final String hostname;
-    
-    @Schema(required = true) 
-    private final Properties properties;
+  @Schema(required = true)
+  private final String hostname;
 
-    public SystemData(String hostname, Properties properties) {
-        this.hostname = hostname;
-        this.properties = properties;
-    }
+  @Schema(required = true)
+  private final Properties properties;
 
-    public String getHostname() {
-        return hostname;
-    }
+  public SystemData(String hostname, Properties properties) {
+    this.hostname = hostname;
+    this.properties = properties;
+  }
 
-    public Properties getProperties() {
-        return properties;
-    }
+  public String getHostname() {
+    return hostname;
+  }
 
-    @Override
-    public boolean equals(Object host) {
-        if (host instanceof SystemData) {
-            return hostname.equals(((SystemData) host).getHostname());
-        }
-        return false;
+  public Properties getProperties() {
+    return properties;
+  }
+
+  @Override
+  public boolean equals(Object host) {
+    if (host instanceof SystemData) {
+      return hostname.equals(((SystemData) host).getHostname());
     }
+    return false;
+  }
 }
