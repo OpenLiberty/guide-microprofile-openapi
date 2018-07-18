@@ -17,28 +17,28 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 public class SystemData {
 
-  private final String hostname;
+    private final String hostname;
 
-  private final Properties properties;
+    private final Properties properties;
 
-  public SystemData(String hostname, Properties properties) {
-    this.hostname = hostname;
-    this.properties = properties;
-  }
-
-  public String getHostname() {
-    return hostname;
-  }
-
-  public Properties getProperties() {
-    return properties;
-  }
-
-  @Override
-  public boolean equals(Object host) {
-    if (host instanceof SystemData) {
-      return hostname.equals(((SystemData) host).getHostname());
+    public SystemData(String hostname, Properties properties) {
+        this.hostname = hostname;
+        this.properties = properties;
     }
-    return false;
-  }
+
+    public String getHostname() {
+        return hostname;
+    }
+
+    public Properties getProperties() {
+        return properties;
+    }
+
+    @Override
+    public boolean equals(Object host) {
+        if (host instanceof SystemData) {
+            return hostname.equals(((SystemData) host).getHostname());
+        }
+        return false;
+    }
 }
