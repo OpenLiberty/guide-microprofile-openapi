@@ -5,15 +5,27 @@
 #   license:
 #     name: Eclipse Public License - v 1.0
 #     url: https://www.eclipse.org/legal/epl-v10.html
-#   version: "1.0"
+#   version: 1.0.0
 # servers:
 # - url: http://localhost:{port}
 #   description: Simple Open Liberty.
 #   variables:
 #     port:
-#       description: Server HTTP port.
 #       default: "9080"
+#       description: Server HTTP port.
 # paths:
+#   /inventory/systems:
+#     get:
+#       summary: List inventory contents.
+#       description: Returns the currently stored host:properties pairs in the inventory.
+#       operationId: listContents
+#       responses:
+#         200:
+#           description: host:properties pairs stored in the inventory.
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: '#/components/schemas/InventoryList'
 #   /inventory/systems/{hostname}:
 #     get:
 #       summary: Get JVM system properties for particular host
@@ -40,22 +52,8 @@
 #             application/json:
 #               schema:
 #                 $ref: '#/components/schemas/Properties'
-#   /inventory/systems:
-#     get:
-#       summary: List inventory contents.
-#       description: Returns the currently stored host:properties pairs in the inventory.
-#       operationId: listContents
-#       responses:
-#         200:
-#           description: host:properties pairs stored in the inventory.
-#           content:
-#             application/json:
-#               schema:
-#                 $ref: '#/components/schemas/InventoryList'
 #   /inventory/properties:
 #     get:
-#       summary: Get JVM system properties.
-#       description: Returns the JVM system properties for the host running this service.
 #       operationId: getProperties
 #       responses:
 #         200:
@@ -63,7 +61,9 @@
 #           content:
 #             application/json:
 #               schema:
-#                 $ref: '#/components/schemas/Properties'
+#                 type: object
+#                 additionalProperties:
+#                   type: string
 # components:
 #   schemas:
 #     InventoryList:
@@ -74,15 +74,11 @@
 #         systems:
 #           type: array
 #           items:
-#             $ref: '#/components/schemas/System'
+#             $ref: '#/components/schemas/SystemData'
 #         total:
 #           type: integer
 #       description: POJO that represents the inventory contents.
-#     Properties:
-#       type: object
-#       additionalProperties:
-#         type: string
-#     System:
+#     SystemData:
 #       required:
 #       - hostname
 #       - properties
@@ -95,3 +91,7 @@
 #           additionalProperties:
 #             type: string
 #       description: POJO that represents a single inventory entry.
+#     Properties:
+#       type: object
+#       additionalProperties:
+#         type: string
