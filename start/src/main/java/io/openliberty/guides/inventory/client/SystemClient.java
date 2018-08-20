@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@Dependent
+
 @RegisterRestClient
 @RegisterProvider(UnknownUrlExceptionMapper.class)
 @Path("/properties")
