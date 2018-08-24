@@ -9,7 +9,7 @@
 :page-layout: guide
 :page-duration: 20 minutes
 :page-releasedate: 2018-03-16
-:page-guide-catagory: microprofile
+:page-guide-category: microprofile
 :page-essential: false
 :page-description: Explore how to document and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
 :page-tags: ['MicroProfile', 'OpenAPI', 'microservices', '@APIResponse', '@Schema', '@Content', '@Operation', '@Info', '@Parameter']
