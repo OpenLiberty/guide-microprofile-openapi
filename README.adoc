@@ -315,7 +315,7 @@ servers:
     text/plain: {}
 ----
 
-For more information about which elements you can filter, see the https://openliberty.io/docs/ref/microprofile/1.3/[MicroProfile 1.3 API].
+For more information about which elements you can filter, see the https://openliberty.io/docs/ref/microprofile/[MicroProfile API].
 
 To learn more about MicroProfile Config, visit the MicroProfile Config https://github.com/eclipse/microprofile-config[GitHub repository]
 and try one of the MicroProfile Config https://openliberty.io/guides/?search=Config[guides].
