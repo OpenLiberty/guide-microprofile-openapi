@@ -9,6 +9,8 @@
 :page-layout: guide
 :page-duration: 20 minutes
 :page-releasedate: 2018-03-16
+:page-guide-category: microprofile
+:page-essential: false
 :page-description: Explore how to document and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
 :page-tags: ['MicroProfile', 'OpenAPI', 'microservices', '@APIResponse', '@Schema', '@Content', '@Operation', '@Info', '@Parameter']
 :page-permalink: /guides/{projectid}
@@ -42,10 +44,10 @@ JAX-RS applications.
 
 You will document the RESTful APIs of the provided `inventory` service, which serves two endpoints, 
 `inventory/systems` and `inventory/properties`. These two endpoints function the same way as in the 
-other MicroProfile gudes.
+other MicroProfile guides.
 
 Before you proceed, note that the 1.0 version of the MicroProfile OpenAPI specification does 
-not define how the `/openapi` endpoint may be partiontioned in the event of multiple JAX-RS applications 
+not define how the `/openapi` endpoint may be partitioned in the event of multiple JAX-RS applications 
 running on the same server. In other words, you must stick to one JAX-RS application per server instance 
 as the behaviour for handling multiple applications is currently undefined.
 
@@ -126,7 +128,7 @@ the `src/main/java/io/openliberty/guides/inventory/InventoryResource.java` file:
 include::finish/src/main/java/io/openliberty/guides/inventory/InventoryResource.java[tags=**;!copyright]
 ----
 
-There is quite a bit more annotations now, so lets break them down:
+Clearly, there are many more annotations now, so let's break them down:
 
 [cols="35, 200", options="header"]
 |===
@@ -313,7 +315,7 @@ servers:
     text/plain: {}
 ----
 
-For more information about which elements you can filter, see the https://openliberty.io/docs/ref/microprofile/1.3/[MicroProfile 1.3 API].
+For more information about which elements you can filter, see the https://openliberty.io/docs/ref/microprofile/[MicroProfile API].
 
 To learn more about MicroProfile Config, visit the MicroProfile Config https://github.com/eclipse/microprofile-config[GitHub repository]
 and try one of the MicroProfile Config https://openliberty.io/guides/?search=Config[guides].
@@ -389,7 +391,7 @@ file by using MicroProfile OpenAPI.
 Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you
 can learn and expand on top of what you built here.
 
-For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications avilable in the 
+For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications available in the 
 MicroProfile OpenAPI
 https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps[GitHub repository].
 
