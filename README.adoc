@@ -312,14 +312,14 @@ InventoryOASFilter.java
 include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[tags=**;!copyright]
 ----
 
-The `filterAPIResponse()` method allows filtering of `APIResponse` elements. When you
+The [hotspot=18-24 file=0]`filterAPIResponse()` method allows filtering of `APIResponse` elements. When you
 override this method, it will be called once for every `APIResponse` element in the OpenAPI tree.
 In this case, you are matching the `404` response that is returned by the `/inventory/systems/{hostname}`
 endpoint and setting the previously missing description. To remove an `APIResponse` element
 or another filterable element, simply return `null`.
 
-The [hotspot=27-46]`filterOpenAPI()` method allows filtering of the singleton [hotspot=27]`OpenAPI` element. Unlike other filter
-methods, when you override [hotspot=27-46]`filterOpenAPI()`, it is called only once as the last method
+The [hotspot=27-46 file=0]`filterOpenAPI()` method allows filtering of the singleton [hotspot=27 file=0]`OpenAPI` element. Unlike other filter
+methods, when you override [hotspot=27-46 file=0]`filterOpenAPI()`, it is called only once as the last method
 for a particular filter. Hence, make sure that it doesn't override any other filter operations that are
 called before it. Your current OpenAPI document doesn't provide much information on the application
 itself or on what server and port it runs on. This information is usually provided in the `info`
