@@ -55,7 +55,7 @@ as the behaviour for handling multiple applications is currently undefined.
 // =================================================================================================
 // Getting Started
 // =================================================================================================
-
+[role='command']
 include::{common-includes}/gitclone.adoc[]
 
 
@@ -66,6 +66,7 @@ service. Feel free to give it a try before you proceed.
 
 To try out the service, navigate to the `finish` directory and then run the Maven `install` and
 `liberty:start-server` goals to build and run the service in Open Liberty:
+
 [role='command']
 ```
 mvn install liberty:start-server
@@ -299,9 +300,14 @@ components:
 Filtering of certain elements and fields of the generated OpenAPI document can be done by using the 
 `OASFilter` interface.
 
-Implement the `OASFilter` interface in the `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java` file:
+[role="code_command hotspot=1-48", subs="quotes"]
+----
+Create the `OASFilter` interface.
+`src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java`
+----
 
-[source, Java, indent=0]
+InventoryOASFilter.java
+[source, Java, linenums, role="code_column"]
 ----
 include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[tags=**;!copyright]
 ----
@@ -312,8 +318,8 @@ In this case, you are matching the `404` response that is returned by the `/inve
 endpoint and setting the previously missing description. To remove an `APIResponse` element
 or another filterable element, simply return `null`.
 
-The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Unlike other filter
-methods, when you override `filterOpenAPI()`, it is called only once as the last method
+The [hotspot=27-46]`filterOpenAPI()` method allows filtering of the singleton [hotspot=27]`OpenAPI` element. Unlike other filter
+methods, when you override [hotspot=27-46]`filterOpenAPI()`, it is called only once as the last method
 for a particular filter. Hence, make sure that it doesn't override any other filter operations that are
 called before it. Your current OpenAPI document doesn't provide much information on the application
 itself or on what server and port it runs on. This information is usually provided in the `info`
@@ -325,12 +331,19 @@ removing the whole OpenAPI tree.
 Each filtering method is called once for each corresponding element in the model tree. You can think
 of each method as a callback for various key OpenAPI elements.
 
-Before you can use the filter class that you created, create the `src/main/webapp/META-INF/microprofile-config.properties`
-configuration file with the following content:
+Before you can use the filter class that you created, you need to create the `microprofile-config.properties` file.
 
-```
-mp.openapi.filter = io.openliberty.guides.inventory.filter.InventoryOASFilter
-```
+[role="code_command hotspot=1", subs="quotes"]
+----
+Create the the configuration file.
+`src/main/webapp/META-INF/microprofile-config.properties`
+----
+
+microprofile-config.properties
+[source, text, linenums, role="code_column"]
+----
+include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=config]
+----
 
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
 by passing in the fully qualified name of the filter class into the `mp.openapi.filter` property.
@@ -387,14 +400,25 @@ You can find a complete OpenAPI document in the `src/main/webapp/META-INF/openap
 This document is the same as your current OpenAPI document with additional APIs for the `/inventory/properties` 
 endpoint. To make use of this document, open this document in your favorite text editor and uncomment 
 all of its lines. Since this document is complete, you can also set the `mp.openapi.scan.disable` property 
-to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file:
+to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file.
 
-```
-mp.openapi.filter = io.openliberty.guides.inventory.filter.InventoryOASFilter
-mp.openapi.scan.disable = true
-```
+[role="code_command hotspot=1", subs="quotes"]
+----
+Edit the configuration file.
+`src/main/webapp/META-INF/microprofile-config.properties`
+----
 
-Run the `mvn compile` command and refresh the {openapi-url} URL to see the updated OpenAPI tree:
+microprofile-config.properties
+[source, text, linenums, role="code_column"]
+----
+include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=**]
+----
+
+Run the following command and refresh the {openapi-url} URL to see the updated OpenAPI tree.
+[role='command']
+```
+mvn compile
+```
 
 [source, yml, role="no_copy"]
 ----
