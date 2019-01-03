@@ -122,13 +122,13 @@ the JAX-RS framework.
 
 Add OpenAPI annotations to the two JAX-RS methods, `getPropertiesForHost()` and `listContents()`.
 
-[role='code_command hotspot=32-46', subs="quotes"]
+[role='code_command hotspot=32-46 file=0', subs="quotes"]
 ----
 Add OpenApi annotations to `getPropertiesForHost()`.
 `src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
 ----
 
-[role='code_command hotspot=70-81', subs="quotes"]
+[role='code_command hotspot=70-81 file=0', subs="quotes"]
 ----
 Add OpenApi annotations to `listContents()`.
 `src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
@@ -145,16 +145,21 @@ Clearly, there are many more annotations now, so let's break them down:
 [cols="35, 200", options="header"]
 |===
 | *Annotation*    | *Description*
-| [hotspot=32-42]`@APIResponses` | A container for multiple responses from an API operation. This annotation is
+| [hotspot=32-42 file=0]`@APIResponses` | A container for multiple responses from an API operation. This annotation is
 optional, but it can be helpful to organize a method with multiple responses.
-| [hotspot=34-37]`@APIResponse`  | Describes a single response from an API operation.
-| [hotspot=41]`@Content`      | Provides a schema and examples for a particular media type.
-| [hotspot=42]`@Schema`       | Defines the input and output data types.
-| [hotspot=43-46]`@Operation`    | Describes a single API operation on a path.
-| [hotspot=48-52]`@Parameter`    | Describes a single operation parameter.
+| [hotspot=34-37 file=0]`@APIResponse`  | Describes a single response from an API operation.
+| [hotspot=41 file=0]`@Content`      | Provides a schema and examples for a particular media type.
+| [hotspot=42 file=0]`@Schema`       | Defines the input and output data types.
+| [hotspot=43-46 file=0]`@Operation`    | Describes a single API operation on a path.
+| [hotspot=48-52 file=0]`@Parameter`    | Describes a single operation parameter.
 |===
 
-At this point, you can run the `mvn compile` command to rebuild the application. Then, refresh the
+At this point, you can run the the following command to rebuild the application. 
+[role='command']
+```
+mvn compile
+```
+Then, refresh the
 {openapi-url} URL to see the updated OpenAPI tree. The two endpoints at which your JAX-RS methods are
 served are now more meaningful:
 
@@ -204,17 +209,49 @@ served are now more meaningful:
 OpenAPI annotations can also be added to POJOs to describe what they represent. Currently, your OpenAPI 
 document doesn't have a very meaningful description of the `InventoryList` POJO and hence it's very 
 difficult to tell exactly what that POJO is used for. To describe the `InventoryList` POJO in more detail, augment the 
-`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations:
+`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations.
 
-[source, Java]
+[role='code_command hotspot=7 file=1', subs="quotes"]
+----
+Add the OpenApi annotation to the `InventoryList` class.
+`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
+----
+
+[role='code_command hotspot=10 file=1', subs="quotes"]
+----
+Add the OpenApi annotation to the `systems` variable.
+`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
+----
+
+InventoryList.java
+[source, Java, linenums, role='code_column']
 ----
 include::finish/src/main/java/io/openliberty/guides/inventory/model/InventoryList.java[tags=**;!copyright]
 ----
 
 Likewise, annotate the `src/main/java/io/openliberty/guides/inventory/model/SystemData.java` POJO, 
-which is referenced in the `InventoryList` class:
+which is referenced in the `InventoryList` class.
 
-[source, Java]
+[role='code_command hotspot=6 file=2', subs="quotes"]
+----
+Add the OpenApi annotation to the `SystemData` class.
+`src/main/java/io/openliberty/guides/inventory/model/SystemData.java`
+----
+
+[role='code_command hotspot=9 file=2', subs="quotes"]
+----
+Add the OpenApi annotation to the `hostname` variable.
+`src/main/java/io/openliberty/guides/inventory/model/SystemData.java`
+----
+
+[role='code_command hotspot=12 file=2', subs="quotes"]
+----
+Add the OpenApi annotation to the `properties` variable.
+`src/main/java/io/openliberty/guides/inventory/model/SystemData.java`
+----
+
+SystemData.java
+[source, Java, linenums, role="code_column"]
 ----
 include::finish/src/main/java/io/openliberty/guides/inventory/model/SystemData.java[tags=**;!copyright]
 ----
