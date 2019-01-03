@@ -122,13 +122,13 @@ the JAX-RS framework.
 
 Add OpenAPI annotations to the two JAX-RS methods, `getPropertiesForHost()` and `listContents()`.
 
-[role='code_command hotspot=32-46']
+[role='code_command hotspot=32-46', subs="quotes"]
 ----
 Add OpenApi annotations to `getPropertiesForHost()`.
 `src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
 ----
 
-[role='code_command hotspot=70-81']
+[role='code_command hotspot=70-81', subs="quotes"]
 ----
 Add OpenApi annotations to `listContents()`.
 `src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
