@@ -134,6 +134,7 @@ Add OpenApi annotations to `listContents()`.
 `src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
 ----
 
+InventoryResource.java
 [source, Java, linenums, role='code_column']
 ----
 include::finish/src/main/java/io/openliberty/guides/inventory/InventoryResource.java[tags=**;!copyright]
