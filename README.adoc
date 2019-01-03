@@ -257,7 +257,11 @@ SystemData.java
 include::finish/src/main/java/io/openliberty/guides/inventory/model/SystemData.java[tags=**;!copyright]
 ----
 
-Again, run the `mvn compile` command and refresh the {openapi-url} URL to see the updated OpenAPI tree:
+Again, run the following command and refresh the {openapi-url} URL to see the updated OpenAPI tree.
+[role='command']
+```
+mvn compile
+```
 
 [source, YAML, role="no_copy"]
 ----
@@ -348,8 +352,11 @@ include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=con
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
 by passing in the fully qualified name of the filter class into the `mp.openapi.filter` property.
 
-Finally, run the `mvn compile` command and refresh the {openapi-url} URL to see the updated OpenAPI tree:
-
+Finally, run the following command and refresh the {openapi-url} URL to see the updated OpenAPI tree.
+[role='command']
+```
+mvn compile
+```
 [source, yaml, role="no_copy"]
 ----
 info:
