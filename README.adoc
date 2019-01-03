@@ -66,7 +66,7 @@ service. Feel free to give it a try before you proceed.
 
 To try out the service, navigate to the `finish` directory and then run the Maven `install` and
 `liberty:start-server` goals to build and run the service in Open Liberty:
-
+[role='command']
 ```
 mvn install liberty:start-server
 ```
@@ -77,7 +77,7 @@ Next, point your browser to the {openapi-url} URL and you'll see the RESTful API
 service. You can also point to the {openapi-url}/ui URL for a more interactive view of the deployed APIs.
 
 When you are done checking out the service and its APIs, stop Open Liberty:
-
+[role='command']
 ```
 mvn liberty:stop-server
 ```
@@ -97,7 +97,7 @@ OpenAPI tree, changing them to your liking or removing them entirely.
 
 Before you proceed, deploy the `inventory` service to see the bare-bones OpenAPI document that is generated. 
 To deploy the `inventory` service, run the Maven `install` phase and the `liberty:start-server` goal:
-
+[role='command']
 ```
 mvn install liberty:start-server
 ```
@@ -120,10 +120,21 @@ Because all JAX-RS annotations are processed by default, you can augment the exi
 annotations without needing to rewrite portions of the OpenAPI document that are already covered by 
 the JAX-RS framework.
 
-Add OpenAPI annotations to the two JAX-RS methods, `getPropertiesForHost()` and `listContents()`, in 
-the `src/main/java/io/openliberty/guides/inventory/InventoryResource.java` file:
+Add OpenAPI annotations to the two JAX-RS methods, `getPropertiesForHost()` and `listContents()`.
 
-[source, Java]
+[role='code_command hotspot=32-46']
+----
+Add OpenApi annotations to `getPropertiesForHost()`.
+`src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
+----
+
+[role='code_command hotspot=70-81']
+----
+Add OpenApi annotations to `listContents()`.
+`src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
+----
+
+[source, Java, linenums, role='code_column']
 ----
 include::finish/src/main/java/io/openliberty/guides/inventory/InventoryResource.java[tags=**;!copyright]
 ----
@@ -133,13 +144,13 @@ Clearly, there are many more annotations now, so let's break them down:
 [cols="35, 200", options="header"]
 |===
 | *Annotation*    | *Description*
-| `@APIResponses` | A container for multiple responses from an API operation. This annotation is
+| [hotspot=32-42]`@APIResponses` | A container for multiple responses from an API operation. This annotation is
 optional, but it can be helpful to organize a method with multiple responses.
-| `@APIResponse`  | Describes a single response from an API operation.
-| `@Content`      | Provides a schema and examples for a particular media type.
-| `@Schema`       | Defines the input and output data types.
-| `@Operation`    | Describes a single API operation on a path.
-| `@Parameter`    | Describes a single operation parameter.
+| [hotspot=34-37]`@APIResponse`  | Describes a single response from an API operation.
+| [hotspot=41]`@Content`      | Provides a schema and examples for a particular media type.
+| [hotspot=42]`@Schema`       | Defines the input and output data types.
+| [hotspot=43-46]`@Operation`    | Describes a single API operation on a path.
+| [hotspot=48-52]`@Parameter`    | Describes a single operation parameter.
 |===
 
 At this point, you can run the `mvn compile` command to rebuild the application. Then, refresh the
