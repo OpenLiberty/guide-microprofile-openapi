@@ -17,6 +17,7 @@
 :page-related-guides: ['cdi-intro', 'microprofile-config']
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
 :source-highlighter: prettify
+:guide-author: Open Liberty
 = Documenting RESTful APIs
 
 [.hidden]
@@ -304,9 +305,9 @@ components:
 Filtering of certain elements and fields of the generated OpenAPI document can be done by using the 
 `OASFilter` interface.
 
-[role="code_command hotspot=1-48", subs="quotes"]
+[role="code_command hotspot=15-48", subs="quotes"]
 ----
-Create the `OASFilter` interface.
+Create the `InventoryOASFilter` class.
 `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java`
 ----
 
@@ -462,6 +463,7 @@ mvn install
 ```
 You can also run these
 tests separately from the build by using the following command, but first make sure that the server is stopped.
+[role="command"]
 ```
 mvn verify
 ```
@@ -473,7 +475,7 @@ mvn verify
 == Great work! You're done!
 
 You have just documented and filtered the APIs of the `inventory` service from both the code and a static
-file by using MicroProfile OpenAPI.
+file by using MicroProfile OpenAPI in Open Liberty.
 
 Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you
 can learn and expand on top of what you built here.
