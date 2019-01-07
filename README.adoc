@@ -99,6 +99,7 @@ OpenAPI tree, changing them to your liking or removing them entirely.
 
 Before you proceed, deploy the `inventory` service to see the bare-bones OpenAPI document that is generated. 
 To deploy the `inventory` service, run the Maven `install` phase and the `liberty:start-server` goal:
+
 [role='command']
 ```
 mvn install liberty:start-server
