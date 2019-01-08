@@ -463,8 +463,14 @@ as a part of the Maven build process when you run the following command.
 mvn install
 ```
 You can also run these
-tests separately from the build by using the following command, but first make sure that the server is stopped.
-[role="command"]
+tests separately from the build by using the following command, but first make sure that the server is stopped.If the server is still running from the previous steps, stop it using the Maven `liberty:stop-server` goal from command line in the `start` directory:
+[role='command']
+```
+mvn liberty:stop-server
+```
+
+Then, verify that the tests pass using the Maven `verify` goal:
+[role='command']
 ```
 mvn verify
 ```
