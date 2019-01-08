@@ -127,13 +127,13 @@ Add OpenAPI annotations to the two JAX-RS methods, `getPropertiesForHost()` and 
 
 [role='code_command hotspot=32-46 file=0', subs="quotes"]
 ----
-Add OpenApi annotations to `getPropertiesForHost()`.
+#Add OpenApi annotations to `getPropertiesForHost()`.#
 `src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
 ----
 
 [role='code_command hotspot=70-81 file=0', subs="quotes"]
 ----
-Add OpenApi annotations to `listContents()`.
+#Add OpenApi annotations to `listContents()`.#
 `src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
 ----
 
@@ -216,13 +216,13 @@ difficult to tell exactly what that POJO is used for. To describe the `Inventory
 
 [role='code_command hotspot=7 file=1', subs="quotes"]
 ----
-Add the OpenApi annotation to the `InventoryList` class.
+#Add the OpenApi annotation to the `InventoryList` class.#
 `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
 ----
 
 [role='code_command hotspot=10 file=1', subs="quotes"]
 ----
-Add the OpenApi annotation to the `systems` variable.
+#Add the OpenApi annotation to the `systems` variable.#
 `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
 ----
 
@@ -237,19 +237,19 @@ which is referenced in the `InventoryList` class.
 
 [role='code_command hotspot=6 file=2', subs="quotes"]
 ----
-Add the OpenApi annotation to the `SystemData` class.
+#Add the OpenApi annotation to the `SystemData` class.#
 `src/main/java/io/openliberty/guides/inventory/model/SystemData.java`
 ----
 
 [role='code_command hotspot=9 file=2', subs="quotes"]
 ----
-Add the OpenApi annotation to the `hostname` variable.
+#Add the OpenApi annotation to the `hostname` variable.#
 `src/main/java/io/openliberty/guides/inventory/model/SystemData.java`
 ----
 
 [role='code_command hotspot=12 file=2', subs="quotes"]
 ----
-Add the OpenApi annotation to the `properties` variable.
+#Add the OpenApi annotation to the `properties` variable.#
 `src/main/java/io/openliberty/guides/inventory/model/SystemData.java`
 ----
 
@@ -308,7 +308,7 @@ Filtering of certain elements and fields of the generated OpenAPI document can b
 
 [role="code_command hotspot=15-48", subs="quotes"]
 ----
-Create the `InventoryOASFilter` class.
+#Create the `InventoryOASFilter` class.#
 `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java`
 ----
 
@@ -341,7 +341,7 @@ Before you can use the filter class that you created, you need to create the `mi
 
 [role="code_command hotspot=1", subs="quotes"]
 ----
-Create the configuration file.
+#Create the configuration file.#
 `src/main/webapp/META-INF/microprofile-config.properties`
 ----
 
@@ -413,7 +413,7 @@ to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file.
 
 [role="code_command hotspot=1", subs="quotes"]
 ----
-Edit the configuration file.
+#Edit the configuration file.#
 `src/main/webapp/META-INF/microprofile-config.properties`
 ----
 
