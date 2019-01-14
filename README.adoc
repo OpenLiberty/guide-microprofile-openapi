@@ -492,6 +492,5 @@ MicroProfile OpenAPI
 https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps[GitHub repository].
 
 
-include::{common-includes}/finish.adoc[]
 include::https://raw.githubusercontent.com/OpenLiberty/guides-common/multipane/attribution.adoc[subs="attributes"]
 
