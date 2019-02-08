@@ -130,7 +130,7 @@ the JAX-RS framework.
 ----
 
 [role="edit_command_text"]
-Add OpenAPI annotations to the two JAX-RS methods, [hotspot=32-46 file=0]`getPropertiesForHost()` and [hotspot=32-46 file=0]`listContents()`.
+Add OpenAPI annotations to the two JAX-RS methods, [hotspot=32-46 file=0]`getPropertiesForHost()` and [hotspot=70-81 file=0]`listContents()`.
 
 
 InventoryResource.java
