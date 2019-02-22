@@ -323,7 +323,7 @@ of each method as a callback for various key OpenAPI elements.
 
 Before you can use the filter class that you created, you need to create the `microprofile-config.properties` file.
 
-[role="code_command hotspot=1", subs="quotes"]
+[role="code_command", subs="quotes"]
 ----
 #Create the configuration file.#
 `src/main/webapp/META-INF/microprofile-config.properties`
@@ -332,7 +332,7 @@ Before you can use the filter class that you created, you need to create the `mi
 microprofile-config.properties
 [source, text, linenums, role="code_column"]
 ----
-include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=config]
+include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=**]
 ----
 
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
