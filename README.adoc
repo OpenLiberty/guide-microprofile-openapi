@@ -336,7 +336,7 @@ include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=con
 ----
 
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
-by passing in the fully qualified name of the filter class into the [hotspot=1]`mp.openapi.filter` property.
+by passing in the fully qualified name of the filter class into the [hotspot=1 file=1]`mp.openapi.filter` property.
 
 Finally, run the following command and refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree.
 [role='command']
