@@ -332,7 +332,7 @@ Before you can use the filter class that you created, you need to create the `mi
 microprofile-config.properties
 [source, text, linenums, role="code_column"]
 ----
-include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=**]
+include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=config]
 ----
 
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
@@ -402,7 +402,7 @@ to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file.
 ----
 
 [role="edit_command_text"]
-Set the [hotspot=1]`mp.openapi.scan.disable` property to `true`.
+Add and set the [hotspot=1]`mp.openapi.scan.disable` property to `true`.
 
 microprofile-config.properties
 [source, text, linenums, role="code_column"]
