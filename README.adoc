@@ -75,8 +75,8 @@ mvn install liberty:start-server
 
 // I think here I can say "you'll see" because its still part of the same sentence and its assumed that the user
 // will finish reading the sentence first before doing anything. If it were two sentences, then it would be "You see".
-Next, point your browser to the {openapi-url} URL and you'll see the RESTful APIs of the `inventory`
-service. You can also point to the {openapi-url}/ui URL for a more interactive view of the deployed APIs.
+Next, point your browser to the {openapi-url}[{openapi-url}^] URL and you'll see the RESTful APIs of the `inventory`
+service. You can also point to the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the deployed APIs.
 
 When you are done checking out the service and its APIs, stop Open Liberty:
 [role='command']
@@ -98,7 +98,7 @@ models to manually create all elements of the OpenAPI tree. Finally, you can fil
 OpenAPI tree, changing them to your liking or removing them entirely.
 
 Before you proceed, deploy the `inventory` service to see the bare-bones OpenAPI document that is generated. 
-To deploy the `inventory` service, run the Maven `install` phase and the `liberty:start-server` goal:
+To deploy the `inventory` service, navigate to the `start` directory and run the Maven `install` phase and the `liberty:start-server` goal:
 
 [role='command']
 ```
@@ -113,8 +113,8 @@ Because the JAX-RS framework handles basic API generation for JAX-RS annotations
 tree will be generated from the `inventory` service. You can use this tree as a starting point and
 augment it with annotations and code to produce a complete OpenAPI document.
 
-Now, point to the {openapi-url} URL to see the generated OpenAPI tree. You can also point to the 
-{openapi-url}/ui URL for a more interactive view of the APIs.
+Now, point to the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. You can also point to the 
+{openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the APIs.
 
 
 === Augmenting the existing JAX-RS annotations with OpenAPI annotations
@@ -158,8 +158,8 @@ At this point, you can run the the following command to rebuild the application.
 ```
 mvn compile
 ```
-Then, refresh the
-{openapi-url} URL to see the updated OpenAPI tree. The two endpoints at which your JAX-RS methods are
+Then, refresh the {openapi-url}[{openapi-url}^]
+URL to see the updated OpenAPI tree. The two endpoints at which your JAX-RS methods are
 served are now more meaningful:
 
 [source, YAML, role="no_copy"]
@@ -243,7 +243,7 @@ SystemData.java
 include::finish/src/main/java/io/openliberty/guides/inventory/model/SystemData.java[tags=**;!copyright]
 ----
 
-Again, run the following command and refresh the {openapi-url} URL to see the updated OpenAPI tree.
+Again, run the following command and refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree.
 [role='command']
 ```
 mvn compile
@@ -338,7 +338,7 @@ include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=con
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
 by passing in the fully qualified name of the filter class into the [hotspot=1]`mp.openapi.filter` property.
 
-Finally, run the following command and refresh the {openapi-url} URL to see the updated OpenAPI tree.
+Finally, run the following command and refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree.
 [role='command']
 ```
 mvn compile
@@ -410,7 +410,7 @@ microprofile-config.properties
 include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=**]
 ----
 
-Run the following command and refresh the {openapi-url} URL to see the updated OpenAPI tree.
+Run the following command and refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree.
 [role='command']
 ```
 mvn compile
@@ -440,7 +440,7 @@ mvn compile
 == Testing the service
 
 No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually
-verify the document by visiting the {openapi-url} or the {openapi-url}/ui URL.
+verify the document by visiting the {openapi-url}[{openapi-url}^] or the {openapi-url}/ui[{openapi-url}/ui^] URL.
 
 A few tests are included for you to test the basic functionality of the `inventory` service. If a test
 failure occurs, then you might have introduced a bug into the code. These tests will run automatically
