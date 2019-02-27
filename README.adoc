@@ -6,17 +6,18 @@
 // Contributors:
 //   IBM Corporation
 :projectid: microprofile-openapi
-:page-layout: guide
+:page-layout: guide-multipane
 :page-duration: 20 minutes
 :page-releasedate: 2018-03-16
 :page-guide-category: microprofile
 :page-essential: false
 :page-description: Explore how to document and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
-:page-tags: ['MicroProfile', 'OpenAPI', 'microservices', '@APIResponse', '@Schema', '@Content', '@Operation', '@Info', '@Parameter']
+:page-tags: ['MicroProfile']
 :page-permalink: /guides/{projectid}
 :page-related-guides: ['cdi-intro', 'microprofile-config']
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
 :source-highlighter: prettify
+:guide-author: Open Liberty
 = Documenting RESTful APIs
 
 [.hidden]
@@ -55,7 +56,7 @@ as the behaviour for handling multiple applications is currently undefined.
 // =================================================================================================
 // Getting Started
 // =================================================================================================
-
+[role='command']
 include::{common-includes}/gitclone.adoc[]
 
 
@@ -67,17 +68,18 @@ service. Feel free to give it a try before you proceed.
 To try out the service, navigate to the `finish` directory and then run the Maven `install` and
 `liberty:start-server` goals to build and run the service in Open Liberty:
 
+[role='command']
 ```
 mvn install liberty:start-server
 ```
 
 // I think here I can say "you'll see" because its still part of the same sentence and its assumed that the user
 // will finish reading the sentence first before doing anything. If it were two sentences, then it would be "You see".
-Next, point your browser to the {openapi-url} URL and you'll see the RESTful APIs of the `inventory`
-service. You can also point to the {openapi-url}/ui URL for a more interactive view of the deployed APIs.
+Next, point your browser to the {openapi-url}[{openapi-url}^] URL and you'll see the RESTful APIs of the `inventory`
+service. You can also point to the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the deployed APIs.
 
 When you are done checking out the service and its APIs, stop Open Liberty:
-
+[role='command']
 ```
 mvn liberty:stop-server
 ```
@@ -96,8 +98,9 @@ models to manually create all elements of the OpenAPI tree. Finally, you can fil
 OpenAPI tree, changing them to your liking or removing them entirely.
 
 Before you proceed, deploy the `inventory` service to see the bare-bones OpenAPI document that is generated. 
-To deploy the `inventory` service, run the Maven `install` phase and the `liberty:start-server` goal:
+To deploy the `inventory` service, navigate to the `start` directory and run the Maven `install` phase and the `liberty:start-server` goal:
 
+[role='command']
 ```
 mvn install liberty:start-server
 ```
@@ -110,8 +113,8 @@ Because the JAX-RS framework handles basic API generation for JAX-RS annotations
 tree will be generated from the `inventory` service. You can use this tree as a starting point and
 augment it with annotations and code to produce a complete OpenAPI document.
 
-Now, point to the {openapi-url} URL to see the generated OpenAPI tree. You can also point to the 
-{openapi-url}/ui URL for a more interactive view of the APIs.
+Now, point to the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. You can also point to the 
+{openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the APIs.
 
 
 === Augmenting the existing JAX-RS annotations with OpenAPI annotations
@@ -120,10 +123,18 @@ Because all JAX-RS annotations are processed by default, you can augment the exi
 annotations without needing to rewrite portions of the OpenAPI document that are already covered by 
 the JAX-RS framework.
 
-Add OpenAPI annotations to the two JAX-RS methods, `getPropertiesForHost()` and `listContents()`, in 
-the `src/main/java/io/openliberty/guides/inventory/InventoryResource.java` file:
+[role='code_command file=0', subs="quotes"]
+----
+#Update the `InventoryResource` class.#
+`src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
+----
 
-[source, Java]
+[role="edit_command_text"]
+Add OpenAPI annotations to the two JAX-RS methods, [hotspot=32-46 hotspot=48-52 file=0]`getPropertiesForHost()` and [hotspot=70-81 file=0]`listContents()`.
+
+
+InventoryResource.java
+[source, Java, linenums, role='code_column']
 ----
 include::finish/src/main/java/io/openliberty/guides/inventory/InventoryResource.java[tags=**;!copyright]
 ----
@@ -133,17 +144,22 @@ Clearly, there are many more annotations now, so let's break them down:
 [cols="35, 200", options="header"]
 |===
 | *Annotation*    | *Description*
-| `@APIResponses` | A container for multiple responses from an API operation. This annotation is
+| [hotspot=32-42 file=0]`@APIResponses` | A container for multiple responses from an API operation. This annotation is
 optional, but it can be helpful to organize a method with multiple responses.
-| `@APIResponse`  | Describes a single response from an API operation.
-| `@Content`      | Provides a schema and examples for a particular media type.
-| `@Schema`       | Defines the input and output data types.
-| `@Operation`    | Describes a single API operation on a path.
-| `@Parameter`    | Describes a single operation parameter.
+| [hotspot=34-37 file=0]`@APIResponse`  | Describes a single response from an API operation.
+| [hotspot=41 file=0]`@Content`      | Provides a schema and examples for a particular media type.
+| [hotspot=42 file=0]`@Schema`       | Defines the input and output data types.
+| [hotspot=43-46 file=0]`@Operation`    | Describes a single API operation on a path.
+| [hotspot=48-52 file=0]`@Parameter`    | Describes a single operation parameter.
 |===
 
-At this point, you can run the `mvn compile` command to rebuild the application. Then, refresh the
-{openapi-url} URL to see the updated OpenAPI tree. The two endpoints at which your JAX-RS methods are
+At this point, you can run the the following command to rebuild the application. 
+[role='command']
+```
+mvn compile
+```
+Then, refresh the {openapi-url}[{openapi-url}^]
+URL to see the updated OpenAPI tree. The two endpoints at which your JAX-RS methods are
 served are now more meaningful:
 
 [source, YAML, role="no_copy"]
@@ -192,22 +208,46 @@ served are now more meaningful:
 OpenAPI annotations can also be added to POJOs to describe what they represent. Currently, your OpenAPI 
 document doesn't have a very meaningful description of the `InventoryList` POJO and hence it's very 
 difficult to tell exactly what that POJO is used for. To describe the `InventoryList` POJO in more detail, augment the 
-`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations:
+`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations.
 
-[source, Java]
+[role='code_command file=1', subs="quotes"]
+----
+#Update the `InventoryList` class.#
+`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
+----
+
+[role='edit_command_text']
+Add OpenAPI annotations to the [hotspot=7 file=1]`InventoryList` class and the [hotspot=10 file=1]`systems` variable.
+
+InventoryList.java
+[source, Java, linenums, role='code_column']
 ----
 include::finish/src/main/java/io/openliberty/guides/inventory/model/InventoryList.java[tags=**;!copyright]
 ----
 
 Likewise, annotate the `src/main/java/io/openliberty/guides/inventory/model/SystemData.java` POJO, 
-which is referenced in the `InventoryList` class:
+which is referenced in the `InventoryList` class.
 
-[source, Java]
+[role='code_command file=2', subs="quotes"]
+----
+#Update the `SystemData` class.#
+`src/main/java/io/openliberty/guides/inventory/model/SystemData.java`
+----
+
+[role='edit_command_text']
+Add OpenAPI annotations to the [hotspot=6 file=2]`SystemData` class, the [hotspot=9 file=2]`hostname` variable and the [hotspot=12 file=2]`properties` variable.
+
+SystemData.java
+[source, Java, linenums, role="code_column"]
 ----
 include::finish/src/main/java/io/openliberty/guides/inventory/model/SystemData.java[tags=**;!copyright]
 ----
 
-Again, run the `mvn compile` command and refresh the {openapi-url} URL to see the updated OpenAPI tree:
+Again, run the following command and refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree.
+[role='command']
+```
+mvn compile
+```
 
 [source, YAML, role="no_copy"]
 ----
@@ -250,21 +290,26 @@ components:
 Filtering of certain elements and fields of the generated OpenAPI document can be done by using the 
 `OASFilter` interface.
 
-Implement the `OASFilter` interface in the `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java` file:
+[role="code_command hotspot=", subs="quotes"]
+----
+#Create the `InventoryOASFilter` class.#
+`src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java`
+----
 
-[source, Java, indent=0]
+InventoryOASFilter.java
+[source, Java, linenums, role="code_column"]
 ----
 include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[tags=**;!copyright]
 ----
 
-The `filterAPIResponse()` method allows filtering of `APIResponse` elements. When you
+The [hotspot=18-24 file=0]`filterAPIResponse()` method allows filtering of `APIResponse` elements. When you
 override this method, it will be called once for every `APIResponse` element in the OpenAPI tree.
 In this case, you are matching the `404` response that is returned by the `/inventory/systems/{hostname}`
 endpoint and setting the previously missing description. To remove an `APIResponse` element
 or another filterable element, simply return `null`.
 
-The `filterOpenAPI()` method allows filtering of the singleton `OpenAPI` element. Unlike other filter
-methods, when you override `filterOpenAPI()`, it is called only once as the last method
+The [hotspot=27-46 file=0]`filterOpenAPI()` method allows filtering of the singleton [hotspot=27 file=0]`OpenAPI` element. Unlike other filter
+methods, when you override [hotspot=27-46 file=0]`filterOpenAPI()`, it is called only once as the last method
 for a particular filter. Hence, make sure that it doesn't override any other filter operations that are
 called before it. Your current OpenAPI document doesn't provide much information on the application
 itself or on what server and port it runs on. This information is usually provided in the `info`
@@ -276,18 +321,28 @@ removing the whole OpenAPI tree.
 Each filtering method is called once for each corresponding element in the model tree. You can think
 of each method as a callback for various key OpenAPI elements.
 
-Before you can use the filter class that you created, create the `src/main/webapp/META-INF/microprofile-config.properties`
-configuration file with the following content:
+Before you can use the filter class that you created, you need to create the `microprofile-config.properties` file.
 
-```
-mp.openapi.filter = io.openliberty.guides.inventory.filter.InventoryOASFilter
-```
+[role="code_command hotspot=", subs="quotes"]
+----
+#Create the configuration file.#
+`src/main/webapp/META-INF/microprofile-config.properties`
+----
+
+microprofile-config.properties
+[source, text, linenums, role="code_column"]
+----
+include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=config]
+----
 
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
-by passing in the fully qualified name of the filter class into the `mp.openapi.filter` property.
+by passing in the fully qualified name of the filter class into the [hotspot=1 file=1]`mp.openapi.filter` property.
 
-Finally, run the `mvn compile` command and refresh the {openapi-url} URL to see the updated OpenAPI tree:
-
+Finally, run the following command and refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree.
+[role='command']
+```
+mvn compile
+```
 [source, yaml, role="no_copy"]
 ----
 info:
@@ -315,10 +370,10 @@ servers:
     text/plain: {}
 ----
 
-For more information about which elements you can filter, see the https://openliberty.io/docs/ref/microprofile/[MicroProfile API].
+For more information about which elements you can filter, see the https://openliberty.io/docs/ref/microprofile/[MicroProfile API^].
 
-To learn more about MicroProfile Config, visit the MicroProfile Config https://github.com/eclipse/microprofile-config[GitHub repository]
-and try one of the MicroProfile Config https://openliberty.io/guides/?search=Config[guides].
+To learn more about MicroProfile Config, visit the MicroProfile Config https://github.com/eclipse/microprofile-config[GitHub repository^]
+and try one of the MicroProfile Config https://openliberty.io/guides/?search=Config[guides^].
 
 
 // =================================================================================================
@@ -338,14 +393,28 @@ You can find a complete OpenAPI document in the `src/main/webapp/META-INF/openap
 This document is the same as your current OpenAPI document with additional APIs for the `/inventory/properties` 
 endpoint. To make use of this document, open this document in your favorite text editor and uncomment 
 all of its lines. Since this document is complete, you can also set the `mp.openapi.scan.disable` property 
-to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file:
+to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file.
 
-```
-mp.openapi.filter = io.openliberty.guides.inventory.filter.InventoryOASFilter
-mp.openapi.scan.disable = true
-```
+[role="code_command hotspot", subs="quotes"]
+----
+#Update the configuration file.#
+`src/main/webapp/META-INF/microprofile-config.properties`
+----
 
-Run the `mvn compile` command and refresh the {openapi-url} URL to see the updated OpenAPI tree:
+[role="edit_command_text"]
+Add and set the [hotspot=1]`mp.openapi.scan.disable` property to `true`.
+
+microprofile-config.properties
+[source, text, linenums, role="code_column"]
+----
+include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=**]
+----
+
+Run the following command and refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree.
+[role='command']
+```
+mvn compile
+```
 
 [source, yml, role="no_copy"]
 ----
@@ -371,13 +440,27 @@ Run the `mvn compile` command and refresh the {openapi-url} URL to see the updat
 == Testing the service
 
 No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually
-verify the document by visiting the {openapi-url} or the {openapi-url}/ui URL.
+verify the document by visiting the {openapi-url}[{openapi-url}^] or the {openapi-url}/ui[{openapi-url}/ui^] URL.
 
 A few tests are included for you to test the basic functionality of the `inventory` service. If a test
 failure occurs, then you might have introduced a bug into the code. These tests will run automatically
-as a part of the Maven build process when you run the `mvn install` command. You can also run these
-tests separately from the build by using the `mvn verify` command, but first make sure that the server is stopped.
+as a part of the Maven build process when you run the following command. 
+[role='command']
+```
+mvn install
+```
+You can also run these
+tests separately from the build by using the following command, but first make sure that the server is stopped.If the server is still running from the previous steps, stop it using the Maven `liberty:stop-server` goal from command line in the `start` directory:
+[role='command']
+```
+mvn liberty:stop-server
+```
 
+Then, verify that the tests pass using the Maven `verify` goal:
+[role='command']
+```
+mvn verify
+```
 
 // =================================================================================================
 // Great work! You're done!
@@ -386,7 +469,7 @@ tests separately from the build by using the `mvn verify` command, but first mak
 == Great work! You're done!
 
 You have just documented and filtered the APIs of the `inventory` service from both the code and a static
-file by using MicroProfile OpenAPI.
+file by using MicroProfile OpenAPI in Open Liberty.
 
 Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you
 can learn and expand on top of what you built here.
@@ -396,4 +479,5 @@ MicroProfile OpenAPI
 https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps[GitHub repository].
 
 
-include::{common-includes}/finish.adoc[]
+include::{common-includes}/attribution.adoc[subs="attributes"]
+
