@@ -43,13 +43,13 @@ source code or documentation. The MicroProfile OpenAPI specification provides a 
 and programming models that allow Java developers to natively produce OpenAPI v3 documents from their
 JAX-RS applications.
 
-You will document the RESTful APIs of the provided `inventory` service, which serves two endpoints, 
-`inventory/systems` and `inventory/properties`. These two endpoints function the same way as in the 
+You will document the RESTful APIs of the provided `inventory` service, which serves two endpoints,
+`inventory/systems` and `inventory/properties`. These two endpoints function the same way as in the
 other MicroProfile guides.
 
-Before you proceed, note that the 1.0 version of the MicroProfile OpenAPI specification does 
-not define how the `/openapi` endpoint may be partitioned in the event of multiple JAX-RS applications 
-running on the same server. In other words, you must stick to one JAX-RS application per server instance 
+Before you proceed, note that the 1.0 version of the MicroProfile OpenAPI specification does
+not define how the `/openapi` endpoint may be partitioned in the event of multiple JAX-RS applications
+running on the same server. In other words, you must stick to one JAX-RS application per server instance
 as the behaviour for handling multiple applications is currently undefined.
 
 
@@ -97,7 +97,7 @@ OpenAPI annotations to enrich your APIs with a minimal amount of work. Second, y
 models to manually create all elements of the OpenAPI tree. Finally, you can filter various elements of the
 OpenAPI tree, changing them to your liking or removing them entirely.
 
-Before you proceed, deploy the `inventory` service to see the bare-bones OpenAPI document that is generated. 
+Before you proceed, deploy the `inventory` service to see the bare-bones OpenAPI document that is generated.
 To deploy the `inventory` service, navigate to the `start` directory and run the Maven `install` phase and the `liberty:start-server` goal:
 
 [role='command']
@@ -105,25 +105,25 @@ To deploy the `inventory` service, navigate to the `start` directory and run the
 mvn install liberty:start-server
 ```
 
-The `install` phase builds the application and packages it into the `target/mp-openapi.war` file. 
-It also downloads Open Liberty into the `target/liberty/wlp` directory and configures it to run the 
+The `install` phase builds the application and packages it into the `target/mp-openapi.war` file.
+It also downloads Open Liberty into the `target/liberty/wlp` directory and configures it to run the
 application. The `liberty:start-server` goal starts an Open Liberty server instance.
 
 Because the JAX-RS framework handles basic API generation for JAX-RS annotations, a skeleton OpenAPI
 tree will be generated from the `inventory` service. You can use this tree as a starting point and
 augment it with annotations and code to produce a complete OpenAPI document.
 
-Now, point to the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. You can also point to the 
+Now, point to the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. You can also point to the
 {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the APIs.
 
 
 === Augmenting the existing JAX-RS annotations with OpenAPI annotations
 
-Because all JAX-RS annotations are processed by default, you can augment the existing code with OpenAPI 
-annotations without needing to rewrite portions of the OpenAPI document that are already covered by 
+Because all JAX-RS annotations are processed by default, you can augment the existing code with OpenAPI
+annotations without needing to rewrite portions of the OpenAPI document that are already covered by
 the JAX-RS framework.
 
-[role='code_command file=0', subs="quotes"]
+[role='code_command hotspot file=0', subs="quotes"]
 ----
 #Update the `InventoryResource` class.#
 `src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
@@ -153,7 +153,7 @@ optional, but it can be helpful to organize a method with multiple responses.
 | [hotspot=48-52 file=0]`@Parameter`    | Describes a single operation parameter.
 |===
 
-At this point, you can run the the following command to rebuild the application. 
+At this point, you can run the the following command to rebuild the application.
 [role='command']
 ```
 mvn compile
@@ -205,12 +205,12 @@ served are now more meaningful:
 ----
 
 
-OpenAPI annotations can also be added to POJOs to describe what they represent. Currently, your OpenAPI 
-document doesn't have a very meaningful description of the `InventoryList` POJO and hence it's very 
-difficult to tell exactly what that POJO is used for. To describe the `InventoryList` POJO in more detail, augment the 
+OpenAPI annotations can also be added to POJOs to describe what they represent. Currently, your OpenAPI
+document doesn't have a very meaningful description of the `InventoryList` POJO and hence it's very
+difficult to tell exactly what that POJO is used for. To describe the `InventoryList` POJO in more detail, augment the
 `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations.
 
-[role='code_command file=1', subs="quotes"]
+[role='code_command hotspot file=1', subs="quotes"]
 ----
 #Update the `InventoryList` class.#
 `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
@@ -225,10 +225,10 @@ InventoryList.java
 include::finish/src/main/java/io/openliberty/guides/inventory/model/InventoryList.java[tags=**;!copyright]
 ----
 
-Likewise, annotate the `src/main/java/io/openliberty/guides/inventory/model/SystemData.java` POJO, 
+Likewise, annotate the `src/main/java/io/openliberty/guides/inventory/model/SystemData.java` POJO,
 which is referenced in the `InventoryList` class.
 
-[role='code_command file=2', subs="quotes"]
+[role='code_command hotspot file=2', subs="quotes"]
 ----
 #Update the `SystemData` class.#
 `src/main/java/io/openliberty/guides/inventory/model/SystemData.java`
@@ -287,10 +287,10 @@ components:
 
 === Filtering the OpenAPI tree elements
 
-Filtering of certain elements and fields of the generated OpenAPI document can be done by using the 
+Filtering of certain elements and fields of the generated OpenAPI document can be done by using the
 `OASFilter` interface.
 
-[role="code_command hotspot=", subs="quotes"]
+[role="code_command hotspot", subs="quotes"]
 ----
 #Create the `InventoryOASFilter` class.#
 `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java`
@@ -323,7 +323,7 @@ of each method as a callback for various key OpenAPI elements.
 
 Before you can use the filter class that you created, you need to create the `microprofile-config.properties` file.
 
-[role="code_command hotspot=", subs="quotes"]
+[role="code_command hotspot", subs="quotes"]
 ----
 #Create the configuration file.#
 `src/main/webapp/META-INF/microprofile-config.properties`
@@ -383,16 +383,16 @@ and try one of the MicroProfile Config https://openliberty.io/guides/?search=Con
 == Using pregenerated OpenAPI documents
 
 As an alternative to generating the OpenAPI model tree from code, you can provide a valid pregenerated
-OpenAPI document to describe your APIs. This document must be named `openapi` with a `yml`, `yaml`, or `json` 
+OpenAPI document to describe your APIs. This document must be named `openapi` with a `yml`, `yaml`, or `json`
 extension and be placed under the `META-INF` directory. Depending on the scenario, the document
 might be fully or partially complete. If the document is fully complete, then you can disable
 annotation scanning entirely by setting the `mp.openapi.scan.disable` MicroProfile Config property to `true`.
 If the document is partially complete, then you can augment it with code.
 
 You can find a complete OpenAPI document in the `src/main/webapp/META-INF/openapi.yaml` file.
-This document is the same as your current OpenAPI document with additional APIs for the `/inventory/properties` 
-endpoint. To make use of this document, open this document in your favorite text editor and uncomment 
-all of its lines. Since this document is complete, you can also set the `mp.openapi.scan.disable` property 
+This document is the same as your current OpenAPI document with additional APIs for the `/inventory/properties`
+endpoint. To make use of this document, open this document in your favorite text editor and uncomment
+all of its lines. Since this document is complete, you can also set the `mp.openapi.scan.disable` property
 to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file.
 
 [role="code_command hotspot", subs="quotes"]
@@ -444,7 +444,7 @@ verify the document by visiting the {openapi-url}[{openapi-url}^] or the {openap
 
 A few tests are included for you to test the basic functionality of the `inventory` service. If a test
 failure occurs, then you might have introduced a bug into the code. These tests will run automatically
-as a part of the Maven build process when you run the following command. 
+as a part of the Maven build process when you run the following command.
 [role='command']
 ```
 mvn install
@@ -474,10 +474,9 @@ file by using MicroProfile OpenAPI in Open Liberty.
 Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you
 can learn and expand on top of what you built here.
 
-For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications available in the 
+For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications available in the
 MicroProfile OpenAPI
 https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps[GitHub repository].
 
 
 include::{common-includes}/attribution.adoc[subs="attributes"]
-
