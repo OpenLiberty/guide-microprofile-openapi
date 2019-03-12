@@ -392,17 +392,34 @@ If the document is partially complete, then you can augment it with code.
 You can find a complete OpenAPI document in the `src/main/webapp/META-INF/openapi.yaml` file.
 This document is the same as your current OpenAPI document with additional APIs for the `/inventory/properties`
 endpoint. To make use of this document, open this document in your favorite text editor and uncomment
-all of its lines. Since this document is complete, you can also set the `mp.openapi.scan.disable` property
+all of its lines. 
+
+[role="code_command hotspot file=0", subs="quotes"]
+----
+#Update the OpenAPI document file.#
+`src/main/webapp/META-INF/openapi.yaml`
+----
+
+[role="edit_command_text"]
+Uncomment all the lines in the [hotspot file=0]`openapi.yaml` file.
+
+openapi.yaml
+[source, text, linenums, role="code_column"]
+----
+include::finish/src/main/webapp/META-INF/openapi.yaml[tags=**]
+----
+
+Since this document is complete, you can also set the `mp.openapi.scan.disable` property
 to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file.
 
-[role="code_command hotspot", subs="quotes"]
+[role="code_command hotspot file=1", subs="quotes"]
 ----
 #Update the configuration file.#
 `src/main/webapp/META-INF/microprofile-config.properties`
 ----
 
 [role="edit_command_text"]
-Add and set the [hotspot=1]`mp.openapi.scan.disable` property to `true`.
+Add and set the [hotspot=1 file=1]`mp.openapi.scan.disable` property to `true`.
 
 microprofile-config.properties
 [source, text, linenums, role="code_column"]
