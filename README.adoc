@@ -77,6 +77,7 @@ mvn install liberty:start-server
 // will finish reading the sentence first before doing anything. If it were two sentences, then it would be "You see".
 Next, point your browser to the {openapi-url}[{openapi-url}^] URL and you'll see the RESTful APIs of the `inventory`
 service. You can also point to the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the deployed APIs.
+This UI is built from the https://swagger.io/tools/swagger-ui/[Open Source Swagger UI^] and renders the generated `/openapi` document into a very user friendly page.
 
 When you are done checking out the service and its APIs, stop Open Liberty:
 [role='command']
