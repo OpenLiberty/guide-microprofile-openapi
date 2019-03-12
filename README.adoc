@@ -396,7 +396,7 @@ all of its lines.
 
 [role="code_command hotspot file=0", subs="quotes"]
 ----
-#Update the configuration file.#
+#Update the OpenAPI document file.#
 `src/main/webapp/META-INF/openapi.yaml`
 ----
 
