@@ -72,13 +72,13 @@
         </dependency>
         <dependency>
             <groupId>io.openliberty.features</groupId>
-            <artifactId>mpRestClient-1.1</artifactId>
+            <artifactId>mpRestClient-1.2</artifactId>
             <type>esa</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.openliberty.features</groupId>
-            <artifactId>mpOpenAPI-1.0</artifactId>
+            <artifactId>mpOpenAPI-1.1</artifactId>
             <type>esa</type>
             <scope>provided</scope>
         </dependency>
