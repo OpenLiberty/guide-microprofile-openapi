@@ -41,27 +41,40 @@ public class InventoryResource {
     @GET
     @Path("/{hostname}")
     @Produces(MediaType.APPLICATION_JSON)
+    // tag::APIResponses[]
+    // tag::APIResponse[]
+    // tag::host-property[]
     @APIResponses(
         value = {
             @APIResponse(
                 responseCode = "404", 
                 description = "Missing description",
                 content = @Content(mediaType = "text/plain")),
+    // end::APIResponse[]
             @APIResponse(
                 responseCode = "200",
                 description = "JVM system properties of a particular host.",
+                // tag::Content[]
                 content = @Content(mediaType = "application/json",
+                // end::Content[]
+                // tag::Schmea[]
                 schema = @Schema(implementation = Properties.class))) })
+                // end::Schmea[]
+    // tag::Operation[]
     @Operation(
         summary = "Get JVM system properties for particular host",
         description = "Retrieves and returns the JVM system properties from the system "
         + "service running on the particular host.")
+    // tag::Operation[]
+    // end::host-property[]
     public Response getPropertiesForHost(
+        // tag::Parameter[]
         @Parameter(
             description = "The host for whom to retrieve the JVM system properties for.",
             required = true, 
             example = "foo", 
             schema = @Schema(type = SchemaType.STRING)) 
+        // end::Parameter[]
         @PathParam("hostname") String hostname) {
         // Get properties for host
         Properties props = manager.get(hostname);
@@ -79,6 +92,7 @@ public class InventoryResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    // tag::listContents[]
     @APIResponse(
         responseCode = "200",
         description = "host:properties pairs stored in the inventory.",
@@ -91,8 +105,10 @@ public class InventoryResource {
         summary = "List inventory contents.",
         description = "Returns the currently stored host:properties pairs in the "
         + "inventory.")
+    // end::listContents[]
     public InventoryList listContents() {
         return manager.list();
     }
 
 }
+// end::APIResponses[]

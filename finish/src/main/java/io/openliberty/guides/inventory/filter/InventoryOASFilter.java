@@ -27,6 +27,7 @@ import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 public class InventoryOASFilter implements OASFilter {
 
   @Override
+  // tag::filterAPIResponse[]
   public APIResponse filterAPIResponse(APIResponse apiResponse) {
     if ("Missing description".equals(apiResponse.getDescription())) {
       apiResponse.setDescription("Invalid hostname or the system service may not "
@@ -34,9 +35,13 @@ public class InventoryOASFilter implements OASFilter {
     }
     return apiResponse;
   }
+  // end::filterAPIResponse[]
 
   @Override
+  // tag::filterOpenAPI[]
+  // tag::OpenAPI[]
   public void filterOpenAPI(OpenAPI openAPI) {
+  // end::OpenAPI[]
     // tag::oasfactory[]
     openAPI.setInfo(
         OASFactory.createObject(Info.class).title("Inventory App").version("1.0")
@@ -58,5 +63,6 @@ public class InventoryOASFilter implements OASFilter {
                                               .defaultValue("9080")))));
     // end::oasfactory[]
   }
+  // end::filterOpenAPI[]
 
 }

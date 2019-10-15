@@ -14,6 +14,6 @@
 
   <!-- <logging traceSpecification="com.ibm.ws.microprofile.openapi.*=all"/> -->
 
-  <webApplication location="mp-openapi.war" contextRoot="/" />
+  <webApplication location="guide-microprofile-openapi.war" contextRoot="/" />
 
 </server>

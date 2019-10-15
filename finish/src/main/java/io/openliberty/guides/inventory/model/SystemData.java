@@ -14,15 +14,20 @@ package io.openliberty.guides.inventory.model;
 
 import java.util.Properties;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
-
+// tag::SystemData[]
 @Schema(name="SystemData", description="POJO that represents a single inventory entry.")
+// end::SystemData[]
 public class SystemData {
 
     @Schema(required = true)
+    // tag::Hostname[]
     private final String hostname;
+    // end::Hostname[]
 
     @Schema(required = true)
+    // tag::Properties[]
     private final Properties properties;
+    // end::Properties[]
 
     public SystemData(String hostname, Properties properties) {
         this.hostname = hostname;
