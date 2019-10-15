@@ -42,15 +42,15 @@ public class InventoryResource {
     @Path("/{hostname}")
     @Produces(MediaType.APPLICATION_JSON)
     // tag::APIResponses[]
-    // tag::APIResponse[]
     // tag::host-property[]
     @APIResponses(
         value = {
+            // tag::APIResponse[]
             @APIResponse(
                 responseCode = "404", 
                 description = "Missing description",
                 content = @Content(mediaType = "text/plain")),
-    // end::APIResponse[]
+            // end::APIResponse[]
             @APIResponse(
                 responseCode = "200",
                 description = "JVM system properties of a particular host.",
@@ -65,7 +65,7 @@ public class InventoryResource {
         summary = "Get JVM system properties for particular host",
         description = "Retrieves and returns the JVM system properties from the system "
         + "service running on the particular host.")
-    // tag::Operation[]
+    // end::Operation[]
     // end::host-property[]
     public Response getPropertiesForHost(
         // tag::Parameter[]
