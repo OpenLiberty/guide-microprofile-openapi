@@ -57,9 +57,9 @@ public class InventoryResource {
                 // tag::Content[]
                 content = @Content(mediaType = "application/json",
                 // end::Content[]
-                // tag::Schmea[]
+                // tag::Schema[]
                 schema = @Schema(implementation = Properties.class))) })
-                // end::Schmea[]
+                // end::Schema[]
     // tag::Operation[]
     @Operation(
         summary = "Get JVM system properties for particular host",
