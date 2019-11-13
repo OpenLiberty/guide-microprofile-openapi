@@ -331,7 +331,7 @@ Before you can use the filter class that you created, you need to create the `mi
 ----
 
 microprofile-config.properties
-[source, text, linenums, role='code_column hidetags=Scan tags=Config']
+[source, text, linenums, role='code_column hide_tags=Scan tags=Config']
 ----
 include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 ----
