@@ -420,7 +420,7 @@ to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file.
 ----
 
 [role="edit_command_text"]
-Add and set the [hotspot=1 file=1]`mp.openapi.scan.disable` property to `true`.
+Add and set the [hotspot=Scan file=1]`mp.openapi.scan.disable` property to `true`.
 
 microprofile-config.properties
 [source, text, linenums, role='code_column']
