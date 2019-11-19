@@ -84,6 +84,8 @@ OpenAPI annotations to enrich your APIs with a minimal amount of work. Second, y
 models to manually create all elements of the OpenAPI tree. Finally, you can filter various elements of the
 OpenAPI tree, changing them to your liking or removing them entirely.
 
+Navigate to the `start` directory to begin.
+
 [role='command']
 include::{common-includes}/devmode-start.adoc[]
 
