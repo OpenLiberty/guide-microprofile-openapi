@@ -156,8 +156,7 @@ served are now more meaningful:
       example: foo
     responses:
       404:
-        description: Invalid hostname or the system service may not be running on
-          the particular host.
+        description: Missing description
         content:
           text/plain: {}
       200:
