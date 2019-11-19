@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class InventoryEndpointTest {
+public class InventoryEndpointIT {
 
     private static String port;
     private static String baseUrl;
