@@ -16,6 +16,7 @@ package it.io.openliberty.guides.inventory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -61,21 +62,6 @@ public class InventoryEndpointIT {
 
     @Test
     @Order(1)
-    public void testEmptyInventory() {
-        Response response = this.getResponse(baseUrl + INVENTORY_SYSTEMS);
-        this.assertResponse(baseUrl, response);
-
-        JsonObject obj = response.readEntity(JsonObject.class);
-
-        int expected = 0;
-        int actual = obj.getInt("total");
-        assertEquals(expected, actual, "The inventory should be empty on application start but it wasn't");
-
-        response.close();
-    }
-
-    @Test
-    @Order(2)
     public void testHostRegistration() {
         this.visitLocalhost();
 
@@ -84,20 +70,24 @@ public class InventoryEndpointIT {
 
         JsonObject obj = response.readEntity(JsonObject.class);
 
-        int expected = 1;
-        int actual = obj.getInt("total");
-        assertEquals(expected, actual, "The inventory should have one entry for localhost");
+        JsonArray systems = obj.getJsonArray("systems");
 
-        boolean localhostExists = obj.getJsonArray("systems").getJsonObject(0)
-                                                             .get("hostname").toString()
-                                                             .contains("localhost");
+        boolean localhostExists = false;
+        for (int n = 0; n < systems.size(); n++) {
+            localhostExists = systems.getJsonObject(n)
+                                .get("hostname").toString()
+                                .contains("localhost");
+            if (localhostExists) {
+                break;
+            }
+        }
         assertTrue(localhostExists, "A host was registered, but it was not localhost");
 
         response.close();
     }
 
     @Test
-    @Order(3)
+    @Order(2)
     public void testSystemPropertiesMatch() {
         Response invResponse = this.getResponse(baseUrl + INVENTORY_SYSTEMS);
         Response sysResponse = this.getResponse(baseUrl + INVENTORY_PROPERTIES);
@@ -125,7 +115,7 @@ public class InventoryEndpointIT {
     }
 
     @Test
-    @Order(4)
+    @Order(3)
     public void testUnknownHost() {
         Response response = this.getResponse(baseUrl + INVENTORY_SYSTEMS);
         this.assertResponse(baseUrl, response);
