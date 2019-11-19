@@ -1,6 +1,6 @@
 // tag::copyright[]
 /*******************************************************************************
- * Copyright (c) 2017 IBM Corporation and others.
+ * Copyright (c) 2017, 2019 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,9 +12,9 @@
  // end::copyright[]
 package it.io.openliberty.guides.system;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.json.JsonObject;
 
@@ -29,7 +29,7 @@ public class SystemEndpointTest {
 
     @Test
     public void testGetProperties() {
-        String port = System.getProperty("liberty.test.port");
+        String port = System.getProperty("http.port");
         String url = "http://localhost:" + port + "/";
 
         Client client = ClientBuilder.newClient();
@@ -38,13 +38,13 @@ public class SystemEndpointTest {
         WebTarget target = client.target(url + "inventory/properties");
         Response response = target.request().get();
 
-        assertEquals("Incorrect response code from " + url, 200, response.getStatus());
+        assertEquals(200, response.getStatus(), "Incorrect response code from " + url);
 
         JsonObject obj = response.readEntity(JsonObject.class);
 
-        assertEquals("The system property for the local and remote JVM should match",
-                     System.getProperty("os.name"),
-                     obj.getString("os.name"));
+        assertEquals(System.getProperty("os.name"),
+                     obj.getString("os.name"), 
+                     "The system property for the local and remote JVM should match");
         
         response.close();
     }
