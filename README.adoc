@@ -17,6 +17,8 @@
 :page-related-guides: ['cdi-intro', 'microprofile-config']
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
 :source-highlighter: prettify
+:page-seo-title: Documenting RESTful APIs using MicroProfile OpenAPI
+:page-seo-description: A tutorial on how to document and filter RESTful APIs by using MicroProfile OpenAPI
 :guide-author: Open Liberty
 = Documenting RESTful APIs
 
