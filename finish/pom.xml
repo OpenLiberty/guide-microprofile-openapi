@@ -37,7 +37,7 @@
             <dependency>
                 <groupId>io.openliberty.features</groupId>
                 <artifactId>features-bom</artifactId>
-                <version>RELEASE</version>
+                <version>19.0.0.11</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
