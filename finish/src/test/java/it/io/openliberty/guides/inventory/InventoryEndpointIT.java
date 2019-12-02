@@ -1,6 +1,6 @@
 // tag::copyright[]
 /*******************************************************************************
- * Copyright (c) 2017, 2018 IBM Corporation and others.
+ * Copyright (c) 2017, 2019 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,9 +13,10 @@
 // tag::testClass[]
 package it.io.openliberty.guides.inventory;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -23,12 +24,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.provider.jsrjsonp.JsrJsonpProvider;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
-public class InventoryEndpointTest {
+@TestMethodOrder(OrderAnnotation.class)
+public class InventoryEndpointIT {
 
     private static String port;
     private static String baseUrl;
@@ -38,44 +43,25 @@ public class InventoryEndpointTest {
     private final String INVENTORY_PROPERTIES = "inventory/properties";
     private final String INVENTORY_SYSTEMS = "inventory/systems";
 
-    @BeforeClass
+    @BeforeAll
     public static void oneTimeSetup() {
-        port = System.getProperty("liberty.test.port");
+        port = System.getProperty("http.port");
         baseUrl = "http://localhost:" + port + "/";
     }
 
-    @Before
+    @BeforeEach
     public void setup() {
         client = ClientBuilder.newClient();
         client.register(JsrJsonpProvider.class);
     }
 
-    @After
+    @AfterEach
     public void teardown() {
         client.close();
     }
 
     @Test
-    public void testSuite() {
-        this.testEmptyInventory();
-        this.testHostRegistration();
-        this.testSystemPropertiesMatch();
-        this.testUnknownHost();
-    }
-
-    public void testEmptyInventory() {
-        Response response = this.getResponse(baseUrl + INVENTORY_SYSTEMS);
-        this.assertResponse(baseUrl, response);
-
-        JsonObject obj = response.readEntity(JsonObject.class);
-
-        int expected = 0;
-        int actual = obj.getInt("total");
-        assertEquals("The inventory should be empty on application start but it wasn't", expected, actual);
-
-        response.close();
-    }
-
+    @Order(1)
     public void testHostRegistration() {
         this.visitLocalhost();
 
@@ -84,18 +70,24 @@ public class InventoryEndpointTest {
 
         JsonObject obj = response.readEntity(JsonObject.class);
 
-        int expected = 1;
-        int actual = obj.getInt("total");
-        assertEquals("The inventory should have one entry for localhost", expected, actual);
+        JsonArray systems = obj.getJsonArray("systems");
 
-        boolean localhostExists = obj.getJsonArray("systems").getJsonObject(0)
-                                                             .get("hostname").toString()
-                                                             .contains("localhost");
-        assertTrue("A host was registered, but it was not localhost", localhostExists);
+        boolean localhostExists = false;
+        for (int n = 0; n < systems.size(); n++) {
+            localhostExists = systems.getJsonObject(n)
+                                .get("hostname").toString()
+                                .contains("localhost");
+            if (localhostExists) {
+                break;
+            }
+        }
+        assertTrue(localhostExists, "A host was registered, but it was not localhost");
 
         response.close();
     }
 
+    @Test
+    @Order(2)
     public void testSystemPropertiesMatch() {
         Response invResponse = this.getResponse(baseUrl + INVENTORY_SYSTEMS);
         Response sysResponse = this.getResponse(baseUrl + INVENTORY_PROPERTIES);
@@ -122,6 +114,8 @@ public class InventoryEndpointTest {
         sysResponse.close();
     }
 
+    @Test
+    @Order(3)
     public void testUnknownHost() {
         Response response = this.getResponse(baseUrl + INVENTORY_SYSTEMS);
         this.assertResponse(baseUrl, response);
@@ -132,7 +126,7 @@ public class InventoryEndpointTest {
         String obj = badResponse.readEntity(String.class);
 
         boolean isError = obj.contains("ERROR");
-        assertTrue("badhostname is not a valid host but it didn't raise an error", isError);
+        assertTrue(isError, "badhostname is not a valid host but it didn't raise an error");
 
         response.close();
         badResponse.close();
@@ -162,7 +156,7 @@ public class InventoryEndpointTest {
      *          - response received from the target URL.
      */
     private void assertResponse(String url, Response response) {
-        assertEquals("Incorrect response code from " + url, 200, response.getStatus());
+        assertEquals(200, response.getStatus(), "Incorrect response code from " + url);
     }
 
     /**
@@ -179,9 +173,9 @@ public class InventoryEndpointTest {
      *          - actual name.
      */
     private void assertProperty(String propertyName, String hostname, String expected, String actual) {
-        assertEquals("JVM system property [" + propertyName + "] "
+        assertEquals(expected, actual, "JVM system property [" + propertyName + "] "
                 + "in the system service does not match the one stored in "
-                + "the inventory service for " + hostname, expected, actual);
+                + "the inventory service for " + hostname);
     }
 
     /**
