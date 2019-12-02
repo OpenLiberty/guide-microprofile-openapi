@@ -17,6 +17,8 @@
 :page-related-guides: ['cdi-intro', 'microprofile-config']
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
 :source-highlighter: prettify
+:page-seo-title: Documenting RESTful APIs using MicroProfile OpenAPI
+:page-seo-description: A tutorial on how to document and filter RESTful APIs by using MicroProfile OpenAPI
 :guide-author: Open Liberty
 = Documenting RESTful APIs
 
@@ -59,32 +61,18 @@ as the behaviour for handling multiple applications is currently undefined.
 [role='command']
 include::{common-includes}/gitclone.adoc[]
 
-
-=== Try what you'll build
-
-The `finish` directory in the root directory of this guide contains the fully documented `inventory`
-service. Feel free to give it a try before you proceed.
-
-To try out the service, navigate to the `finish` directory and then run the Maven `install` and
-`liberty:start-server` goals to build and run the service in Open Liberty:
-
+// =================================================================================================
+// Try what you'll build
+// =================================================================================================
 [role='command']
-```
-mvn install liberty:start-server
-```
+include::{common-includes}/twyb-intro.adoc[]
 
-// I think here I can say "you'll see" because its still part of the same sentence and its assumed that the user
-// will finish reading the sentence first before doing anything. If it were two sentences, then it would be "You see".
 Next, point your browser to the {openapi-url}[{openapi-url}^] URL and you'll see the RESTful APIs of the `inventory`
 service. You can also point to the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the deployed APIs.
 This UI is built from the https://swagger.io/tools/swagger-ui/[Open Source Swagger UI^] and renders the generated `/openapi` document into a very user friendly page.
 
-When you are done checking out the service and its APIs, stop Open Liberty:
 [role='command']
-```
-mvn liberty:stop-server
-```
-
+include::{common-includes}/twyb-end.adoc[]
 
 // =================================================================================================
 // Generating APIs
@@ -98,17 +86,10 @@ OpenAPI annotations to enrich your APIs with a minimal amount of work. Second, y
 models to manually create all elements of the OpenAPI tree. Finally, you can filter various elements of the
 OpenAPI tree, changing them to your liking or removing them entirely.
 
-Before you proceed, deploy the `inventory` service to see the bare-bones OpenAPI document that is generated.
-To deploy the `inventory` service, navigate to the `start` directory and run the Maven `install` phase and the `liberty:start-server` goal:
+Navigate to the `start` directory to begin.
 
 [role='command']
-```
-mvn install liberty:start-server
-```
-
-The `install` phase builds the application and packages it into the `target/mp-openapi.war` file.
-It also downloads Open Liberty into the `target/liberty/wlp` directory and configures it to run the
-application. The `liberty:start-server` goal starts an Open Liberty server instance.
+include::{common-includes}/devmode-start.adoc[]
 
 Because the JAX-RS framework handles basic API generation for JAX-RS annotations, a skeleton OpenAPI
 tree will be generated from the `inventory` service. You can use this tree as a starting point and
@@ -154,12 +135,8 @@ optional, but it can be helpful to organize a method with multiple responses.
 | [hotspot=Parameter file=0]`@Parameter`    | Describes a single operation parameter.
 |===
 
-At this point, you can run the the following command to rebuild the application.
-[role='command']
-```
-mvn compile
-```
-Then, refresh the {openapi-url}[{openapi-url}^]
+Since the Open Liberty server was started in development mode at the beginning of the guide, your changes were automatically picked up.
+Refresh the {openapi-url}[{openapi-url}^]
 URL to see the updated OpenAPI tree. The two endpoints at which your JAX-RS methods are
 served are now more meaningful:
 
@@ -181,8 +158,7 @@ served are now more meaningful:
       example: foo
     responses:
       404:
-        description: Invalid hostname or the system service may not be running on
-          the particular host.
+        description: Missing description
         content:
           text/plain: {}
       200:
@@ -244,11 +220,7 @@ SystemData.java
 include::finish/src/main/java/io/openliberty/guides/inventory/model/SystemData.java[]
 ----
 
-Again, run the following command and refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree.
-[role='command']
-```
-mvn compile
-```
+Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
 
 [source, YAML, role="no_copy"]
 ----
@@ -339,11 +311,8 @@ include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
 by passing in the fully qualified name of the filter class into the [hotspot=Config file=1]`mp.openapi.filter` property.
 
-Finally, run the following command and refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree.
-[role='command']
-```
-mvn compile
-```
+Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
+
 [source, yaml, role="no_copy"]
 ----
 info:
@@ -428,11 +397,7 @@ microprofile-config.properties
 include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 ----
 
-Run the following command and refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree.
-[role='command']
-```
-mvn compile
-```
+Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
 
 [source, yml, role="no_copy"]
 ----
@@ -462,23 +427,31 @@ verify the document by visiting the {openapi-url}[{openapi-url}^] or the {openap
 
 A few tests are included for you to test the basic functionality of the `inventory` service. If a test
 failure occurs, then you might have introduced a bug into the code. These tests will run automatically
-as a part of the Maven build process when you run the following command.
-[role='command']
-```
-mvn install
-```
-You can also run these
-tests separately from the build by using the following command, but first make sure that the server is stopped. If the server is still running from the previous steps, stop it using the Maven `liberty:stop-server` goal from command line in the `start` directory:
-[role='command']
-```
-mvn liberty:stop-server
-```
+as a part of the integration test suite.
 
-Then, verify that the tests pass using the Maven `verify` goal:
 [role='command']
-```
-mvn verify
-```
+include::{common-includes}/devmode-test.adoc[]
+
+You will see the following output:
+
+[source, role="no_copy"]
+----
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running it.io.openliberty.guides.system.SystemEndpointIT
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.4 sec - in it.io.openliberty.guides.system.SystemEndpointIT
+Running it.io.openliberty.guides.inventory.InventoryEndpointIT
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.264 sec - in it.io.openliberty.guides.inventory.InventoryEndpointIT
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+----
+
+[role='command']
+include::{common-includes}/devmode-quit.adoc[]
+
 
 // =================================================================================================
 // Great work! You're done!
