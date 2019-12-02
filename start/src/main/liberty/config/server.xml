@@ -9,11 +9,14 @@
     <feature>mpOpenAPI-1.1</feature>
   </featureManager>
 
+  <variable name="default.http.port" defaultValue="9080"/>
+  <variable name="default.https.port" defaultValue="9443"/>
+
   <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}"
       id="defaultHttpEndpoint" host="*" />
 
   <!-- <logging traceSpecification="com.ibm.ws.microprofile.openapi.*=all"/> -->
 
-  <webApplication location="mp-openapi.war" contextRoot="/" />
+  <webApplication location="guide-microprofile-openapi.war" contextRoot="/" />
 
 </server>
