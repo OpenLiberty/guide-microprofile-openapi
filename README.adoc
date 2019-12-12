@@ -268,7 +268,6 @@ Filtering of certain elements and fields of the generated OpenAPI document can b
 #Create the `InventoryOASFilter` class.#
 `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java`
 ----
-
 InventoryOASFilter.java
 [source, Java, linenums, role='code_column hide_tags=copyright']
 ----
@@ -301,7 +300,6 @@ Before you can use the filter class that you created, you need to create the `mi
 #Create the configuration file.#
 `src/main/webapp/META-INF/microprofile-config.properties`
 ----
-
 microprofile-config.properties
 [source, text, linenums, role='code_column hide_tags=Scan tags=Config']
 ----
