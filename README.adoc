@@ -112,13 +112,13 @@ the JAX-RS framework.
 ----
 
 [role="edit_command_text"]
-Add OpenAPI annotations to the two JAX-RS methods, [hotspot=32-46 hotspot=48-52 file=0]`getPropertiesForHost()` and [hotspot=70-81 file=0]`listContents()`.
+Add OpenAPI annotations to the two JAX-RS methods, [hotspot=host-property hotspot=Parameter file=0]`getPropertiesForHost()` and [hotspot=listContents file=0]`listContents()`.
 
 
 InventoryResource.java
-[source, Java, linenums, role='code_column']
+[source, Java, linenums, role='code_column hide_tags=copyright']
 ----
-include::finish/src/main/java/io/openliberty/guides/inventory/InventoryResource.java[tags=**;!copyright]
+include::finish/src/main/java/io/openliberty/guides/inventory/InventoryResource.java[]
 ----
 
 Clearly, there are many more annotations now, so let's break them down:
@@ -126,13 +126,13 @@ Clearly, there are many more annotations now, so let's break them down:
 [cols="35, 200", options="header"]
 |===
 | *Annotation*    | *Description*
-| [hotspot=32-42 file=0]`@APIResponses` | A container for multiple responses from an API operation. This annotation is
+| [hotspot=APIResponses file=0]`@APIResponses` | A container for multiple responses from an API operation. This annotation is
 optional, but it can be helpful to organize a method with multiple responses.
-| [hotspot=34-37 file=0]`@APIResponse`  | Describes a single response from an API operation.
-| [hotspot=41 file=0]`@Content`      | Provides a schema and examples for a particular media type.
-| [hotspot=42 file=0]`@Schema`       | Defines the input and output data types.
-| [hotspot=43-46 file=0]`@Operation`    | Describes a single API operation on a path.
-| [hotspot=48-52 file=0]`@Parameter`    | Describes a single operation parameter.
+| [hotspot=APIResponse file=0]`@APIResponse`  | Describes a single response from an API operation.
+| [hotspot=Content file=0]`@Content`      | Provides a schema and examples for a particular media type.
+| [hotspot=Schema file=0]`@Schema`       | Defines the input and output data types.
+| [hotspot=Operation file=0]`@Operation`    | Describes a single API operation on a path.
+| [hotspot=Parameter file=0]`@Parameter`    | Describes a single operation parameter.
 |===
 
 Since the Open Liberty server was started in development mode at the beginning of the guide, your changes were automatically picked up.
@@ -194,12 +194,12 @@ difficult to tell exactly what that POJO is used for. To describe the `Inventory
 ----
 
 [role='edit_command_text']
-Add OpenAPI annotations to the [hotspot=7 file=1]`InventoryList` class and the [hotspot=10 file=1]`systems` variable.
+Add OpenAPI annotations to the [hotspot=InventoryList file=1]`InventoryList` class and the [hotspot=Systems file=1]`systems` variable.
 
 InventoryList.java
-[source, Java, linenums, role='code_column']
+[source, Java, linenums, role='code_column hide_tags=copyright']
 ----
-include::finish/src/main/java/io/openliberty/guides/inventory/model/InventoryList.java[tags=**;!copyright]
+include::finish/src/main/java/io/openliberty/guides/inventory/model/InventoryList.java[]
 ----
 
 Likewise, annotate the `src/main/java/io/openliberty/guides/inventory/model/SystemData.java` POJO,
@@ -212,12 +212,12 @@ which is referenced in the `InventoryList` class.
 ----
 
 [role='edit_command_text']
-Add OpenAPI annotations to the [hotspot=6 file=2]`SystemData` class, the [hotspot=9 file=2]`hostname` variable and the [hotspot=12 file=2]`properties` variable.
+Add OpenAPI annotations to the [hotspot=SystemData file=2]`SystemData` class, the [hotspot=Hostname file=2]`hostname` variable and the [hotspot=Properties file=2]`properties` variable.
 
 SystemData.java
-[source, Java, linenums, role="code_column"]
+[source, Java, linenums, role='code_column hide_tags=copyright']
 ----
-include::finish/src/main/java/io/openliberty/guides/inventory/model/SystemData.java[tags=**;!copyright]
+include::finish/src/main/java/io/openliberty/guides/inventory/model/SystemData.java[]
 ----
 
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
@@ -268,21 +268,20 @@ Filtering of certain elements and fields of the generated OpenAPI document can b
 #Create the `InventoryOASFilter` class.#
 `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java`
 ----
-
 InventoryOASFilter.java
-[source, Java, linenums, role="code_column"]
+[source, Java, linenums, role='code_column hide_tags=copyright']
 ----
-include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[tags=**;!copyright]
+include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[]
 ----
 
-The [hotspot=18-24 file=0]`filterAPIResponse()` method allows filtering of `APIResponse` elements. When you
+The [hotspot=filterAPIResponse file=0]`filterAPIResponse()` method allows filtering of `APIResponse` elements. When you
 override this method, it will be called once for every `APIResponse` element in the OpenAPI tree.
 In this case, you are matching the `404` response that is returned by the `/inventory/systems/{hostname}`
 endpoint and setting the previously missing description. To remove an `APIResponse` element
 or another filterable element, simply return `null`.
 
-The [hotspot=27-46 file=0]`filterOpenAPI()` method allows filtering of the singleton [hotspot=27 file=0]`OpenAPI` element. Unlike other filter
-methods, when you override [hotspot=27-46 file=0]`filterOpenAPI()`, it is called only once as the last method
+The [hotspot=filterOpenAPI file=0]`filterOpenAPI()` method allows filtering of the singleton [hotspot=OpenAPI file=0]`OpenAPI` element. Unlike other filter
+methods, when you override [hotspot=filterOpenAPI file=0]`filterOpenAPI()`, it is called only once as the last method
 for a particular filter. Hence, make sure that it doesn't override any other filter operations that are
 called before it. Your current OpenAPI document doesn't provide much information on the application
 itself or on what server and port it runs on. This information is usually provided in the `info`
@@ -301,15 +300,14 @@ Before you can use the filter class that you created, you need to create the `mi
 #Create the configuration file.#
 `src/main/webapp/META-INF/microprofile-config.properties`
 ----
-
 microprofile-config.properties
-[source, text, linenums, role="code_column"]
+[source, text, linenums, role='code_column hide_tags=Scan tags=Config']
 ----
-include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=config]
+include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 ----
 
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
-by passing in the fully qualified name of the filter class into the [hotspot=1 file=1]`mp.openapi.filter` property.
+by passing in the fully qualified name of the filter class into the [hotspot=Config file=1]`mp.openapi.filter` property.
 
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
 
@@ -374,9 +372,9 @@ all of its lines.
 Uncomment all the lines in the [hotspot file=0]`openapi.yaml` file.
 
 openapi.yaml
-[source, text, linenums, role="code_column"]
+[source, text, linenums, role='code_column']
 ----
-include::finish/src/main/webapp/META-INF/openapi.yaml[tags=**]
+include::finish/src/main/webapp/META-INF/openapi.yaml[]
 ----
 
 Since this document is complete, you can also set the `mp.openapi.scan.disable` property
@@ -389,12 +387,12 @@ to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file.
 ----
 
 [role="edit_command_text"]
-Add and set the [hotspot=1 file=1]`mp.openapi.scan.disable` property to `true`.
+Add and set the [hotspot=Scan file=1]`mp.openapi.scan.disable` property to `true`.
 
 microprofile-config.properties
-[source, text, linenums, role="code_column"]
+[source, text, linenums, role='code_column']
 ----
-include::finish/src/main/webapp/META-INF/microprofile-config.properties[tags=**]
+include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 ----
 
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
