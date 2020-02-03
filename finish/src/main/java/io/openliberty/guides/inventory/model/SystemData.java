@@ -20,15 +20,15 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 // end::SystemData[]
 public class SystemData {
 
-    @Schema(required = true)
     // tag::Hostname[]
-    private final String hostname;
-    // end::Hostname[]
-
     @Schema(required = true)
+    // end::Hostname[]
+    private final String hostname;
+
     // tag::Properties[]
-    private final Properties properties;
+    @Schema(required = true)
     // end::Properties[]
+    private final Properties properties;
 
     public SystemData(String hostname, Properties properties) {
         this.hostname = hostname;

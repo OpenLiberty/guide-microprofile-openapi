@@ -20,10 +20,10 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 // end::InventoryList[]
 public class InventoryList {
 
-    @Schema(required = true)
     // tag::Systems[]
-    private List<SystemData> systems;
+    @Schema(required = true)
     // end::Systems[]
+    private List<SystemData> systems;
 
     public InventoryList(List<SystemData> systems) {
         this.systems = systems;

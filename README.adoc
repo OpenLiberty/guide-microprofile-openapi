@@ -207,8 +207,8 @@ served are now more meaningful:
 
 
 OpenAPI annotations can also be added to POJOs to describe what they represent. Currently, your OpenAPI
-document doesn't have a very meaningful description of the `InventoryList` POJO and hence it's very
-difficult to tell exactly what that POJO is used for. To describe the `InventoryList` POJO in more detail, augment the
+document doesn't have a very meaningful description of the [hotspot=InventoryList file=1]`InventoryList` POJO and hence it's very
+difficult to tell exactly what that POJO is used for. To describe the [hotspot=InventoryList file=1]`InventoryList` POJO in more detail, augment the
 `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations.
 
 [role='code_command hotspot file=1', subs="quotes"]
@@ -226,8 +226,8 @@ InventoryList.java
 include::finish/src/main/java/io/openliberty/guides/inventory/model/InventoryList.java[]
 ----
 
-Likewise, annotate the `src/main/java/io/openliberty/guides/inventory/model/SystemData.java` POJO,
-which is referenced in the `InventoryList` class.
+Likewise, annotate the [hotspot file=2]`src/main/java/io/openliberty/guides/inventory/model/SystemData.java` POJO,
+which is referenced in the [hotspot file=1]`InventoryList` class.
 
 [role='code_command hotspot file=2', subs="quotes"]
 ----
@@ -316,13 +316,13 @@ called before it. Your current OpenAPI document doesn't provide much information
 itself or on what server and port it runs on. This information is usually provided in the `info`
 and `servers` elements, which are currently missing. Use the `OASFactory` class to manually set these
 and other elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models`
-package. The `OpenAPI` element is the only element that cannot be removed since that would mean
+package. The [hotspot=OpenAPI file=0]`OpenAPI` element is the only element that cannot be removed since that would mean
 removing the whole OpenAPI tree.
 
 Each filtering method is called once for each corresponding element in the model tree. You can think
 of each method as a callback for various key OpenAPI elements.
 
-Before you can use the filter class that you created, you need to create the `microprofile-config.properties` file.
+Before you can use the filter class that you created, you need to create the [hotspot file=1]`microprofile-config.properties` file.
 
 [role="code_command hotspot", subs="quotes"]
 ----
@@ -331,7 +331,7 @@ Before you can use the filter class that you created, you need to create the `mi
 ----
 
 microprofile-config.properties
-[source, text, linenums, role='code_column hide_tags=Scan tags=Config']
+[source, text, linenums, role='code_column']
 ----
 include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 ----
@@ -390,7 +390,7 @@ might be fully or partially complete. If the document is fully complete, then yo
 annotation scanning entirely by setting the `mp.openapi.scan.disable` MicroProfile Config property to `true`.
 If the document is partially complete, then you can augment it with code.
 
-You can find a complete OpenAPI document in the `src/main/webapp/META-INF/openapi.yaml` file.
+You can find a complete OpenAPI document in the [hotspot file=0]`src/main/webapp/META-INF/openapi.yaml` file.
 This document is the same as your current OpenAPI document with additional APIs for the `/inventory/properties`
 endpoint. To make use of this document, open this document in your favorite text editor and uncomment
 all of its lines. 
@@ -410,8 +410,8 @@ openapi.yaml
 include::finish/src/main/webapp/META-INF/openapi.yaml[]
 ----
 
-Since this document is complete, you can also set the `mp.openapi.scan.disable` property
-to `true` in the `src/main/webapp/META-INF/microprofile-config.properties` file.
+Since this document is complete, you can also set the [hotspot file=0]`mp.openapi.scan.disable` property
+to `true` in the [hotspot file=1]`src/main/webapp/META-INF/microprofile-config.properties` file.
 
 [role="code_command hotspot file=1", subs="quotes"]
 ----
