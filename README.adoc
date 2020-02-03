@@ -291,7 +291,7 @@ components:
 Filtering of certain elements and fields of the generated OpenAPI document can be done by using the
 `OASFilter` interface.
 
-[role="code_command hotspot", subs="quotes"]
+[role="code_command hotspot file=0", subs="quotes"]
 ----
 #Create the `InventoryOASFilter` class.#
 `src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java`
@@ -324,7 +324,7 @@ of each method as a callback for various key OpenAPI elements.
 
 Before you can use the filter class that you created, you need to create the [hotspot file=1]`microprofile-config.properties` file.
 
-[role="code_command hotspot", subs="quotes"]
+[role="code_command hotspot file=1", subs="quotes"]
 ----
 #Create the configuration file.#
 `src/main/webapp/META-INF/microprofile-config.properties`
