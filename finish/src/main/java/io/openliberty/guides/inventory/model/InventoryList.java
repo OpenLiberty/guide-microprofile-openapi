@@ -18,12 +18,13 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 // tag::InventoryList[]
 @Schema(name="InventoryList", description="POJO that represents the inventory contents.")
 // end::InventoryList[]
+// tag::InventoryListClass[]
 public class InventoryList {
 
-    @Schema(required = true)
     // tag::Systems[]
-    private List<SystemData> systems;
+    @Schema(required = true)
     // end::Systems[]
+    private List<SystemData> systems;
 
     public InventoryList(List<SystemData> systems) {
         this.systems = systems;
@@ -37,3 +38,4 @@ public class InventoryList {
         return systems.size();
     }
 }
+// end::InventoryListClass[]
