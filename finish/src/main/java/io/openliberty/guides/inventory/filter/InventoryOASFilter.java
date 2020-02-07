@@ -1,6 +1,6 @@
 // tag::copyright[]
 /*******************************************************************************
- * Copyright (c) 2018 IBM Corporation and others.
+ * Copyright (c) 2018, 2020 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -27,6 +27,7 @@ import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 public class InventoryOASFilter implements OASFilter {
 
   @Override
+  // tag::filterAPIResponse[]
   public APIResponse filterAPIResponse(APIResponse apiResponse) {
     if ("Missing description".equals(apiResponse.getDescription())) {
       apiResponse.setDescription("Invalid hostname or the system service may not "
@@ -34,9 +35,13 @@ public class InventoryOASFilter implements OASFilter {
     }
     return apiResponse;
   }
+  // end::filterAPIResponse[]
 
   @Override
+  // tag::filterOpenAPI[]
+  // tag::OpenAPI[]
   public void filterOpenAPI(OpenAPI openAPI) {
+  // end::OpenAPI[]
     // tag::oasfactory[]
     openAPI.setInfo(
         OASFactory.createObject(Info.class).title("Inventory App").version("1.0")
@@ -58,5 +63,6 @@ public class InventoryOASFilter implements OASFilter {
                                               .defaultValue("9080")))));
     // end::oasfactory[]
   }
+  // end::filterOpenAPI[]
 
 }
