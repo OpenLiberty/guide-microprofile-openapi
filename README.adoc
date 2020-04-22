@@ -185,7 +185,7 @@ served are now more meaningful:
 OpenAPI annotations can also be added to POJOs to describe what they represent. Currently, your OpenAPI
 document doesn't have a very meaningful description of the [hotspot=InventoryListClass file=1]`InventoryList` POJO and hence it's very
 difficult to tell exactly what that POJO is used for. To describe the [hotspot=InventoryListClass file=1]`InventoryList` POJO in more detail, augment the
-`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations.
+[hotspot file=1]`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations.
 
 [role='code_command hotspot file=1', subs="quotes"]
 ----
