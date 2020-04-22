@@ -185,7 +185,7 @@ served are now more meaningful:
 OpenAPI annotations can also be added to POJOs to describe what they represent. Currently, your OpenAPI
 document doesn't have a very meaningful description of the [hotspot=InventoryListClass file=1]`InventoryList` POJO and hence it's very
 difficult to tell exactly what that POJO is used for. To describe the [hotspot=InventoryListClass file=1]`InventoryList` POJO in more detail, augment the
-`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations.
+[hotspot file=1]`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations.
 
 [role='code_command hotspot file=1', subs="quotes"]
 ----
@@ -301,7 +301,7 @@ Before you can use the filter class that you created, you need to create the [ho
 `src/main/webapp/META-INF/microprofile-config.properties`
 ----
 microprofile-config.properties
-[source, text, linenums, role='code_column']
+[source, text, linenums, role='code_column hide_tags=Scan']
 ----
 include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 ----
@@ -377,8 +377,8 @@ openapi.yaml
 include::finish/src/main/webapp/META-INF/openapi.yaml[]
 ----
 
-Since this document is complete, you can also set the [hotspot=Scan file=1]`mp.openapi.scan.disable` property
-to `true` in the [hotspot file=1]`src/main/webapp/META-INF/microprofile-config.properties` file.
+Since this document is complete, you can also add the [hotspot=Scan file=1]`mp.openapi.scan.disable` property
+and set it to `true` in the [hotspot file=1]`src/main/webapp/META-INF/microprofile-config.properties` file.
 
 [role="code_command hotspot file=1", subs="quotes"]
 ----
