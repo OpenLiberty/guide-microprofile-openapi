@@ -377,8 +377,8 @@ openapi.yaml
 include::finish/src/main/webapp/META-INF/openapi.yaml[]
 ----
 
-Since this document is complete, you can also set the [hotspot=Scan file=1]`mp.openapi.scan.disable` property
-to `true` in the [hotspot file=1]`src/main/webapp/META-INF/microprofile-config.properties` file.
+Since this document is complete, you can also add the [hotspot=Scan file=1]`mp.openapi.scan.disable` property
+and set it to `true` in the [hotspot file=1]`src/main/webapp/META-INF/microprofile-config.properties` file.
 
 [role="code_command hotspot file=1", subs="quotes"]
 ----
