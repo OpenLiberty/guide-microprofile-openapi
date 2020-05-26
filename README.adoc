@@ -212,7 +212,7 @@ which is referenced in the [hotspot file=1]`InventoryList` class.
 ----
 
 [role='edit_command_text']
-Add OpenAPI annotations `@Schema` to the [hotspot=SystemData file=2]`SystemData` class, the [hotspot=Hostname file=2]`hostname` variable and the [hotspot=Properties file=2]`properties` variable.
+Add OpenAPI annotations [hotspot=SystemData hotspot=Hostname hotspot=Properties file=2]`@Schema` to the [hotspot=SystemData file=2]`SystemData` class, the [hotspot=Hostname file=2]`hostname` variable and the [hotspot=Properties file=2]`properties` variable.
 
 SystemData.java
 [source, Java, linenums, role='code_column hide_tags=copyright']
