@@ -128,7 +128,7 @@ public class InventoryEndpointIT {
                      "BadResponse expected status: 404. Response code not as expected.");
 
         String stringObj = badResponse.readEntity(String.class);
-        assertEquals("{}", stringObj, "Reponse entity is not as expected.");
+        assertEquals("{}", stringObj, "Response entity is not as expected.");
         
         try {
             JsonObject jsonObj = badResponse.readEntity(JsonObject.class);
