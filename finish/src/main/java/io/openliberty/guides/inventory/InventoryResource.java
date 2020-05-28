@@ -80,7 +80,6 @@ public class InventoryResource {
         // Get properties for host
         Properties props = manager.get(hostname);
         if (props == null) {
-            // Error if unknown hostname or service not running
             return Response.status(Response.Status.NOT_FOUND)
                             .entity("{ \"error\" : " 
                                     + "\"Unknown hostname or the resource may not be "
