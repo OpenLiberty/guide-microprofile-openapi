@@ -79,12 +79,10 @@ public class InventoryResource {
         @PathParam("hostname") String hostname) {
         // Get properties for host
         Properties props = manager.get(hostname);
-
-        System.out.println("HELLO");
-        System.out.println(new Properties());
         if (props == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                            .entity(new Properties())
+                            .entity("ERROR: Unknown hostname or the system service may "
+                            + "not be running on " + hostname)
                             .build();
         }
 
