@@ -112,7 +112,7 @@ the JAX-RS framework.
 ----
 
 [role="edit_command_text"]
-Add OpenAPI annotations to the two JAX-RS methods, [hotspot=host-property hotspot=Parameter file=0]`getPropertiesForHost()` and [hotspot=listContents file=0]`listContents()`.
+Add OpenAPI [hotspot=APIResponses file=0]`@APIResponses`, [hotspot=Operation file=0]`@Operation` and [hotspot=Parameter file=0]`@Parameter` annotations to the two JAX-RS methods, [hotspot=host-property hotspot=Parameter file=0]`getPropertiesForHost()` and [hotspot=listContents file=0]`listContents()`.
 
 
 InventoryResource.java
@@ -121,7 +121,7 @@ InventoryResource.java
 include::finish/src/main/java/io/openliberty/guides/inventory/InventoryResource.java[]
 ----
 
-Clearly, there are many more annotations now, so let's break them down:
+Clearly, there are many more OpenAPI annotations now, so let’s break them down:
 
 [cols="35, 200", options="header"]
 |===
@@ -194,7 +194,7 @@ difficult to tell exactly what that POJO is used for. To describe the [hotspot=I
 ----
 
 [role='edit_command_text']
-Add OpenAPI annotations to the [hotspot=InventoryList file=1]`InventoryList` class and the [hotspot=Systems file=1]`systems` variable.
+Add OpenAPI [hotspot=InventoryList hotspot=Systems file=1]`@Schema` annotations to the [hotspot=InventoryList file=1]`InventoryList` class and the [hotspot=Systems file=1]`systems` variable.
 
 InventoryList.java
 [source, Java, linenums, role='code_column hide_tags=copyright']
@@ -212,7 +212,7 @@ which is referenced in the [hotspot file=1]`InventoryList` class.
 ----
 
 [role='edit_command_text']
-Add OpenAPI annotations to the [hotspot=SystemData file=2]`SystemData` class, the [hotspot=Hostname file=2]`hostname` variable and the [hotspot=Properties file=2]`properties` variable.
+Add OpenAPI [hotspot=SystemData hotspot=Hostname hotspot=Properties file=2]`@Schema` annotations to the [hotspot=SystemData file=2]`SystemData` class, the [hotspot=Hostname file=2]`hostname` variable and the [hotspot=Properties file=2]`properties` variable.
 
 SystemData.java
 [source, Java, linenums, role='code_column hide_tags=copyright']
