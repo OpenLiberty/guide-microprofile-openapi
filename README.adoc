@@ -440,12 +440,17 @@ You will see the following output:
 Running it.io.openliberty.guides.system.SystemEndpointIT
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.4 sec - in it.io.openliberty.guides.system.SystemEndpointIT
 Running it.io.openliberty.guides.inventory.InventoryEndpointIT
+[WARNING ] Interceptor for {http://client.inventory.guides.openliberty.io/}SystemClient has thrown exception, unwinding now
+Could not send Message.
+[err] The specified host is unknown: java.net.UnknownHostException: UnknownHostException invoking http://badhostname:9080/inventory/properties: badhostname
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.264 sec - in it.io.openliberty.guides.inventory.InventoryEndpointIT
 
 Results :
 
 Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 ----
+
+The warning message is expected and results from a request to a bad or unknown host name.
 
 [role='command']
 include::{common-includes}/devmode-quit.adoc[]
