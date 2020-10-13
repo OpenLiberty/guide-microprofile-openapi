@@ -450,7 +450,7 @@ Results :
 Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 ----
 
-The warning message is expected and results from a request to a bad or unknown host name.
+The warning message is expected and results from a request to a bad or an unknown host name.
 
 [role='command']
 include::{common-includes}/devmode-quit.adoc[]
