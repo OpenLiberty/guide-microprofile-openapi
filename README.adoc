@@ -427,6 +427,12 @@ A few tests are included for you to test the basic functionality of the `invento
 failure occurs, then you might have introduced a bug into the code. These tests will run automatically
 as a part of the integration test suite.
 
+InventoryEndpointIT.java
+[source, Java, linenums, role='code_column hide_tags=copyright']
+----
+include::finish/src/test/java/it/io/openliberty/guides/inventory/InventoryEndpointIT.java[]
+----
+
 [role='command']
 include::{common-includes}/devmode-test.adoc[]
 
@@ -450,7 +456,7 @@ Results :
 Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 ----
 
-The warning message is expected and results from a request to a bad or an unknown host name.
+The warning and error messages are expected and result from a request to a bad or an unknown host name. This request is made in the test [hotspot=testUnknownHost file=0]`testUnknownHost()` from [hotspot file=0]`InventoryEndpointIT`.
 
 [role='command']
 include::{common-includes}/devmode-quit.adoc[]

@@ -112,7 +112,7 @@ public class InventoryEndpointIT {
         invResponse.close();
         sysResponse.close();
     }
-
+    // tag::testUnknownHost[]
     @Test
     @Order(3)
     public void testUnknownHost() {
@@ -132,7 +132,7 @@ public class InventoryEndpointIT {
         response.close();
         badResponse.close();
     }
-
+    // end::testUnknownHost[]
     /**
      * <p>
      * Returns response information from the specified URL.
