@@ -364,12 +364,10 @@ all of its lines.
 
 [role="code_command hotspot file=0", subs="quotes"]
 ----
-#Update the OpenAPI document file.#
+#Create the OpenAPI document file.#
 `src/main/webapp/META-INF/openapi.yaml`
 ----
 
-[role="edit_command_text"]
-Uncomment all the lines in the [hotspot file=0]`openapi.yaml` file.
 
 openapi.yaml
 [source, text, linenums, role='code_column']
