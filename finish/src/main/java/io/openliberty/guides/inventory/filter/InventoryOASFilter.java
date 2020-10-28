@@ -13,6 +13,7 @@
 package io.openliberty.guides.inventory.filter;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.OASFilter;
@@ -22,7 +23,6 @@ import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.responses.APIResponse;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
-import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 
 public class InventoryOASFilter implements OASFilter {
 
@@ -52,15 +52,13 @@ public class InventoryOASFilter implements OASFilter {
                                 .name("Eclipse Public License - v 1.0").url(
                                     "https://www.eclipse.org/legal/epl-v10.html")));
 
-    openAPI.setServers(Arrays.asList(
-        OASFactory.createObject(Server.class).url("http://localhost:{port}")
-                  .description("Simple Open Liberty.").variables(
-                      OASFactory.createObject(ServerVariables.class)
-                                .addServerVariable("port",
-                                    OASFactory.createObject(ServerVariable.class)
-                                              .description(
-                                                  "Server HTTP port.")
-                                              .defaultValue("9080")))));
+    openAPI.addServer(OASFactory.createServer()
+                                .url("http://localhost:{port}")
+                                .description("Simple Open Liberty. but with a twist!!!")
+                                .variables(Collections.singletonMap("port", 
+                                            OASFactory.createServerVariable()
+                                                      .defaultValue("9080")
+                                                      .description("Server HTTP port."))));
     // end::oasfactory[]
   }
   // end::filterOpenAPI[]
