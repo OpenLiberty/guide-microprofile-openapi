@@ -52,13 +52,14 @@ public class InventoryOASFilter implements OASFilter {
                                 .name("Eclipse Public License - v 1.0").url(
                                     "https://www.eclipse.org/legal/epl-v10.html")));
 
-    openAPI.addServer(OASFactory.createServer()
-                                .url("http://localhost:{port}")
-                                .description("Simple Open Liberty.")
-                                .variables(Collections.singletonMap("port", 
-                                            OASFactory.createServerVariable()
-                                                      .defaultValue("9080")
-                                                      .description("Server HTTP port."))));
+    openAPI.addServer(
+        OASFactory.createServer()
+                  .url("http://localhost:{port}")
+                  .description("Simple Open Liberty.")
+                  .variables(Collections.singletonMap("port", 
+                                        OASFactory.createServerVariable()
+                                                  .defaultValue("9080")
+                                                  .description("Server HTTP port."))));
     // end::oasfactory[]
   }
   // end::filterOpenAPI[]
