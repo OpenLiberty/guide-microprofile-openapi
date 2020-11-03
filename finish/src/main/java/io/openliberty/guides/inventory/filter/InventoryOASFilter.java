@@ -57,9 +57,9 @@ public class InventoryOASFilter implements OASFilter {
                   .url("http://localhost:{port}")
                   .description("Simple Open Liberty.")
                   .variables(Collections.singletonMap("port", 
-                                        OASFactory.createServerVariable()
-                                                  .defaultValue("9080")
-                                                  .description("Server HTTP port."))));
+                                 OASFactory.createServerVariable()
+                                           .defaultValue("9080")
+                                           .description("Server HTTP port."))));
     // end::oasfactory[]
   }
   // end::filterOpenAPI[]
