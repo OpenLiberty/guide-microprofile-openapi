@@ -450,7 +450,7 @@ Results :
 Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 ----
 
-The warning and error messages are expected and result from a request to a bad or an unknown host name. This request is made in the test `testUnknownHost()` from `InventoryEndpointIT`.
+The warning and error messages are expected and result from a request to a bad or an unknown host name. This request is made in the test `testUnknownHost()` from `InventoryEndpointIT` file.
 
 [role='command']
 include::{common-includes}/devmode-quit.adoc[]
