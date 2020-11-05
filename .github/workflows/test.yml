@@ -6,8 +6,6 @@ name: Test application
 on:
   pull_request:
     branches: [ qa ]
-  push:
-    branches: [ qa ]  
 
 jobs:
   java8build:
@@ -22,7 +20,7 @@ jobs:
       with:
         java-version: 1.8
     - run: unset _JAVA_OPTIONS
-    - name: Test
+    - name: Run tests
       run: chmod +x ../scripts/travisTest.sh && ../scripts/travisTest.sh
     - name: Post tests
       if: always()
@@ -34,4 +32,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: server-logs
-        path: finish/target/liberty/wlp/usr/servers/guideServer/logs/
+        path: finish/target/liberty/wlp/usr/servers/defaultServer/logs/
