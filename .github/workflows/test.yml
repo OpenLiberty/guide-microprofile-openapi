@@ -23,7 +23,7 @@ jobs:
         java-version: 1.8
     - run: unset _JAVA_OPTIONS
     - name: Test
-      run: ../scripts/travisTest.sh
+      run: chmod +x ../scripts/travisTest.sh && ../scripts/travisTest.sh
     - name: Post tests
       if: always()
       run: |
