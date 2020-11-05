@@ -22,7 +22,6 @@ jobs:
       with:
         java-version: 1.8
     - run: unset _JAVA_OPTIONS
-    - name: Setting up OC
     - name: Test
       run: ../scripts/travisTest.sh
     - name: Post tests
