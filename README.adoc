@@ -357,7 +357,7 @@ might be fully or partially complete. If the document is fully complete, then yo
 annotation scanning entirely by setting the `mp.openapi.scan.disable` MicroProfile Config property to `true`.
 If the document is partially complete, then you can augment it with code.
 
-To use pregenerated OpenAPI documents first create the complete OpenAPI document.
+To use pregenerated OpenAPI document, create the OpenAPI document yaml file.
 
 [role="code_command hotspot file=0", subs="quotes"]
 ----
