@@ -5,7 +5,7 @@ name: Test application
 
 on:
   pull_request:
-    branches: [ qa ]
+    branches: [ master, qa ]
 
 jobs:
   needTest:
