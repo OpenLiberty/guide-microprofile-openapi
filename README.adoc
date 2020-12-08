@@ -357,7 +357,7 @@ might be fully or partially complete. If the document is fully complete, then yo
 annotation scanning entirely by setting the `mp.openapi.scan.disable` MicroProfile Config property to `true`.
 If the document is partially complete, then you can augment it with code.
 
-To use pregenerated OpenAPI document, create the OpenAPI document yaml file.
+To use the pregenerated OpenAPI document, create the OpenAPI document yaml file.
 
 [role="code_command hotspot file=0", subs="quotes"]
 ----
@@ -372,7 +372,7 @@ openapi.yaml
 include::finish/src/main/webapp/META-INF/openapi.yaml[]
 ----
 
-This document is the same as your current OpenAPI document with additional APIs for the `/inventory/properties` endpoint. 
+This document is the same as your current OpenAPI document with extra APIs for the `/inventory/properties` endpoint. 
 Since this document is complete, you can also add the [hotspot=Scan file=1]`mp.openapi.scan.disable` property
 and set it to `true` in the [hotspot file=1]`src/main/webapp/META-INF/microprofile-config.properties` file.
 
