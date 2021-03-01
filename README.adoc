@@ -466,7 +466,7 @@ can learn and expand on top of what you built here.
 
 For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications available in the
 MicroProfile OpenAPI
-https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps[GitHub repository].
+https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps[GitHub repository^].
 
 
 include::{common-includes}/attribution.adoc[subs="attributes"]
