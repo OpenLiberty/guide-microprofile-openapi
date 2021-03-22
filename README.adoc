@@ -78,7 +78,7 @@ ifdef::cloud-hosted[]
 A UI is also available for a more interactive view of the deployed APIs.
 To enable the UI, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
 and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
-where **accountname** is your account name. Click the **Log in** link on the welcome page. 
+where **accountname** is your account name. Click the **interactive UI** link on the welcome page. 
 This UI is built from the https://swagger.io/tools/swagger-ui/[Open Source Swagger UI^] and renders the generated `/openapi` document into a very user friendly page.
 endif::[]
 
@@ -115,7 +115,7 @@ endif::[]
 ifdef::cloud-hosted[]
 To enable the UI for a more interactive view of the APIs, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
 and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
-where **accountname** is your account name. Click the **Log in** link on the welcome page. 
+where **accountname** is your account name. Click the **interactive UI** link on the welcome page. 
 endif::[]
 
 === Augmenting the existing JAX-RS annotations with OpenAPI annotations
