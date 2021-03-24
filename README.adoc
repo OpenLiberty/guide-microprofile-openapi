@@ -129,8 +129,8 @@ curl http://localhost:9080/openapi
 {: codeblock}
 
 To visit the UI for a more interactive view of the APIs, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
-and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
-where **accountname** is your account name. Click the **interactive UI** link on the welcome page. 
+and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL.
+Click the **interactive UI** link on the welcome page. 
 endif::[]
 
 === Augmenting the existing JAX-RS annotations with OpenAPI annotations
@@ -492,8 +492,17 @@ endif::[]
 
 == Testing the service
 
+// static guide instructions:
+ifndef::cloud-hosted[]
 No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually
 verify the document by visiting the {openapi-url}[{openapi-url}^] or the {openapi-url}/ui[{openapi-url}/ui^] URL.
+endif::[]
+
+// cloud-hosted guide instructions:
+ifdef::cloud-hosted[]
+No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually
+verify the document by visiting the **http://localhost:9080/openapi** or the **http://localhost:9080/openapi/ui** URL.
+endif::[]
 
 A few tests are included for you to test the basic functionality of the `inventory` service. If a test
 failure occurs, then you might have introduced a bug into the code. These tests will run automatically
