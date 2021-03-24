@@ -83,7 +83,7 @@ curl http://localhost:9080/openapi
 ```
 {: codeblock}
 
-An UI is also available for a more interactive view of the deployed APIs.
+A UI is also available for a more interactive view of the deployed APIs.
 To visit the UI, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
 and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
 where **accountname** is your account name. Click the **interactive UI** link on the welcome page. 
@@ -122,9 +122,13 @@ You can also point to the {openapi-url}/ui[{openapi-url}/ui^] URL for a more int
 endif::[]
 
 ifdef::cloud-hosted[]
-Now, point to the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. 
+Now, run the following curl command to see the generated OpenAPI tree.
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
 
-To enable the UI for a more interactive view of the APIs, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
+To visit the UI for a more interactive view of the APIs, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
 and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
 where **accountname** is your account name. Click the **interactive UI** link on the welcome page. 
 endif::[]
@@ -165,9 +169,22 @@ optional, but it can be helpful to organize a method with multiple responses.
 | [hotspot=Parameter file=0]`@Parameter`    | Describes a single operation parameter.
 |===
 
+ifndef::cloud-hosted[]
 Since the Open Liberty server was started in development mode at the beginning of the guide, your changes were automatically picked up.
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree. 
 The two endpoints at which your JAX-RS methods are served are now more meaningful:
+endif::[]
+
+ifdef::cloud-hosted[]
+Since the Open Liberty server was started in development mode at the beginning of the guide, your changes were automatically picked up. 
+Run the following curl command to see the updated OpenAPI tree.
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+
+The two endpoints at which your JAX-RS methods are served are now more meaningful:
+endif::[]
 
 [source, YAML, role="no_copy"]
 ----
@@ -249,7 +266,17 @@ SystemData.java
 include::finish/src/main/java/io/openliberty/guides/inventory/model/SystemData.java[]
 ----
 
+ifndef::cloud-hosted[]
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
+endif::[]
+
+ifdef::cloud-hosted[]
+Run the following curl command to see the updated OpenAPI tree.
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+endif::[]
 
 [source, YAML, role="no_copy"]
 ----
@@ -338,7 +365,17 @@ include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
 by passing in the fully qualified name of the filter class into the [hotspot=Config file=1]`mp.openapi.filter` property.
 
+ifndef::cloud-hosted[]
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
+endif::[]
+
+ifdef::cloud-hosted[]
+Run the following curl command to see the updated OpenAPI tree.
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+endif::[]
 
 [source, yaml, role="no_copy"]
 ----
@@ -420,7 +457,17 @@ microprofile-config.properties
 include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 ----
 
+ifndef::cloud-hosted[]
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
+endif::[]
+
+ifdef::cloud-hosted[]
+Run the following curl command to see the updated OpenAPI tree.
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+endif::[]
 
 [source, yml, role="no_copy"]
 ----
