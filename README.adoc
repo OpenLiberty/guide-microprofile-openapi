@@ -87,7 +87,7 @@ A UI is also available for a more interactive view of the deployed APIs.
 To visit the UI, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
 and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
 where **accountname** is your account name. Click the **interactive UI** link on the welcome page. 
-This UI is built from the [Open Source Swagger UI](https://swagger.io/tools/swagger-ui/)
+This UI is built from the https://swagger.io/tools/swagger-ui/[Open Source Swagger UI^]
 renders the generated **/openapi** document into a very user friendly page.
 endif::[]
 
