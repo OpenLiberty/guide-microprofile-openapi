@@ -75,13 +75,20 @@ This UI is built from the https://swagger.io/tools/swagger-ui/[Open Source Swagg
 endif::[]
 
 ifdef::cloud-hosted[]
-Next, point your browser to the {openapi-url}[{openapi-url}^] URL and you'll see the RESTful APIs of the `inventory` service.
+To open a new command-line session, select **Terminal** > **New Terminal** from the menu of the IDE.
 
-A UI is also available for a more interactive view of the deployed APIs.
-To enable the UI, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
+Next, run the following curl command to see the RESTful APIs of the `inventory` service.
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+
+An UI is also available for a more interactive view of the deployed APIs.
+To visit the UI, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
 and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
 where **accountname** is your account name. Click the **interactive UI** link on the welcome page. 
-This UI is built from the https://swagger.io/tools/swagger-ui/[Open Source Swagger UI^] and renders the generated `/openapi` document into a very user friendly page.
+This UI is built from the (Open Source Swagger UI)[https://swagger.io/tools/swagger-ui/] and 
+renders the generated **/openapi** document into a very user friendly page.
 endif::[]
 
 [role='command']
