@@ -117,8 +117,8 @@ augment it with annotations and code to produce a complete OpenAPI document.
 
 
 ifndef::cloud-hosted[]
-Now, point to the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. 
-You can also point to the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the APIs.
+Now, visit the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. 
+You can also visit the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the APIs.
 endif::[]
 
 ifdef::cloud-hosted[]
