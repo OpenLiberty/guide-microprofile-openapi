@@ -67,9 +67,29 @@ include::{common-includes}/gitclone.adoc[]
 [role='command']
 include::{common-includes}/twyb-intro.adoc[]
 
-Next, point your browser to the {openapi-url}[{openapi-url}^] URL and you'll see the RESTful APIs of the `inventory`
-service. You can also point to the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the deployed APIs.
+
+ifndef::cloud-hosted[]
+Next, point your browser to the {openapi-url}[{openapi-url}^] URL and you'll see the RESTful APIs of the `inventory` service.
+You can also point to the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the deployed APIs.
 This UI is built from the https://swagger.io/tools/swagger-ui/[Open Source Swagger UI^] and renders the generated `/openapi` document into a very user friendly page.
+endif::[]
+
+ifdef::cloud-hosted[]
+To open a new command-line session, select **Terminal** > **New Terminal** from the menu of the IDE.
+
+Next, run the following curl command to see the RESTful APIs of the `inventory` service:
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+
+A UI is also available for a more interactive view of the deployed APIs.
+To visit the UI, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
+and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
+where **accountname** is your account name. Click the **interactive UI** link on the welcome page. 
+This UI is built from the [Open Source Swagger UI](https://swagger.io/tools/swagger-ui)
+renders the generated **/openapi** document into a very user friendly page.
+endif::[]
 
 [role='command']
 include::{common-includes}/twyb-end.adoc[]
@@ -95,9 +115,23 @@ Because the JAX-RS framework handles basic API generation for JAX-RS annotations
 tree will be generated from the `inventory` service. You can use this tree as a starting point and
 augment it with annotations and code to produce a complete OpenAPI document.
 
-Now, point to the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. You can also point to the
-{openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the APIs.
 
+ifndef::cloud-hosted[]
+Now, visit the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. 
+You can also visit the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the APIs.
+endif::[]
+
+ifdef::cloud-hosted[]
+Now, run the following curl command to see the generated OpenAPI tree:
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+
+To visit the UI for a more interactive view of the APIs, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number 
+and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL.
+Click the **interactive UI** link on the welcome page. 
+endif::[]
 
 === Augmenting the existing JAX-RS annotations with OpenAPI annotations
 
@@ -135,10 +169,22 @@ optional, but it can be helpful to organize a method with multiple responses.
 | [hotspot=Parameter file=0]`@Parameter`    | Describes a single operation parameter.
 |===
 
+ifndef::cloud-hosted[]
 Since the Open Liberty server was started in development mode at the beginning of the guide, your changes were automatically picked up.
-Refresh the {openapi-url}[{openapi-url}^]
-URL to see the updated OpenAPI tree. The two endpoints at which your JAX-RS methods are
-served are now more meaningful:
+Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree. 
+The two endpoints at which your JAX-RS methods are served are now more meaningful:
+endif::[]
+
+ifdef::cloud-hosted[]
+Since the Open Liberty server was started in development mode at the beginning of the guide, your changes were automatically picked up. 
+Run the following curl command to see the updated OpenAPI tree:
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+
+The two endpoints at which your JAX-RS methods are served are now more meaningful:
+endif::[]
 
 [source, YAML, role="no_copy"]
 ----
@@ -220,7 +266,17 @@ SystemData.java
 include::finish/src/main/java/io/openliberty/guides/inventory/model/SystemData.java[]
 ----
 
+ifndef::cloud-hosted[]
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
+endif::[]
+
+ifdef::cloud-hosted[]
+Run the following curl command to see the updated OpenAPI tree:
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+endif::[]
 
 [source, YAML, role="no_copy"]
 ----
@@ -309,7 +365,17 @@ include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 This configuration file is picked up automatically by MicroProfile Config and registers your filter
 by passing in the fully qualified name of the filter class into the [hotspot=Config file=1]`mp.openapi.filter` property.
 
+ifndef::cloud-hosted[]
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
+endif::[]
+
+ifdef::cloud-hosted[]
+Run the following curl command to see the updated OpenAPI tree:
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+endif::[]
 
 [source, yaml, role="no_copy"]
 ----
@@ -391,7 +457,17 @@ microprofile-config.properties
 include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 ----
 
+ifndef::cloud-hosted[]
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
+endif::[]
+
+ifdef::cloud-hosted[]
+Run the following curl command to see the updated OpenAPI tree:
+```
+curl http://localhost:9080/openapi
+```
+{: codeblock}
+endif::[]
 
 [source, yml, role="no_copy"]
 ----
@@ -416,8 +492,17 @@ Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
 
 == Testing the service
 
+// static guide instructions:
+ifndef::cloud-hosted[]
 No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually
 verify the document by visiting the {openapi-url}[{openapi-url}^] or the {openapi-url}/ui[{openapi-url}/ui^] URL.
+endif::[]
+
+// cloud-hosted guide instructions:
+ifdef::cloud-hosted[]
+No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually
+verify the document by visiting the **http://localhost:9080/openapi** or the **http://localhost:9080/openapi/ui** URL.
+endif::[]
 
 A few tests are included for you to test the basic functionality of the `inventory` service. If a test
 failure occurs, then you might have introduced a bug into the code. These tests will run automatically
