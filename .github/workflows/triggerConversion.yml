@@ -5,8 +5,6 @@ name: Rebuild cloud-hosted guide
 on:
   push:
     branches:
-      - 'master'
-      - 'qa'
       - 'prod'
       - 'staging'
 
