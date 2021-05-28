@@ -110,7 +110,7 @@ OpenAPI tree, changing them to your liking or removing them entirely.
 Navigate to the `start` directory to begin.
 
 [role='command']
-include::{common-includes}/devmode-start.adoc[]
+include::{common-includes}/devmode-lmp33-start.adoc[]
 
 Because the JAX-RS framework handles basic API generation for JAX-RS annotations, a skeleton OpenAPI
 tree will be generated from the `inventory` service. You can use this tree as a starting point and
