@@ -194,12 +194,30 @@ endif::[]
 
 [source, YAML, role="no_copy"]
 ----
+/inventory/systems:
+  get:
+    summary: List inventory contents.
+    description: Returns the currently stored host:properties pairs in the inventory.
+    responses:
+      "200":
+        description: host:properties pairs stored in the inventory.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                systems:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SystemData'
+                total:
+                  format: int32
+                  type: integer
 /inventory/systems/{hostname}:
   get:
     summary: Get JVM system properties for particular host
     description: Retrieves and returns the JVM system properties from the system
       service running on the particular host.
-    operationId: getPropertiesForHost
     parameters:
     - name: hostname
       in: path
@@ -209,28 +227,16 @@ endif::[]
         type: string
       example: foo
     responses:
-      404:
+      "404":
         description: Missing description
         content:
           text/plain: {}
-      200:
+      "200":
         description: JVM system properties of a particular host.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Properties'
-/inventory/systems:
-  get:
-    summary: List inventory contents.
-    description: Returns the currently stored host:properties pairs in the inventory.
-    operationId: listContents
-    responses:
-      200:
-        description: host:properties pairs stored in the inventory.
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InventoryList'
+              type: object
 ----
 
 
@@ -295,6 +301,7 @@ endif::[]
 components:
   schemas:
     InventoryList:
+      description: POJO that represents the inventory contents.
       required:
       - systems
       type: object
@@ -304,9 +311,10 @@ components:
           items:
             $ref: '#/components/schemas/SystemData'
         total:
+          format: int32
           type: integer
-      description: POJO that represents the inventory contents.
     SystemData:
+      description: POJO that represents a single inventory entry.
       required:
       - hostname
       - properties
@@ -316,13 +324,6 @@ components:
           type: string
         properties:
           type: object
-          additionalProperties:
-            type: string
-      description: POJO that represents a single inventory entry.
-    Properties:
-      type: object
-      additionalProperties:
-        type: string
 ----
 
 
@@ -397,9 +398,9 @@ info:
   license:
     name: Eclipse Public License - v 1.0
     url: https://www.eclipse.org/legal/epl-v10.html
-  version: 1.0.0
+  version: "1.0"
 servers:
-- url: http://localhost:{port}
+- url: "http://localhost:{port}"
   description: Simple Open Liberty.
   variables:
     port:
@@ -409,7 +410,7 @@ servers:
 
 [source, yaml, role="no_copy"]
 ----
-404:
+"404":
   description: Invalid hostname or the system service may not be running on
     the particular host.
   content:
@@ -484,17 +485,14 @@ endif::[]
 [source, yml, role="no_copy"]
 ----
 /inventory/properties:
-  get:
-    operationId: getProperties
-    responses:
-      200:
-        description: JVM system properties of the host running this service.
-        content:
-          application/json:
-            schema:
-              type: object
-              additionalProperties:
-                type: string
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
 ----
 
 
@@ -556,11 +554,9 @@ include::{common-includes}/devmode-quit.adoc[]
 
 == Great work! You're done!
 
-You have just documented and filtered the APIs of the `inventory` service from both the code and a static
-file by using MicroProfile OpenAPI in Open Liberty.
+You have just documented and filtered the APIs of the `inventory` service from both the code and a static file by using MicroProfile OpenAPI in Open Liberty.
 
-Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you
-can learn and expand on top of what you built here.
+Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you can learn and expand on top of what you built here.
 
 For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications available in the
 MicroProfile OpenAPI
