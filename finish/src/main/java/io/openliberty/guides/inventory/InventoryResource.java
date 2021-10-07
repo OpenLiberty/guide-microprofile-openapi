@@ -29,6 +29,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
 import io.openliberty.guides.inventory.model.InventoryList;
 
 @RequestScoped
@@ -49,18 +50,16 @@ public class InventoryResource {
             @APIResponse(
                 responseCode = "404", 
                 description = "Missing description",
-                content = @Content(mediaType = "text/plain")),
-            // end::APIResponse[]
-            @APIResponse(
-                responseCode = "200",
-                description = "JVM system properties of a particular host.",
                 // tag::Content[]
-                content = @Content(mediaType = "application/json",
+                content = @Content(mediaType = "text/plain")),
                 // end::Content[]
-                // tag::Schema[]
-                schema = @Schema(implementation = Properties.class))) })
-                // end::Schema[]
+            // end::APIResponse[]
+        }
+    )
     // end::APIResponses[]
+    // tag::APIResponseSchema[]
+    @APIResponseSchema(value=Properties.class, responseDescription="JVM system properties of a particular host.")
+    // end::APIResponseSchema[]
     // tag::Operation[]
     @Operation(
         summary = "Get JVM system properties for particular host",
@@ -101,9 +100,11 @@ public class InventoryResource {
         description = "host:properties pairs stored in the inventory.",
         content = @Content(
             mediaType = "application/json",
+            // tag::Schema[]
             schema = @Schema(
                 type = SchemaType.OBJECT,
                 implementation = InventoryList.class)))
+            // end::Schema[]
     @Operation(
         summary = "List inventory contents.",
         description = "Returns the currently stored host:properties pairs in the "
