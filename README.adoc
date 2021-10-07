@@ -166,7 +166,7 @@ Clearly, there are many more OpenAPI annotations now, so let’s break them down
 | *Annotation*    | *Description*
 | [hotspot=APIResponses file=0]`@APIResponses` | A container for multiple responses from an API operation. This annotation is optional, but it can be helpful to organize a method with multiple responses.
 | [hotspot=APIResponse file=0]`@APIResponse`  | Describes a single response from an API operation.
-| [hotspot=APIResponseSchema file=0]`@APIResponseSchema | Convenient short-hand way to specify a simple response with a Java class that could otherwise be specified using @APIResponse.
+| [hotspot=APIResponseSchema file=0]`@APIResponseSchema` | Convenient short-hand way to specify a simple response with a Java class that could otherwise be specified using @APIResponse.
 | [hotspot=Content file=0]`@Content`      | Provides a schema and examples for a particular media type.
 | [hotspot=Schema file=0]`@Schema`       | Defines the input and output data types.
 | [hotspot=Operation file=0]`@Operation`    | Describes a single API operation on a path.
