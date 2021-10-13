@@ -204,15 +204,7 @@ endif::[]
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                systems:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/SystemData'
-                total:
-                  format: int32
-                  type: integer
+              $ref: '#/components/schemas/InventoryList'
 /inventory/systems/{hostname}:
   get:
     summary: Get JVM system properties for particular host

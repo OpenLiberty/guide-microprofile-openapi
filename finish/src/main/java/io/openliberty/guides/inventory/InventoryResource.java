@@ -48,19 +48,20 @@ public class InventoryResource {
         value = {
             // tag::APIResponse[]
             @APIResponse(
-                responseCode = "404",
+                responseCode = "404", 
                 description = "Missing description",
-                // tag::Content[]
                 content = @Content(mediaType = "text/plain")),
-                // end::Content[]
             // end::APIResponse[]
-        }
-    )
+            @APIResponse(
+                responseCode = "200",
+                description = "JVM system properties of a particular host.",
+                // tag::Content[]
+                content = @Content(mediaType = "application/json",
+                // end::Content[]
+                // tag::Schema[]
+                schema = @Schema(implementation = Properties.class))) })
+                // end::Schema[]
     // end::APIResponses[]
-    // tag::APIResponseSchema[]
-    @APIResponseSchema(value = Properties.class,
-        responseDescription = "JVM system properties of a particular host.")
-    // end::APIResponseSchema[]
     // tag::Operation[]
     @Operation(
         summary = "Get JVM system properties for particular host",
@@ -97,16 +98,10 @@ public class InventoryResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     // tag::listContents[]
-    @APIResponse(
-        responseCode = "200",
-        description = "host:properties pairs stored in the inventory.",
-        content = @Content(
-            mediaType = "application/json",
-            // tag::Schema[]
-            schema = @Schema(
-                type = SchemaType.OBJECT,
-                implementation = InventoryList.class)))
-            // end::Schema[]
+    // tag::APIResponseSchema[]
+    @APIResponseSchema(value = InventoryList.class,
+        responseDescription = "host:properties pairs stored in the inventory.")
+    // end::APIResponseSchema[]
     @Operation(
         summary = "List inventory contents.",
         description = "Returns the currently stored host:properties pairs in the "
