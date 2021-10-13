@@ -48,7 +48,7 @@ public class InventoryResource {
         value = {
             // tag::APIResponse[]
             @APIResponse(
-                responseCode = "404", 
+                responseCode = "404",
                 description = "Missing description",
                 content = @Content(mediaType = "text/plain")),
             // end::APIResponse[]
