@@ -1,3 +1,4 @@
+---
 openapi: 3.0.3
 info:
   title: Inventory App
@@ -33,7 +34,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InventoryList'
+                description: POJO that represents the inventory contents.
+                required:
+                - systems
+                type: object
+                properties:
+                  systems:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SystemData'
+                  total:
+                    format: int32
+                    type: integer
   /inventory/systems/{hostname}:
     get:
       summary: Get JVM system properties for particular host
