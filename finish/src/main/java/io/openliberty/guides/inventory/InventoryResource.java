@@ -48,7 +48,7 @@ public class InventoryResource {
         value = {
             // tag::APIResponse[]
             @APIResponse(
-                responseCode = "404", 
+                responseCode = "404",
                 description = "Missing description",
                 content = @Content(mediaType = "text/plain"))
             // end::APIResponse[]
@@ -70,18 +70,19 @@ public class InventoryResource {
     public Response getPropertiesForHost(
         // tag::Parameter[]
         @Parameter(
-            description = "The host for whom to retrieve the JVM system properties for.",
-            required = true, 
-            example = "foo", 
-            schema = @Schema(type = SchemaType.STRING)) 
+            description = "The host for whom to retrieve "
+                + "the JVM system properties for.",
+            required = true,
+            example = "foo",
+            schema = @Schema(type = SchemaType.STRING))
         // end::Parameter[]
         @PathParam("hostname") String hostname) {
         // Get properties for host
         Properties props = manager.get(hostname);
         if (props == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                           .entity("{ \"error\" : " 
-                                   + "\"Unknown hostname " + hostname 
+                           .entity("{ \"error\" : "
+                                   + "\"Unknown hostname " + hostname
                                    + " or the resource may not be "
                                    + "running on the host machine\" }")
                            .build();
@@ -117,4 +118,3 @@ public class InventoryResource {
     }
 
 }
-// end::APIResponses[]
