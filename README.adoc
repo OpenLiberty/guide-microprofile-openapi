@@ -108,6 +108,12 @@ models to manually create all elements of the OpenAPI tree. Finally, you can fil
 OpenAPI tree, changing them to your liking or removing them entirely.
 
 Navigate to the `start` directory to begin.
+// cloud hosted instructions
+```
+cd /home/project/guide-microprofile-openapi/start
+```
+{: codeblock}
+endif::[]
 
 [role='command']
 include::{common-includes}/devmode-lmp33-start.adoc[]
