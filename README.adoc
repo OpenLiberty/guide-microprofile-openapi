@@ -109,6 +109,7 @@ OpenAPI tree, changing them to your liking or removing them entirely.
 
 Navigate to the `start` directory to begin.
 // cloud hosted instructions
+ifdef::cloud-hosted[]
 ```
 cd /home/project/guide-microprofile-openapi/start
 ```
