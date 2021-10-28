@@ -155,8 +155,8 @@ the JAX-RS framework.
 ----
 
 [role="edit_command_text"]
-Add OpenAPI [hotspot=APIResponses file=0]`@APIResponses`, [hotspot=Operation file=0]`@Operation`, 
-[hotspot=APIResponseSchema file=0]`@APIResponseSchema`, and [hotspot=Parameter file=0]`@Parameter` annotations to the two JAX-RS methods, 
+Add OpenAPI [hotspot=APIResponses file=0]`@APIResponses`, [hotspot=APIResponseSchema file=0]`@APIResponseSchema`, 
+[hotspot=Operation file=0]`@Operation`, and [hotspot=Parameter file=0]`@Parameter` annotations to the two JAX-RS methods, 
 [hotspot=host-property hotspot=Parameter file=0]`getPropertiesForHost()` and [hotspot=listContents file=0]`listContents()`.
 
 
