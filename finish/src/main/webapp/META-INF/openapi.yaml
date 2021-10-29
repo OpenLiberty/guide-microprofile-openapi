@@ -53,7 +53,7 @@ paths:
           description: Invalid hostname or the system service may not be running on
             the particular host.
           content:
-            text/plain: {}
+            application/json: {}
         "200":
           description: JVM system properties of a particular host.
           content:

@@ -50,7 +50,7 @@ public class InventoryResource {
             @APIResponse(
                 responseCode = "404",
                 description = "Missing description",
-                content = @Content(mediaType = "text/plain"))
+                content = @Content(mediaType = "application/json"))
             // end::APIResponse[]
         }
     )
