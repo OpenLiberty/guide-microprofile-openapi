@@ -96,18 +96,7 @@ public class InventoryResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     // tag::listContents[]
-    @APIResponse(
-        responseCode = "200",
-        description = "host:properties pairs stored in the inventory.",
-        // tag::Content[]
-        content = @Content(
-            mediaType = "application/json",
-        // end::Content[]
-        // tag::Schema[]
-            schema = @Schema(
-                type = SchemaType.OBJECT,
-                implementation = InventoryList.class)))
-        // end::Schema[]
+    @APIResponseSchema(value = InventoryList.class, responseDescription = "host:properties pairs stored in the inventory.", responseCode = "200")
     @Operation(
         summary = "List inventory contents.",
         description = "Returns the currently stored host:properties pairs in the "
