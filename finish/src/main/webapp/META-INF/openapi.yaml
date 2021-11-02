@@ -17,13 +17,16 @@ servers:
 paths:
   /inventory/properties:
     get:
+      operationId: getProperties
       responses:
-        "200":
-          description: OK
+        200:
+          description: JVM system properties of the host running this service.
           content:
             application/json:
               schema:
                 type: object
+                additionalProperties:
+                  type: string
   /inventory/systems:
     get:
       summary: List inventory contents.
@@ -34,7 +37,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InventoryList'
+                description: POJO that represents the inventory contents.
+                required:
+                - systems
+                type: object
+                properties:
+                  systems:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SystemData'
+                  total:
+                    format: int32
+                    type: integer
   /inventory/systems/{hostname}:
     get:
       summary: Get JVM system properties for particular host
@@ -53,7 +67,7 @@ paths:
           description: Invalid hostname or the system service may not be running on
             the particular host.
           content:
-            application/json: {}
+            text/plain: {}
         "200":
           description: JVM system properties of a particular host.
           content:
