@@ -7,23 +7,19 @@ info:
     name: Eclipse Public License - v 1.0
     url: https://www.eclipse.org/legal/epl-v10.html
   version: "1.0"
-servers:
-- url: "http://localhost:{port}"
-  description: Simple Open Liberty.
-  variables:
-    port:
-      default: "9080"
-      description: Server HTTP port.
 paths:
   /inventory/properties:
     get:
+      operationId: getProperties
       responses:
-        "200":
-          description: OK
+        200:
+          description: JVM system properties of the host running this service.
           content:
             application/json:
               schema:
                 type: object
+                additionalProperties:
+                  type: string
   /inventory/systems:
     get:
       summary: List inventory contents.

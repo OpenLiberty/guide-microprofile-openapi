@@ -482,14 +482,17 @@ endif::[]
 [source, yml, role="no_copy"]
 ----
 /inventory/properties:
-    get:
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
+  get:
+    operationId: getProperties
+    responses:
+      200:
+        description: JVM system properties of the host running this service.
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
 ----
 
 
