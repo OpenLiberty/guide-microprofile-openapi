@@ -37,18 +37,7 @@ paths:
           content:
             application/json:
               schema:
-                description: POJO that represents the inventory contents.
-                required:
-                - systems
-                type: object
-                properties:
-                  systems:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/SystemData'
-                  total:
-                    format: int32
-                    type: integer
+                $ref: '#/components/schemas/InventoryList'
   /inventory/systems/{hostname}:
     get:
       summary: Get JVM system properties for particular host
@@ -67,7 +56,7 @@ paths:
           description: Invalid hostname or the system service may not be running on
             the particular host.
           content:
-            text/plain: {}
+            application/json: {}
         "200":
           description: JVM system properties of a particular host.
           content:
