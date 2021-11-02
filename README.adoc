@@ -353,7 +353,7 @@ Hence, make sure that it doesn't override any other filter operations that are c
 Your current OpenAPI document doesn't provide much information on the application itself or on what server and port it runs on. 
 This information is usually provided in the `info` and `servers` elements, which are currently missing. 
 Use the `OASFactory` class to manually set these and other elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models`
-package. The [hotspot=OpenAPI file=0]`OpenAPI` element is the only element that cannot be removed since that would mean
+package. The [hotspot=OpenAPI file=0]`OpenAPI` element is the only element that cannot be removed, because that would mean
 removing the whole OpenAPI tree.
 
 Each filtering method is called once for each corresponding element in the model tree. You can think
