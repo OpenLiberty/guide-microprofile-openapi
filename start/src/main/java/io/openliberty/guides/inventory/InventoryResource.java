@@ -47,7 +47,7 @@ public class InventoryResource {
         Properties props = manager.get(hostname);
         if (props == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                           .entity("{ \"error\" : " 
+                           .entity("{ \"error\" : "
                                    + "\"Unknown hostname " + hostname
                                    + " or the resource may not be "
                                    + "running on the host machine\" }")
