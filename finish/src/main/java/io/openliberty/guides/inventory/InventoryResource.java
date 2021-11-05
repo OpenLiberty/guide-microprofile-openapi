@@ -1,6 +1,6 @@
 // tag::copyright[]
 /*******************************************************************************
- * Copyright (c) 2017, 2020 IBM Corporation and others.
+ * Copyright (c) 2017, 2021 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -29,7 +29,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import io.openliberty.guides.inventory.model.InventoryList;
 
 @RequestScoped
@@ -42,19 +41,13 @@ public class InventoryResource {
     @GET
     @Path("/{hostname}")
     @Produces(MediaType.APPLICATION_JSON)
-    // tag::APIResponses[]
     // tag::host-property[]
-    @APIResponses(
-        value = {
-            // tag::APIResponse[]
-            @APIResponse(
-                responseCode = "404",
-                description = "Missing description",
-                content = @Content(mediaType = "application/json"))
-            // end::APIResponse[]
-        }
-    )
-    // end::APIResponses[]
+    // tag::APIResponse[]
+    @APIResponse(
+        responseCode = "404",
+        description = "Missing description",
+        content = @Content(mediaType = "application/json"))
+    // end::APIResponse[]
     //tag::APIResponseSchema[]
     @APIResponseSchema(value = Properties.class,
         responseDescription = "JVM system properties of a particular host.",

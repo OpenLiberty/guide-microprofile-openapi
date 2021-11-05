@@ -155,7 +155,7 @@ the JAX-RS framework.
 ----
 
 [role="edit_command_text"]
-Add OpenAPI [hotspot=APIResponses file=0]`@APIResponses`, [hotspot=APIResponseSchema file=0]`@APIResponseSchema`, 
+Add OpenAPI [hotspot=APIResponse file=0]`@APIResponse`, [hotspot=APIResponseSchema file=0]`@APIResponseSchema`, 
 [hotspot=Operation file=0]`@Operation`, and [hotspot=Parameter file=0]`@Parameter` annotations to the two JAX-RS methods, 
 [hotspot=host-property hotspot=Parameter file=0]`getPropertiesForHost()` and [hotspot=listContents file=0]`listContents()`.
 
@@ -171,7 +171,6 @@ Clearly, there are many more OpenAPI annotations now, so let’s break them down
 [cols="35, 200", options="header"]
 |===
 | *Annotation*    | *Description*
-| [hotspot=APIResponses file=0]`@APIResponses` | A container for multiple responses from an API operation. This annotation is optional, but it can be helpful to organize a method with multiple responses.
 | [hotspot=APIResponse file=0]`@APIResponse`  | Describes a single response from an API operation.
 | [hotspot=APIResponseSchema file=0]`@APIResponseSchema` | Convenient short-hand way to specify a simple response with a Java class that could otherwise be specified using @APIResponse.
 | [hotspot=Operation file=0]`@Operation`    | Describes a single API operation on a path.
