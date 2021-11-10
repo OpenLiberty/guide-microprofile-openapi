@@ -406,11 +406,12 @@ servers:
 
 [source, yaml, role="no_copy"]
 ----
-"404":
-  description: Invalid hostname or the system service may not be running on
-    the particular host.
-  content:
-    application/json: {}
+responses:
+  "404":
+    description: Invalid hostname or the system service may not be running on
+      the particular host.
+    content:
+      application/json: {}
 ----
 
 For more information about which elements you can filter, see the https://openliberty.io/docs/ref/microprofile/[MicroProfile API documentation^].
