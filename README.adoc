@@ -155,8 +155,8 @@ the JAX-RS framework.
 ----
 
 [role="edit_command_text"]
-Add OpenAPI [hotspot=APIResponses file=0]`@APIResponses`, [hotspot=Operation file=0]`@Operation` 
-and [hotspot=Parameter file=0]`@Parameter` annotations to the two JAX-RS methods, 
+Add OpenAPI [hotspot=APIResponse file=0]`@APIResponse`, [hotspot=APIResponseSchema file=0]`@APIResponseSchema`, 
+[hotspot=Operation file=0]`@Operation`, and [hotspot=Parameter file=0]`@Parameter` annotations to the two JAX-RS methods, 
 [hotspot=host-property hotspot=Parameter file=0]`getPropertiesForHost()` and [hotspot=listContents file=0]`listContents()`.
 
 
@@ -171,10 +171,8 @@ Clearly, there are many more OpenAPI annotations now, so let’s break them down
 [cols="35, 200", options="header"]
 |===
 | *Annotation*    | *Description*
-| [hotspot=APIResponses file=0]`@APIResponses` | A container for multiple responses from an API operation. This annotation is optional, but it can be helpful to organize a method with multiple responses.
 | [hotspot=APIResponse file=0]`@APIResponse`  | Describes a single response from an API operation.
-| [hotspot=Content file=0]`@Content`      | Provides a schema and examples for a particular media type.
-| [hotspot=Schema file=0]`@Schema`       | Defines the input and output data types.
+| [hotspot=APIResponseSchema file=0]`@APIResponseSchema` | Convenient short-hand way to specify a simple response with a Java class that could otherwise be specified using @APIResponse.
 | [hotspot=Operation file=0]`@Operation`    | Describes a single API operation on a path.
 | [hotspot=Parameter file=0]`@Parameter`    | Describes a single operation parameter.
 |===
@@ -200,12 +198,22 @@ endif::[]
 
 [source, YAML, role="no_copy"]
 ----
+/inventory/systems:
+  get:
+    summary: List inventory contents.
+    description: Returns the currently stored host:properties pairs in the inventory.
+    responses:
+      "200":
+        description: host:properties pairs stored in the inventory.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryList'
 /inventory/systems/{hostname}:
   get:
     summary: Get JVM system properties for particular host
     description: Retrieves and returns the JVM system properties from the system
       service running on the particular host.
-    operationId: getPropertiesForHost
     parameters:
     - name: hostname
       in: path
@@ -215,28 +223,16 @@ endif::[]
         type: string
       example: foo
     responses:
-      404:
+      "404":
         description: Missing description
         content:
-          text/plain: {}
-      200:
+          application/json: {}
+      "200":
         description: JVM system properties of a particular host.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Properties'
-/inventory/systems:
-  get:
-    summary: List inventory contents.
-    description: Returns the currently stored host:properties pairs in the inventory.
-    operationId: listContents
-    responses:
-      200:
-        description: host:properties pairs stored in the inventory.
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InventoryList'
+              type: object
 ----
 
 
@@ -301,6 +297,7 @@ endif::[]
 components:
   schemas:
     InventoryList:
+      description: POJO that represents the inventory contents.
       required:
       - systems
       type: object
@@ -310,9 +307,10 @@ components:
           items:
             $ref: '#/components/schemas/SystemData'
         total:
+          format: int32
           type: integer
-      description: POJO that represents the inventory contents.
     SystemData:
+      description: POJO that represents a single inventory entry.
       required:
       - hostname
       - properties
@@ -322,13 +320,6 @@ components:
           type: string
         properties:
           type: object
-          additionalProperties:
-            type: string
-      description: POJO that represents a single inventory entry.
-    Properties:
-      type: object
-      additionalProperties:
-        type: string
 ----
 
 
@@ -361,7 +352,7 @@ Hence, make sure that it doesn't override any other filter operations that are c
 Your current OpenAPI document doesn't provide much information on the application itself or on what server and port it runs on. 
 This information is usually provided in the `info` and `servers` elements, which are currently missing. 
 Use the `OASFactory` class to manually set these and other elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models`
-package. The [hotspot=OpenAPI file=0]`OpenAPI` element is the only element that cannot be removed since that would mean
+package. The [hotspot=OpenAPI file=0]`OpenAPI` element is the only element that cannot be removed, because that would mean
 removing the whole OpenAPI tree.
 
 Each filtering method is called once for each corresponding element in the model tree. You can think
@@ -403,9 +394,9 @@ info:
   license:
     name: Eclipse Public License - v 1.0
     url: https://www.eclipse.org/legal/epl-v10.html
-  version: 1.0.0
+  version: "1.0"
 servers:
-- url: http://localhost:{port}
+- url: "http://localhost:{port}"
   description: Simple Open Liberty.
   variables:
     port:
@@ -415,11 +406,12 @@ servers:
 
 [source, yaml, role="no_copy"]
 ----
-404:
-  description: Invalid hostname or the system service may not be running on
-    the particular host.
-  content:
-    text/plain: {}
+responses:
+  "404":
+    description: Invalid hostname or the system service may not be running on
+      the particular host.
+    content:
+      application/json: {}
 ----
 
 For more information about which elements you can filter, see the https://openliberty.io/docs/ref/microprofile/[MicroProfile API documentation^].
@@ -493,7 +485,7 @@ endif::[]
   get:
     operationId: getProperties
     responses:
-      200:
+      "200":
         description: JVM system properties of the host running this service.
         content:
           application/json:
@@ -562,11 +554,9 @@ include::{common-includes}/devmode-quit.adoc[]
 
 == Great work! You're done!
 
-You have just documented and filtered the APIs of the `inventory` service from both the code and a static
-file by using MicroProfile OpenAPI in Open Liberty.
+You have just documented and filtered the APIs of the `inventory` service from both the code and a static file by using MicroProfile OpenAPI in Open Liberty.
 
-Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you
-can learn and expand on top of what you built here.
+Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you can learn and expand on top of what you built here.
 
 For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications available in the
 MicroProfile OpenAPI
