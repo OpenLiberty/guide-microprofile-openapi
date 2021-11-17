@@ -1,6 +1,6 @@
 // tag::copyright[]
 /*******************************************************************************
- * Copyright (c) 2017, 2020 IBM Corporation and others.
+ * Copyright (c) 2017, 2021 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
 import io.openliberty.guides.inventory.model.InventoryList;
 
 @RequestScoped
@@ -41,26 +41,18 @@ public class InventoryResource {
     @GET
     @Path("/{hostname}")
     @Produces(MediaType.APPLICATION_JSON)
-    // tag::APIResponses[]
     // tag::host-property[]
-    @APIResponses(
-        value = {
-            // tag::APIResponse[]
-            @APIResponse(
-                responseCode = "404", 
-                description = "Missing description",
-                content = @Content(mediaType = "text/plain")),
-            // end::APIResponse[]
-            @APIResponse(
-                responseCode = "200",
-                description = "JVM system properties of a particular host.",
-                // tag::Content[]
-                content = @Content(mediaType = "application/json",
-                // end::Content[]
-                // tag::Schema[]
-                schema = @Schema(implementation = Properties.class))) })
-                // end::Schema[]
-    // end::APIResponses[]
+    // tag::APIResponse[]
+    @APIResponse(
+        responseCode = "404",
+        description = "Missing description",
+        content = @Content(mediaType = "application/json"))
+    // end::APIResponse[]
+    //tag::APIResponseSchema[]
+    @APIResponseSchema(value = Properties.class,
+        responseDescription = "JVM system properties of a particular host.",
+        responseCode = "200")
+    // end::APIResponseSchema[]
     // tag::Operation[]
     @Operation(
         summary = "Get JVM system properties for particular host",
@@ -71,18 +63,19 @@ public class InventoryResource {
     public Response getPropertiesForHost(
         // tag::Parameter[]
         @Parameter(
-            description = "The host for whom to retrieve the JVM system properties for.",
-            required = true, 
-            example = "foo", 
-            schema = @Schema(type = SchemaType.STRING)) 
+            description = "The host for whom to retrieve "
+                + "the JVM system properties for.",
+            required = true,
+            example = "foo",
+            schema = @Schema(type = SchemaType.STRING))
         // end::Parameter[]
         @PathParam("hostname") String hostname) {
         // Get properties for host
         Properties props = manager.get(hostname);
         if (props == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                           .entity("{ \"error\" : " 
-                                   + "\"Unknown hostname " + hostname 
+                           .entity("{ \"error\" : "
+                                   + "\"Unknown hostname " + hostname
                                    + " or the resource may not be "
                                    + "running on the host machine\" }")
                            .build();
@@ -96,14 +89,9 @@ public class InventoryResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     // tag::listContents[]
-    @APIResponse(
-        responseCode = "200",
-        description = "host:properties pairs stored in the inventory.",
-        content = @Content(
-            mediaType = "application/json",
-            schema = @Schema(
-                type = SchemaType.OBJECT,
-                implementation = InventoryList.class)))
+    @APIResponseSchema(value = InventoryList.class,
+        responseDescription = "host:properties pairs stored in the inventory.",
+        responseCode = "200")
     @Operation(
         summary = "List inventory contents.",
         description = "Returns the currently stored host:properties pairs in the "
@@ -114,4 +102,3 @@ public class InventoryResource {
     }
 
 }
-// end::APIResponses[]

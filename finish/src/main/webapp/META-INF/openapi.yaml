@@ -1,26 +1,31 @@
-openapi: 3.0.0
+---
+openapi: 3.0.3
 info:
   title: Inventory App
   description: App for storing JVM system properties of various hosts.
   license:
     name: Eclipse Public License - v 1.0
     url: https://www.eclipse.org/legal/epl-v10.html
-  version: 1.0.0
-servers:
-- url: http://localhost:{port}
-  description: Simple Open Liberty.
-  variables:
-    port:
-      default: "9080"
-      description: Server HTTP port.
+  version: "1.0"
 paths:
+  /inventory/properties:
+    get:
+      operationId: getProperties
+      responses:
+        "200":
+          description: JVM system properties of the host running this service.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
   /inventory/systems:
     get:
       summary: List inventory contents.
       description: Returns the currently stored host:properties pairs in the inventory.
-      operationId: listContents
       responses:
-        200:
+        "200":
           description: host:properties pairs stored in the inventory.
           content:
             application/json:
@@ -31,7 +36,6 @@ paths:
       summary: Get JVM system properties for particular host
       description: Retrieves and returns the JVM system properties from the system
         service running on the particular host.
-      operationId: getPropertiesForHost
       parameters:
       - name: hostname
         in: path
@@ -41,32 +45,21 @@ paths:
           type: string
         example: foo
       responses:
-        404:
+        "404":
           description: Invalid hostname or the system service may not be running on
             the particular host.
           content:
-            text/plain: {}
-        200:
+            application/json: {}
+        "200":
           description: JVM system properties of a particular host.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Properties'
-  /inventory/properties:
-    get:
-      operationId: getProperties
-      responses:
-        200:
-          description: JVM system properties of the host running this service.
-          content:
-            application/json:
-              schema:
                 type: object
-                additionalProperties:
-                  type: string
 components:
   schemas:
     InventoryList:
+      description: POJO that represents the inventory contents.
       required:
       - systems
       type: object
@@ -76,9 +69,10 @@ components:
           items:
             $ref: '#/components/schemas/SystemData'
         total:
+          format: int32
           type: integer
-      description: POJO that represents the inventory contents.
     SystemData:
+      description: POJO that represents a single inventory entry.
       required:
       - hostname
       - properties
@@ -88,10 +82,3 @@ components:
           type: string
         properties:
           type: object
-          additionalProperties:
-            type: string
-      description: POJO that represents a single inventory entry.
-    Properties:
-      type: object
-      additionalProperties:
-        type: string
