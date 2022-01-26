@@ -103,7 +103,8 @@ public class InventoryEndpointIT {
 
         String osNameFromInventory = jsonFromInventory.getString("os.name");
         String osNameFromSystem = jsonFromSystem.getString("os.name");
-        this.assertProperty("os.name", "localhost", osNameFromSystem, osNameFromInventory);
+        this.assertProperty("os.name", "localhost",
+                            osNameFromSystem, osNameFromInventory);
 
         String userNameFromInventory = jsonFromInventory.getString("user.name");
         String userNameFromSystem = jsonFromSystem.getString("user.name");
@@ -119,7 +120,8 @@ public class InventoryEndpointIT {
         Response response = this.getResponse(baseUrl + INVENTORY_SYSTEMS);
         this.assertResponse(baseUrl, response);
 
-        Response badResponse = client.target(baseUrl + INVENTORY_SYSTEMS + "/"
+        Response badResponse = client.target(baseUrl +
+                                INVENTORY_SYSTEMS + "/"
                                + "badhostname").request(MediaType.APPLICATION_JSON).get();
 
         assertEquals(404, badResponse.getStatus(),
@@ -150,7 +152,7 @@ public class InventoryEndpointIT {
      * <p>
      * Asserts that the given URL has the correct response code of 200.
      * </p>
-     * 
+     *
      * @param url
      *          - target URL.
      * @param response
@@ -163,7 +165,7 @@ public class InventoryEndpointIT {
     /**
      * Asserts that the specified JVM system property is equivalent in both the
      * system and inventory services.
-     * 
+     *
      * @param propertyName
      *          - name of the system property to check.
      * @param hostname

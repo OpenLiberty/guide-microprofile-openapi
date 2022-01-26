@@ -16,7 +16,8 @@ import java.util.List;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 // tag::InventoryList[]
-@Schema(name="InventoryList", description="POJO that represents the inventory contents.")
+@Schema(name = "InventoryList",
+description = "POJO that represents the inventory contents.")
 // end::InventoryList[]
 // tag::InventoryListClass[]
 public class InventoryList {

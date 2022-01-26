@@ -19,7 +19,8 @@ import jakarta.ws.rs.ext.Provider;
 import org.eclipse.microprofile.rest.client.ext.ResponseExceptionMapper;
 
 @Provider
-public class UnknownUrlExceptionMapper implements ResponseExceptionMapper<UnknownUrlException> {
+public class UnknownUrlExceptionMapper implements
+ResponseExceptionMapper<UnknownUrlException> {
 
   Logger LOG = Logger.getLogger(UnknownUrlExceptionMapper.class.getName());
 
