@@ -19,11 +19,9 @@ import org.junit.jupiter.api.Test;
 import jakarta.json.JsonObject;
 
 import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
-
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.plugins.providers.jsonb.JsonBindingProvider;
 
 public class SystemEndpointIT {
 
@@ -32,8 +30,7 @@ public class SystemEndpointIT {
         String port = System.getProperty("http.port");
         String url = "http://localhost:" + port + "/";
 
-        Client client = ResteasyClientBuilder.newClient();
-        client.register(JsonBindingProvider.class);
+        Client client = ClientBuilder.newClient();
 
         WebTarget target = client.target(url + "inventory/properties");
         Response response = target.request().get();
@@ -47,6 +44,7 @@ public class SystemEndpointIT {
                      "The system property for the local and remote JVM should match");
         
         response.close();
+        client.close();
     }
 
 }

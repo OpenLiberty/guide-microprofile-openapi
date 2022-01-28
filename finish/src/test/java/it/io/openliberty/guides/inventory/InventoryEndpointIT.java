@@ -18,11 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.plugins.providers.jsonb.JsonBindingProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -50,8 +49,7 @@ public class InventoryEndpointIT {
 
     @BeforeEach
     public void setup() {
-        client = ResteasyClientBuilder.newClient();
-        client.register(JsonBindingProvider.class);
+        client = ClientBuilder.newClient();
     }
 
     @AfterEach
