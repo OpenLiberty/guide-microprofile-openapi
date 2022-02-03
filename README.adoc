@@ -41,15 +41,15 @@ for documenting and exposing RESTful APIs. This specification allows both humans
 understand or process the functionalities of services without requiring direct access to underlying
 source code or documentation. The MicroProfile OpenAPI specification provides a set of Java interfaces
 and programming models that allow Java developers to natively produce OpenAPI v3 documents from their
-JAX-RS applications.
+restfulWS applications.
 
 You will document the RESTful APIs of the provided `inventory` service, which serves two endpoints,
 `inventory/systems` and `inventory/properties`. These two endpoints function the same way as in the
 other MicroProfile guides.
 
 Before you proceed, note that the 1.0 version of the MicroProfile OpenAPI specification does
-not define how the `/openapi` endpoint may be partitioned in the event of multiple JAX-RS applications
-running on the same server. In other words, you must stick to one JAX-RS application per server instance
+not define how the `/openapi` endpoint may be partitioned in the event of multiple restfulWS applications
+running on the same server. In other words, you must stick to one restfulWS application per server instance
 as the behaviour for handling multiple applications is currently undefined.
 
 
@@ -102,7 +102,7 @@ include::{common-includes}/twyb-end.adoc[]
 == Generating the OpenAPI document for the inventory service
 
 You can generate an OpenAPI document in various ways. First, because
-all JAX-RS annotations are processed by default, you can augment your existing JAX-RS annotations with
+all restfulWS annotations are processed by default, you can augment your existing restfulWS annotations with
 OpenAPI annotations to enrich your APIs with a minimal amount of work. Second, you can use a set of predefined
 models to manually create all elements of the OpenAPI tree. Finally, you can filter various elements of the
 OpenAPI tree, changing them to your liking or removing them entirely.
@@ -119,7 +119,7 @@ endif::[]
 [role='command']
 include::{common-includes}/devmode-lmp33-start.adoc[]
 
-Because the JAX-RS framework handles basic API generation for JAX-RS annotations, a skeleton OpenAPI
+Because the restfulWS framework handles basic API generation for restfulWS annotations, a skeleton OpenAPI
 tree will be generated from the `inventory` service. You can use this tree as a starting point and
 augment it with annotations and code to produce a complete OpenAPI document.
 
@@ -142,11 +142,11 @@ You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cogni
 Click the **interactive UI** link on the welcome page. 
 endif::[]
 
-=== Augmenting the existing JAX-RS annotations with OpenAPI annotations
+=== Augmenting the existing restfulWS annotations with OpenAPI annotations
 
-Because all JAX-RS annotations are processed by default, you can augment the existing code with OpenAPI
+Because all restfulWS annotations are processed by default, you can augment the existing code with OpenAPI
 annotations without needing to rewrite portions of the OpenAPI document that are already covered by
-the JAX-RS framework.
+the restfulWS framework.
 
 [role='code_command hotspot file=0', subs="quotes"]
 ----
@@ -156,7 +156,7 @@ the JAX-RS framework.
 
 [role="edit_command_text"]
 Add OpenAPI [hotspot=APIResponse file=0]`@APIResponse`, [hotspot=APIResponseSchema file=0]`@APIResponseSchema`, 
-[hotspot=Operation file=0]`@Operation`, and [hotspot=Parameter file=0]`@Parameter` annotations to the two JAX-RS methods, 
+[hotspot=Operation file=0]`@Operation`, and [hotspot=Parameter file=0]`@Parameter` annotations to the two restfulWS methods, 
 [hotspot=host-property hotspot=Parameter file=0]`getPropertiesForHost()` and [hotspot=listContents file=0]`listContents()`.
 
 
@@ -181,7 +181,7 @@ ifndef::cloud-hosted[]
 Since the Open Liberty server was started in development mode at the beginning of the guide, 
 your changes were automatically picked up.
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree. 
-The two endpoints at which your JAX-RS methods are served are now more meaningful:
+The two endpoints at which your restfulWS methods are served are now more meaningful:
 endif::[]
 
 ifdef::cloud-hosted[]
@@ -193,7 +193,7 @@ curl http://localhost:9080/openapi
 ```
 {: codeblock}
 
-The two endpoints at which your JAX-RS methods are served are now more meaningful:
+The two endpoints at which your restfulWS methods are served are now more meaningful:
 endif::[]
 
 [source, YAML, role="no_copy"]
