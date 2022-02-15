@@ -1,4 +1,4 @@
-// Copyright (c) 2017, 2021 IBM Corporation and others.
+// Copyright (c) 2017, 2022 IBM Corporation and others.
 // Licensed under Creative Commons Attribution-NoDerivatives
 // 4.0 International (CC BY-ND 4.0)
 //   https://creativecommons.org/licenses/by-nd/4.0/
@@ -33,24 +33,13 @@ Explore how to document and filter RESTful APIs from code or static files by usi
 
 == What you'll learn
 
-You will learn how to document and filter RESTful APIs from annotations, POJOs, and static OpenAPI
-files by using MicroProfile OpenAPI.
+You will learn how to document and filter RESTful APIs from annotations, POJOs, and static OpenAPI files by using MicroProfile OpenAPI.
 
-The OpenAPI specification, previously known as the Swagger specification, defines a standard interface
-for documenting and exposing RESTful APIs. This specification allows both humans and computers to
-understand or process the functionalities of services without requiring direct access to underlying
-source code or documentation. The MicroProfile OpenAPI specification provides a set of Java interfaces
-and programming models that allow Java developers to natively produce OpenAPI v3 documents from their
-restfulWS applications.
+The OpenAPI specification, previously known as the Swagger specification, defines a standard interface for documenting and exposing RESTful APIs. This specification allows both humans and computers to understand or process the functionalities of services without requiring direct access to underlying source code or documentation. The MicroProfile OpenAPI specification provides a set of Java interfaces and programming models that allow Java developers to natively produce OpenAPI v3 documents from their restfulWS applications.
 
-You will document the RESTful APIs of the provided `inventory` service, which serves two endpoints,
-`inventory/systems` and `inventory/properties`. These two endpoints function the same way as in the
-other MicroProfile guides.
+You will document the RESTful APIs of the provided `inventory` service, which serves two endpoints, `inventory/systems` and `inventory/properties`. These two endpoints function the same way as in the other MicroProfile guides.
 
-Before you proceed, note that the 1.0 version of the MicroProfile OpenAPI specification does
-not define how the `/openapi` endpoint may be partitioned in the event of multiple restfulWS applications
-running on the same server. In other words, you must stick to one restfulWS application per server instance
-as the behaviour for handling multiple applications is currently undefined.
+Before you proceed, note that the 1.0 version of the MicroProfile OpenAPI specification does not define how the `/openapi` endpoint may be partitioned in the event of multiple restfulWS applications running on the same server. In other words, you must stick to one restfulWS application per server instance as the behaviour for handling multiple applications is currently undefined.
 
 
 // =================================================================================================
@@ -67,10 +56,7 @@ include::{common-includes}/twyb-intro.adoc[]
 
 
 ifndef::cloud-hosted[]
-Next, point your browser to the {openapi-url}[{openapi-url}^] URL and you'll see the RESTful APIs of the `inventory` service.
-You can also point to the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the deployed APIs.
-This UI is built from the https://swagger.io/tools/swagger-ui/[Open Source Swagger UI^] 
-and renders the generated `/openapi` document into a very user friendly page.
+Next, point your browser to the {openapi-url}[{openapi-url}^] URL and you'll see the RESTful APIs of the `inventory` service. You can also point to the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the deployed APIs. This UI is built from the https://swagger.io/tools/swagger-ui/[Open Source Swagger UI^] and renders the generated `/openapi` document into a very user friendly page.
 endif::[]
 
 ifdef::cloud-hosted[]
@@ -82,14 +68,7 @@ curl http://localhost:9080/openapi
 ```
 {: codeblock}
 
-A UI is also available for a more interactive view of the deployed APIs.
-To visit the UI, select **Launch Application** from the menu of the IDE, 
-type in **9080** to specify the port number and click the **OK** button. 
-You’re redirected to a URL similar to **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`**, 
-where **accountname** is your account name. 
-Click the **interactive UI** link on the welcome page. 
-This UI is built from the [Open Source Swagger UI](https://swagger.io/tools/swagger-ui), 
-which renders the generated **/openapi** document into a very user friendly page.
+A UI is also available for a more interactive view of the deployed APIs. To visit the UI, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number and click the **OK** button. You’re redirected to a URL similar to **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`**, where **accountname** is your account name. Click the **interactive UI** link on the welcome page. This UI is built from the [Open Source Swagger UI](https://swagger.io/tools/swagger-ui), which renders the generated **/openapi** document into a very user friendly page.
 endif::[]
 
 [role='command']
@@ -101,11 +80,7 @@ include::{common-includes}/twyb-end.adoc[]
 
 == Generating the OpenAPI document for the inventory service
 
-You can generate an OpenAPI document in various ways. First, because
-all restfulWS annotations are processed by default, you can augment your existing restfulWS annotations with
-OpenAPI annotations to enrich your APIs with a minimal amount of work. Second, you can use a set of predefined
-models to manually create all elements of the OpenAPI tree. Finally, you can filter various elements of the
-OpenAPI tree, changing them to your liking or removing them entirely.
+You can generate an OpenAPI document in various ways. First, because all restfulWS annotations are processed by default, you can augment your existing restfulWS annotations with OpenAPI annotations to enrich your APIs with a minimal amount of work. Second, you can use a set of predefined models to manually create all elements of the OpenAPI tree. Finally, you can filter various elements of the OpenAPI tree, changing them to your liking or removing them entirely.
 
 Navigate to the `start` directory to begin.
 // cloud hosted instructions
@@ -119,14 +94,11 @@ endif::[]
 [role='command']
 include::{common-includes}/devmode-lmp33-start.adoc[]
 
-Because the restfulWS framework handles basic API generation for restfulWS annotations, a skeleton OpenAPI
-tree will be generated from the `inventory` service. You can use this tree as a starting point and
-augment it with annotations and code to produce a complete OpenAPI document.
+Because the restfulWS framework handles basic API generation for restfulWS annotations, a skeleton OpenAPI tree will be generated from the `inventory` service. You can use this tree as a starting point and augment it with annotations and code to produce a complete OpenAPI document.
 
 
 ifndef::cloud-hosted[]
-Now, visit the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. 
-You can also visit the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the APIs.
+Now, visit the {openapi-url}[{openapi-url}^] URL to see the generated OpenAPI tree. You can also visit the {openapi-url}/ui[{openapi-url}/ui^] URL for a more interactive view of the APIs.
 endif::[]
 
 ifdef::cloud-hosted[]
@@ -136,17 +108,12 @@ curl http://localhost:9080/openapi
 ```
 {: codeblock}
 
-To visit the UI for a more interactive view of the APIs, select **Launch Application** from the menu of the IDE, 
-type in **9080** to specify the port number and click the **OK** button. 
-You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL.
-Click the **interactive UI** link on the welcome page. 
+To visit the UI for a more interactive view of the APIs, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number and click the **OK** button. You’re redirected to the **`https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai`** URL. Click the **interactive UI** link on the welcome page. 
 endif::[]
 
 === Augmenting the existing restfulWS annotations with OpenAPI annotations
 
-Because all restfulWS annotations are processed by default, you can augment the existing code with OpenAPI
-annotations without needing to rewrite portions of the OpenAPI document that are already covered by
-the restfulWS framework.
+Because all restfulWS annotations are processed by default, you can augment the existing code with OpenAPI annotations without needing to rewrite portions of the OpenAPI document that are already covered by the restfulWS framework.
 
 [role='code_command hotspot file=0', subs="quotes"]
 ----
@@ -155,9 +122,7 @@ the restfulWS framework.
 ----
 
 [role="edit_command_text"]
-Add OpenAPI [hotspot=APIResponse file=0]`@APIResponse`, [hotspot=APIResponseSchema file=0]`@APIResponseSchema`, 
-[hotspot=Operation file=0]`@Operation`, and [hotspot=Parameter file=0]`@Parameter` annotations to the two restfulWS methods, 
-[hotspot=host-property hotspot=Parameter file=0]`getPropertiesForHost()` and [hotspot=listContents file=0]`listContents()`.
+Add OpenAPI [hotspot=APIResponse file=0]`@APIResponse`, [hotspot=APIResponseSchema file=0]`@APIResponseSchema`, [hotspot=Operation file=0]`@Operation`, and [hotspot=Parameter file=0]`@Parameter` annotations to the two restfulWS methods, [hotspot=host-property hotspot=Parameter file=0]`getPropertiesForHost()` and [hotspot=listContents file=0]`listContents()`.
 
 
 InventoryResource.java
@@ -178,16 +143,11 @@ Clearly, there are many more OpenAPI annotations now, so let’s break them down
 |===
 
 ifndef::cloud-hosted[]
-Since the Open Liberty server was started in development mode at the beginning of the guide, 
-your changes were automatically picked up.
-Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree. 
-The two endpoints at which your restfulWS methods are served are now more meaningful:
+Since the Open Liberty server was started in development mode at the beginning of the guide, your changes were automatically picked up. Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree. The two endpoints at which your restfulWS methods are served are now more meaningful:
 endif::[]
 
 ifdef::cloud-hosted[]
-Since the Open Liberty server was started in development mode at the beginning of the guide, 
-your changes were automatically picked up. 
-Run the following curl command to see the updated OpenAPI tree:
+Since the Open Liberty server was started in development mode at the beginning of the guide, your changes were automatically picked up. Run the following curl command to see the updated OpenAPI tree:
 ```
 curl http://localhost:9080/openapi
 ```
@@ -236,13 +196,7 @@ endif::[]
 ----
 
 
-OpenAPI annotations can also be added to POJOs to describe what they represent. 
-Currently, your OpenAPI document doesn't have a very meaningful description of the 
-[hotspot=InventoryListClass file=1]`InventoryList` POJO and hence it's very difficult to tell 
-exactly what that POJO is used for. 
-To describe the [hotspot=InventoryListClass file=1]`InventoryList` POJO in more detail, 
-augment the [hotspot file=1]`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` 
-file with some OpenAPI annotations.
+OpenAPI annotations can also be added to POJOs to describe what they represent. Currently, your OpenAPI document doesn't have a very meaningful description of the [hotspot=InventoryListClass file=1]`InventoryList` POJO and hence it's very difficult to tell exactly what that POJO is used for. To describe the [hotspot=InventoryListClass file=1]`InventoryList` POJO in more detail, augment the [hotspot file=1]`src/main/java/io/openliberty/guides/inventory/model/InventoryList.java` file with some OpenAPI annotations.
 
 [role='code_command hotspot file=1', subs="quotes"]
 ----
@@ -251,8 +205,7 @@ file with some OpenAPI annotations.
 ----
 
 [role='edit_command_text']
-Add OpenAPI [hotspot=InventoryList hotspot=Systems file=1]`@Schema` annotations to 
-the [hotspot=InventoryList file=1]`InventoryList` class and the [hotspot=Systems file=1]`systems` variable.
+Add OpenAPI [hotspot=InventoryList hotspot=Systems file=1]`@Schema` annotations to the [hotspot=InventoryList file=1]`InventoryList` class and the [hotspot=Systems file=1]`systems` variable.
 
 InventoryList.java
 [source, Java, linenums, role='code_column hide_tags=copyright']
@@ -260,8 +213,7 @@ InventoryList.java
 include::finish/src/main/java/io/openliberty/guides/inventory/model/InventoryList.java[]
 ----
 
-Likewise, annotate the [hotspot file=2]`src/main/java/io/openliberty/guides/inventory/model/SystemData.java` POJO,
-which is referenced in the [hotspot file=1]`InventoryList` class.
+Likewise, annotate the [hotspot file=2]`src/main/java/io/openliberty/guides/inventory/model/SystemData.java` POJO, which is referenced in the [hotspot file=1]`InventoryList` class.
 
 [role='code_command hotspot file=2', subs="quotes"]
 ----
@@ -270,9 +222,7 @@ which is referenced in the [hotspot file=1]`InventoryList` class.
 ----
 
 [role='edit_command_text']
-Add OpenAPI [hotspot=SystemData hotspot=Hostname hotspot=Properties file=2]`@Schema` annotations 
-to the [hotspot=SystemData file=2]`SystemData` class, 
-the [hotspot=Hostname file=2]`hostname` variable and the [hotspot=Properties file=2]`properties` variable.
+Add OpenAPI [hotspot=SystemData hotspot=Hostname hotspot=Properties file=2]`@Schema` annotations to the [hotspot=SystemData file=2]`SystemData` class, the [hotspot=Hostname file=2]`hostname` variable and the [hotspot=Properties file=2]`properties` variable.
 
 SystemData.java
 [source, Java, linenums, role='code_column hide_tags=copyright']
@@ -339,24 +289,11 @@ InventoryOASFilter.java
 include::finish/src/main/java/io/openliberty/guides/inventory/filter/InventoryOASFilter.java[]
 ----
 
-The [hotspot=filterAPIResponse file=0]`filterAPIResponse()` method allows filtering of `APIResponse` elements. When you
-override this method, it will be called once for every `APIResponse` element in the OpenAPI tree.
-In this case, you are matching the `404` response that is returned by the `/inventory/systems/{hostname}`
-endpoint and setting the previously missing description. To remove an `APIResponse` element
-or another filterable element, simply return `null`.
+The [hotspot=filterAPIResponse file=0]`filterAPIResponse()` method allows filtering of `APIResponse` elements. When you override this method, it will be called once for every `APIResponse` element in the OpenAPI tree. In this case, you are matching the `404` response that is returned by the `/inventory/systems/{hostname}` endpoint and setting the previously missing description. To remove an `APIResponse` element or another filterable element, simply return `null`.
 
-The [hotspot=filterOpenAPI file=0]`filterOpenAPI()` method allows filtering of the singleton [hotspot=OpenAPI file=0]`OpenAPI` element. 
-Unlike other filter methods, when you override [hotspot=filterOpenAPI file=0]`filterOpenAPI()`, 
-it is called only once as the last method for a particular filter. 
-Hence, make sure that it doesn't override any other filter operations that are called before it. 
-Your current OpenAPI document doesn't provide much information on the application itself or on what server and port it runs on. 
-This information is usually provided in the `info` and `servers` elements, which are currently missing. 
-Use the `OASFactory` class to manually set these and other elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models`
-package. The [hotspot=OpenAPI file=0]`OpenAPI` element is the only element that cannot be removed, because that would mean
-removing the whole OpenAPI tree.
+The [hotspot=filterOpenAPI file=0]`filterOpenAPI()` method allows filtering of the singleton [hotspot=OpenAPI file=0]`OpenAPI` element. Unlike other filter methods, when you override [hotspot=filterOpenAPI file=0]`filterOpenAPI()`, it is called only once as the last method for a particular filter. Hence, make sure that it doesn't override any other filter operations that are called before it. Your current OpenAPI document doesn't provide much information on the application itself or on what server and port it runs on. This information is usually provided in the `info` and `servers` elements, which are currently missing. Use the `OASFactory` class to manually set these and other elements of the OpenAPI tree from the `org.eclipse.microprofile.openapi.models` package. The [hotspot=OpenAPI file=0]`OpenAPI` element is the only element that cannot be removed, because that would mean removing the whole OpenAPI tree.
 
-Each filtering method is called once for each corresponding element in the model tree. You can think
-of each method as a callback for various key OpenAPI elements.
+Each filtering method is called once for each corresponding element in the model tree. You can think of each method as a callback for various key OpenAPI elements.
 
 Before you can use the filter class that you created, you need to create the [hotspot file=1]`microprofile-config.properties` file.
 
@@ -371,8 +308,7 @@ microprofile-config.properties
 include::finish/src/main/webapp/META-INF/microprofile-config.properties[]
 ----
 
-This configuration file is picked up automatically by MicroProfile Config and registers your filter
-by passing in the fully qualified name of the filter class into the [hotspot=Config file=1]`mp.openapi.filter` property.
+This configuration file is picked up automatically by MicroProfile Config and registers your filter by passing in the fully qualified name of the filter class into the [hotspot=Config file=1]`mp.openapi.filter` property.
 
 ifndef::cloud-hosted[]
 Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree:
@@ -416,8 +352,7 @@ responses:
 
 For more information about which elements you can filter, see the https://openliberty.io/docs/ref/microprofile/[MicroProfile API documentation^].
 
-To learn more about MicroProfile Config, visit the MicroProfile Config https://github.com/eclipse/microprofile-config[GitHub repository^]
-and try one of the MicroProfile Config https://openliberty.io/guides/?search=Config[guides^].
+To learn more about MicroProfile Config, visit the MicroProfile Config https://github.com/eclipse/microprofile-config[GitHub repository^] and try one of the MicroProfile Config https://openliberty.io/guides/?search=Config[guides^].
 
 
 // =================================================================================================
@@ -426,12 +361,7 @@ and try one of the MicroProfile Config https://openliberty.io/guides/?search=Con
 
 == Using pregenerated OpenAPI documents
 
-As an alternative to generating the OpenAPI model tree from code, you can provide a valid pregenerated
-OpenAPI document to describe your APIs. This document must be named `openapi` with a `yml`, `yaml`, or `json`
-extension and be placed under the `META-INF` directory. Depending on the scenario, the document
-might be fully or partially complete. If the document is fully complete, then you can disable
-annotation scanning entirely by setting the `mp.openapi.scan.disable` MicroProfile Config property to `true`.
-If the document is partially complete, then you can augment it with code.
+As an alternative to generating the OpenAPI model tree from code, you can provide a valid pregenerated OpenAPI document to describe your APIs. This document must be named `openapi` with a `yml`, `yaml`, or `json` extension and be placed under the `META-INF` directory. Depending on the scenario, the document might be fully or partially complete. If the document is fully complete, then you can disable annotation scanning entirely by setting the `mp.openapi.scan.disable` MicroProfile Config property to `true`. If the document is partially complete, then you can augment it with code.
 
 To use the pre-generated OpenAPI document, create the OpenAPI document YAML file.
 
@@ -448,9 +378,7 @@ openapi.yaml
 include::finish/src/main/webapp/META-INF/openapi.yaml[]
 ----
 
-This document is the same as your current OpenAPI document with extra APIs for the `/inventory/properties` endpoint. 
-Since this document is complete, you can also add the [hotspot=Scan file=1]`mp.openapi.scan.disable` property
-and set it to `true` in the [hotspot file=1]`src/main/webapp/META-INF/microprofile-config.properties` file.
+This document is the same as your current OpenAPI document with extra APIs for the `/inventory/properties` endpoint. Since this document is complete, you can also add the [hotspot=Scan file=1]`mp.openapi.scan.disable` property and set it to `true` in the [hotspot file=1]`src/main/webapp/META-INF/microprofile-config.properties` file.
 
 [role="code_command hotspot file=1", subs="quotes"]
 ----
@@ -504,19 +432,15 @@ endif::[]
 
 // static guide instructions:
 ifndef::cloud-hosted[]
-No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually
-verify the document by visiting the {openapi-url}[{openapi-url}^] or the {openapi-url}/ui[{openapi-url}/ui^] URL.
+No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually verify the document by visiting the {openapi-url}[{openapi-url}^] or the {openapi-url}/ui[{openapi-url}/ui^] URL.
 endif::[]
 
 // cloud-hosted guide instructions:
 ifdef::cloud-hosted[]
-No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually
-verify the document by visiting the **http://localhost:9080/openapi** or the **http://localhost:9080/openapi/ui** URL.
+No automated tests are provided to verify the correctness of the generated OpenAPI document. Manually verify the document by visiting the **http://localhost:9080/openapi** or the **http://localhost:9080/openapi/ui** URL.
 endif::[]
 
-A few tests are included for you to test the basic functionality of the `inventory` service. If a test
-failure occurs, then you might have introduced a bug into the code. These tests will run automatically
-as a part of the integration test suite.
+A few tests are included for you to test the basic functionality of the `inventory` service. If a test failure occurs, then you might have introduced a bug into the code. These tests will run automatically as a part of the integration test suite.
 
 [role='command']
 include::{common-includes}/devmode-test.adoc[]
@@ -558,9 +482,7 @@ You have just documented and filtered the APIs of the `inventory` service from b
 
 Feel free to try one of the related MicroProfile guides. They demonstrate additional technologies that you can learn and expand on top of what you built here.
 
-For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications available in the
-MicroProfile OpenAPI
-https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps[GitHub repository^].
+For more in-depth examples of MicroProfile OpenAPI, try one of the demo applications available in the MicroProfile OpenAPI https://github.com/eclipse/microprofile-open-api/tree/master/tck/src/main/java/org/eclipse/microprofile/openapi/apps[GitHub repository^].
 
 
 include::{common-includes}/attribution.adoc[subs="attributes"]
