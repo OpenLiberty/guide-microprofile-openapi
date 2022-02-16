@@ -7,9 +7,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     IBM Corporation - initial API and implementation
+ *     IBM Corporation - Initial implementation
  *******************************************************************************/
- // end::copyright[]
+// end::copyright[]
 package it.io.openliberty.guides.system;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,9 +40,9 @@ public class SystemEndpointIT {
         JsonObject obj = response.readEntity(JsonObject.class);
 
         assertEquals(System.getProperty("os.name"),
-                     obj.getString("os.name"), 
+                     obj.getString("os.name"),
                      "The system property for the local and remote JVM should match");
-        
+
         response.close();
         client.close();
     }

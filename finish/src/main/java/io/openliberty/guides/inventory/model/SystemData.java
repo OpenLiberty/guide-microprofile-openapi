@@ -16,7 +16,8 @@ import java.util.Properties;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 // tag::SystemData[]
-@Schema(name = "SystemData", description = "POJO that represents a single inventory entry.")
+@Schema(name = "SystemData",
+       description = "POJO that represents a single inventory entry.")
 // end::SystemData[]
 public class SystemData {
 

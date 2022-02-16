@@ -42,8 +42,8 @@ public class InventoryUtils {
         } catch (UnknownUrlException ex) {
             System.err.println("The given URL is unreachable.");
         } catch (MalformedURLException ex) {
-            System.err.println("The given URL is not formatted correctly: " +
-            ex.getMessage());
+            System.err.println("The given URL is not formatted correctly: "
+            + ex.getMessage());
         }
         return null;
     }

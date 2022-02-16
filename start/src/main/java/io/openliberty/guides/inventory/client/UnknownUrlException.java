@@ -23,5 +23,5 @@ public class UnknownUrlException extends Exception {
   public UnknownUrlException(String message) {
     super(message);
   }
-  
+
 }

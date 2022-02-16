@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Properties;
 import jakarta.enterprise.context.ApplicationScoped;
-import io.openliberty.guides.inventory.model.*;
+import io.openliberty.guides.inventory.model.InventoryList;
+import io.openliberty.guides.inventory.model.SystemData;
 
 @ApplicationScoped
 public class InventoryManager {

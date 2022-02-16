@@ -93,20 +93,23 @@ public class InventoryEndpointIT {
         this.assertResponse(baseUrl, invResponse);
         this.assertResponse(baseUrl, sysResponse);
 
-        JsonObject jsonFromInventory = (JsonObject) invResponse.readEntity(JsonObject.class)
-                                                               .getJsonArray("systems")
-                                                               .getJsonObject(0)
-                                                               .get("properties");
+        JsonObject jsonFromInventory = (JsonObject)
+                                       invResponse.readEntity(JsonObject.class)
+                                                  .getJsonArray("systems")
+                                                  .getJsonObject(0)
+                                                  .get("properties");
 
         JsonObject jsonFromSystem = sysResponse.readEntity(JsonObject.class);
 
         String osNameFromInventory = jsonFromInventory.getString("os.name");
         String osNameFromSystem = jsonFromSystem.getString("os.name");
-        this.assertProperty("os.name", "localhost", osNameFromSystem, osNameFromInventory);
+        this.assertProperty("os.name", "localhost",
+                            osNameFromSystem, osNameFromInventory);
 
         String userNameFromInventory = jsonFromInventory.getString("user.name");
         String userNameFromSystem = jsonFromSystem.getString("user.name");
-        this.assertProperty("user.name", "localhost", userNameFromSystem, userNameFromInventory);
+        this.assertProperty("user.name", "localhost",
+                             userNameFromSystem, userNameFromInventory);
 
         invResponse.close();
         sysResponse.close();
@@ -119,14 +122,18 @@ public class InventoryEndpointIT {
         this.assertResponse(baseUrl, response);
 
         Response badResponse = client.target(baseUrl + INVENTORY_SYSTEMS + "/"
-                               + "badhostname").request(MediaType.APPLICATION_JSON).get();
+                               + "badhostname")
+                               .request(MediaType.APPLICATION_JSON)
+                               .get();
 
         assertEquals(404, badResponse.getStatus(),
-                     "BadResponse expected status: 404. Response code not as expected.");
+                     "BadResponse expected status: 404."
+                     + " Response code not as expected.");
 
         String stringObj = badResponse.readEntity(String.class);
         boolean isError = stringObj.contains("error");
-        assertTrue(isError, "badhostname is not a valid host but it didn't raise an error");
+        assertTrue(isError, "badhostname is not a valid host"
+                   + "but it didn't raise an error");
 
         response.close();
         badResponse.close();
@@ -136,7 +143,7 @@ public class InventoryEndpointIT {
      * <p>
      * Returns response information from the specified URL.
      * </p>
-     * 
+     *
      * @param url
      *          - target URL.
      * @return Response object with the response from the specified URL.
@@ -149,7 +156,7 @@ public class InventoryEndpointIT {
      * <p>
      * Asserts that the given URL has the correct response code of 200.
      * </p>
-     * 
+     *
      * @param url
      *          - target URL.
      * @param response
@@ -162,7 +169,7 @@ public class InventoryEndpointIT {
     /**
      * Asserts that the specified JVM system property is equivalent in both the
      * system and inventory services.
-     * 
+     *
      * @param propertyName
      *          - name of the system property to check.
      * @param hostname
@@ -172,7 +179,8 @@ public class InventoryEndpointIT {
      * @param actual
      *          - actual name.
      */
-    private void assertProperty(String propertyName, String hostname, String expected, String actual) {
+    private void assertProperty(String propertyName, String hostname,
+                                String expected, String actual) {
         assertEquals(expected, actual, "JVM system property [" + propertyName + "] "
                 + "in the system service does not match the one stored in "
                 + "the inventory service for " + hostname);
@@ -186,7 +194,10 @@ public class InventoryEndpointIT {
         this.assertResponse(baseUrl, response);
         response.close();
 
-        Response targetResponse = client.target(baseUrl + INVENTORY_SYSTEMS + "/localhost").request().get();
+        Response targetResponse = client.target(baseUrl + INVENTORY_SYSTEMS
+                                                + "/localhost")
+                                                .request()
+                                                .get();
         targetResponse.close();
     }
 

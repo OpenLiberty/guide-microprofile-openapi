@@ -26,22 +26,25 @@ import io.openliberty.guides.inventory.client.UnknownUrlExceptionMapper;
 public class InventoryUtils {
 
   private final String SYSTEM_PORT = System.getProperty("default.http.port", "9080");
-  
+
     public Properties getProperties(String hostname) {
         try {
-            String customUrlString = "http://" + hostname + ":" + SYSTEM_PORT + "/inventory";
+            String customUrlString = "http://" + hostname + ":"
+                                      + SYSTEM_PORT + "/inventory";
             URL customURL = new URL(customUrlString);
-            SystemClient customRestClient = RestClientBuilder.newBuilder()
-                                                             .baseUrl(customURL)
-                                                             .register(UnknownUrlExceptionMapper.class)
-                                                             .build(SystemClient.class);
+            SystemClient customRestClient = 
+                                       RestClientBuilder.newBuilder()
+                                                        .baseUrl(customURL)
+                                                        .register(UnknownUrlExceptionMapper.class)
+                                                        .build(SystemClient.class);
             return customRestClient.getProperties();
         } catch (ProcessingException ex) {
             handleProcessingException(ex);
         } catch (UnknownUrlException ex) {
             System.err.println("The given URL is unreachable.");
         } catch (MalformedURLException ex) {
-            System.err.println("The given URL is not formatted correctly: " + ex.getMessage());
+            System.err.println("The given URL is not formatted correctly: "
+                               + ex.getMessage());
         }
         return null;
     }
