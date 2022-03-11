@@ -83,6 +83,9 @@
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
                 <version>3.5.1</version>
+                <configuration>
+                    <liberty.runtime.version>22.0.0.2</liberty.runtime.version>
+                </configuration>
             </plugin>
             <!-- Plugin to run functional tests -->
             <plugin>
