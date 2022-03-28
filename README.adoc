@@ -108,7 +108,10 @@ Now, run the following curl command to see the generated OpenAPI tree:
 curl http://localhost:9080/openapi
 ```
 
-To visit the UI for a more interactive view of the APIs, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number and click the **OK** button. You’re redirected to the ***https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai*** URL. Click the **interactive UI** link on the welcome page. 
+Click the following button to visit the UI by the ***/openapi/ui*** endpoint. 
+::startApplication{port="9080" display="internal" name="Launch Application" route="/openapi/ui"}
+
+Or, select **Launch Application** from the menu of the IDE, type in **9080** to specify the port number and click the **OK** button. You’re redirected to the ***https://accountname-9080.theiadocker-4.proxy.cognitiveclass.ai*** URL. Click the **interactive UI** link on the welcome page. 
 endif::[]
 
 === Augmenting the existing restfulWS annotations with OpenAPI annotations
