@@ -1,6 +1,6 @@
 // tag::copyright[]
 /*******************************************************************************
- * Copyright (c) 2017, 2019 IBM Corporation and others.
+ * Copyright (c) 2017, 2022 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,7 +15,7 @@ package io.openliberty.guides.inventory;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.net.MalformedURLException;
-import javax.ws.rs.ProcessingException;
+import jakarta.ws.rs.ProcessingException;
 import java.util.Properties;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
@@ -26,22 +26,25 @@ import io.openliberty.guides.inventory.client.UnknownUrlExceptionMapper;
 public class InventoryUtils {
 
   private final String SYSTEM_PORT = System.getProperty("default.http.port", "9080");
-  
+
     public Properties getProperties(String hostname) {
         try {
-            String customUrlString = "http://" + hostname + ":" + SYSTEM_PORT + "/inventory";
+            String customUrlString = "http://" + hostname + ":"
+                                      + SYSTEM_PORT + "/inventory";
             URL customURL = new URL(customUrlString);
-            SystemClient customRestClient = RestClientBuilder.newBuilder()
-                                                             .baseUrl(customURL)
-                                                             .register(UnknownUrlExceptionMapper.class)
-                                                             .build(SystemClient.class);
+            SystemClient customRestClient =
+                                       RestClientBuilder.newBuilder()
+                                        .baseUrl(customURL)
+                                        .register(UnknownUrlExceptionMapper.class)
+                                        .build(SystemClient.class);
             return customRestClient.getProperties();
         } catch (ProcessingException ex) {
             handleProcessingException(ex);
         } catch (UnknownUrlException ex) {
             System.err.println("The given URL is unreachable.");
         } catch (MalformedURLException ex) {
-            System.err.println("The given URL is not formatted correctly: " + ex.getMessage());
+            System.err.println("The given URL is not formatted correctly: "
+                               + ex.getMessage());
         }
         return null;
     }

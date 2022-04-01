@@ -1,6 +1,6 @@
 // tag::copyright[]
 /*******************************************************************************
- * Copyright (c) 2017, 2018 IBM Corporation and others.
+ * Copyright (c) 2017, 2022 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,13 +13,14 @@
 package io.openliberty.guides.inventory.client;
 
 import java.util.logging.Logger;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.Provider;
 import org.eclipse.microprofile.rest.client.ext.ResponseExceptionMapper;
 
 @Provider
-public class UnknownUrlExceptionMapper implements ResponseExceptionMapper<UnknownUrlException> {
+public class UnknownUrlExceptionMapper implements
+ResponseExceptionMapper<UnknownUrlException> {
 
   Logger LOG = Logger.getLogger(UnknownUrlExceptionMapper.class.getName());
 

@@ -1,6 +1,6 @@
 // tag::copyright[]
 /*******************************************************************************
- * Copyright (c) 2017, 2020 IBM Corporation and others.
+ * Copyright (c) 2017, 2022 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,14 +15,13 @@ package it.io.openliberty.guides.inventory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
-import org.apache.cxf.jaxrs.provider.jsrjsonp.JsrJsonpProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -51,7 +50,6 @@ public class InventoryEndpointIT {
     @BeforeEach
     public void setup() {
         client = ClientBuilder.newClient();
-        client.register(JsrJsonpProvider.class);
     }
 
     @AfterEach
@@ -94,20 +92,23 @@ public class InventoryEndpointIT {
         this.assertResponse(baseUrl, invResponse);
         this.assertResponse(baseUrl, sysResponse);
 
-        JsonObject jsonFromInventory = (JsonObject) invResponse.readEntity(JsonObject.class)
-                                                               .getJsonArray("systems")
-                                                               .getJsonObject(0)
-                                                               .get("properties");
+        JsonObject jsonFromInventory = (JsonObject)
+                                       invResponse.readEntity(JsonObject.class)
+                                                  .getJsonArray("systems")
+                                                  .getJsonObject(0)
+                                                  .get("properties");
 
         JsonObject jsonFromSystem = sysResponse.readEntity(JsonObject.class);
 
         String osNameFromInventory = jsonFromInventory.getString("os.name");
         String osNameFromSystem = jsonFromSystem.getString("os.name");
-        this.assertProperty("os.name", "localhost", osNameFromSystem, osNameFromInventory);
+        this.assertProperty("os.name", "localhost",
+                            osNameFromSystem, osNameFromInventory);
 
         String userNameFromInventory = jsonFromInventory.getString("user.name");
         String userNameFromSystem = jsonFromSystem.getString("user.name");
-        this.assertProperty("user.name", "localhost", userNameFromSystem, userNameFromInventory);
+        this.assertProperty("user.name", "localhost",
+                           userNameFromSystem, userNameFromInventory);
 
         invResponse.close();
         sysResponse.close();
@@ -119,15 +120,20 @@ public class InventoryEndpointIT {
         Response response = this.getResponse(baseUrl + INVENTORY_SYSTEMS);
         this.assertResponse(baseUrl, response);
 
-        Response badResponse = client.target(baseUrl + INVENTORY_SYSTEMS + "/"
-                               + "badhostname").request(MediaType.APPLICATION_JSON).get();
+        Response badResponse = client.target(baseUrl
+                               + INVENTORY_SYSTEMS + "/"
+                               + "badhostname")
+                                .request(MediaType.APPLICATION_JSON)
+                                .get();
 
         assertEquals(404, badResponse.getStatus(),
-                     "BadResponse expected status: 404. Response code not as expected.");
+                     "BadResponse expected status: 404."
+                     + " Response code not as expected.");
 
         String stringObj = badResponse.readEntity(String.class);
         boolean isError = stringObj.contains("error");
-        assertTrue(isError, "badhostname is not a valid host but it didn't raise an error");
+        assertTrue(isError, "badhostname is not a valid host"
+                   + "but it didn't raise an error");
 
         response.close();
         badResponse.close();
@@ -137,7 +143,7 @@ public class InventoryEndpointIT {
      * <p>
      * Returns response information from the specified URL.
      * </p>
-     * 
+     *
      * @param url
      *          - target URL.
      * @return Response object with the response from the specified URL.
@@ -150,7 +156,7 @@ public class InventoryEndpointIT {
      * <p>
      * Asserts that the given URL has the correct response code of 200.
      * </p>
-     * 
+     *
      * @param url
      *          - target URL.
      * @param response
@@ -163,7 +169,7 @@ public class InventoryEndpointIT {
     /**
      * Asserts that the specified JVM system property is equivalent in both the
      * system and inventory services.
-     * 
+     *
      * @param propertyName
      *          - name of the system property to check.
      * @param hostname
@@ -173,7 +179,8 @@ public class InventoryEndpointIT {
      * @param actual
      *          - actual name.
      */
-    private void assertProperty(String propertyName, String hostname, String expected, String actual) {
+    private void assertProperty(String propertyName, String hostname,
+                               String expected, String actual) {
         assertEquals(expected, actual, "JVM system property [" + propertyName + "] "
                 + "in the system service does not match the one stored in "
                 + "the inventory service for " + hostname);
@@ -187,7 +194,10 @@ public class InventoryEndpointIT {
         this.assertResponse(baseUrl, response);
         response.close();
 
-        Response targetResponse = client.target(baseUrl + INVENTORY_SYSTEMS + "/localhost").request().get();
+        Response targetResponse = client.target(baseUrl
+                                               + INVENTORY_SYSTEMS + "/localhost")
+                                         .request()
+                                         .get();
         targetResponse.close();
     }
 
