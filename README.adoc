@@ -144,11 +144,11 @@ Clearly, there are many more OpenAPI annotations now, so let’s break them down
 |===
 
 ifndef::cloud-hosted[]
-Since the Open Liberty instance was started in dev mode at the beginning of the guide, your changes were automatically picked up. Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree. The two endpoints at which your JAX-RS endpoint methods are served are now more meaningful:
+Because the Open Liberty instance was started in dev mode at the beginning of the guide, your changes were automatically picked up. Refresh the {openapi-url}[{openapi-url}^] URL to see the updated OpenAPI tree. The two endpoints at which your JAX-RS endpoint methods are served are now more meaningful:
 endif::[]
 
 ifdef::cloud-hosted[]
-Since the Open Liberty instance was started in dev mode at the beginning of the guide, your changes were automatically picked up. Run the following curl command to see the updated OpenAPI tree:
+Because the Open Liberty instance was started in dev mode at the beginning of the guide, your changes were automatically picked up. Run the following curl command to see the updated OpenAPI tree:
 ```bash
 curl http://localhost:9080/openapi
 ```
