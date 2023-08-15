@@ -39,7 +39,7 @@ The OpenAPI specification, previously known as the Swagger specification, define
 
 You will document the RESTful APIs of the provided `inventory` service, which serves two endpoints, `inventory/systems` and `inventory/properties`. These two endpoints function the same way as in the other MicroProfile guides.
 
-Before you proceed, note that the 1.0 version of the MicroProfile OpenAPI specification does not define how the `/openapi` endpoint may be partitioned in the event of multiple JAX-RS applications running on the same server. In other words, you must stick to one JAX-RS application per server as the behaviour for handling multiple applications is currently undefined.
+Before you proceed, note that the 1.0 version of the MicroProfile OpenAPI specification does not define how the `/openapi` endpoint may be partitioned in the event of multiple JAX-RS applications running on the same server. In other words, you must stick to one JAX-RS application per server instance as the behaviour for handling multiple applications is currently undefined.
 
 
 // =================================================================================================
