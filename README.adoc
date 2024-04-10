@@ -1,4 +1,4 @@
-// Copyright (c) 2017, 2023 IBM Corporation and others.
+// Copyright (c) 2017, 2024 IBM Corporation and others.
 // Licensed under Creative Commons Attribution-NoDerivatives
 // 4.0 International (CC BY-ND 4.0)
 //   https://creativecommons.org/licenses/by-nd/4.0/
@@ -12,7 +12,7 @@
 :page-guide-category: microprofile
 :page-essential: false
 :page-description: Explore how to document and filter RESTful APIs from code or static files by using MicroProfile OpenAPI.
-:page-tags: ['MicroProfile']
+:page-tags: ['microprofile']
 :page-permalink: /guides/{projectid}
 :page-related-guides: ['cdi-intro', 'microprofile-config']
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/prod
@@ -325,8 +325,8 @@ info:
   title: Inventory App
   description: App for storing JVM system properties of various hosts.
   license:
-    name: Eclipse Public License - v 1.0
-    url: https://www.eclipse.org/legal/epl-v10.html
+    name: Eclipse Public License - v 2.0
+    url: https://www.eclipse.org/legal/epl-2.0
   version: "1.0"
 servers:
 - url: "http://localhost:{port}"
