@@ -118,7 +118,7 @@ Because all Jakarta Restful Web Services annotations are processed by default, y
 
 [role='code_command hotspot file=0', subs="quotes"]
 ----
-#Update the `InventoryResource` class.#
+#Replace the `InventoryResource` class.#
 `src/main/java/io/openliberty/guides/inventory/InventoryResource.java`
 ----
 
@@ -200,7 +200,7 @@ OpenAPI annotations can also be added to POJOs to describe what they represent. 
 
 [role='code_command hotspot file=1', subs="quotes"]
 ----
-#Update the `InventoryList` class.#
+#Replace the `InventoryList` class.#
 `src/main/java/io/openliberty/guides/inventory/model/InventoryList.java`
 ----
 
@@ -217,7 +217,7 @@ Likewise, annotate the [hotspot file=2]`src/main/java/io/openliberty/guides/inve
 
 [role='code_command hotspot file=2', subs="quotes"]
 ----
-#Update the `SystemData` class.#
+#Replace the `SystemData` class.#
 `src/main/java/io/openliberty/guides/inventory/model/SystemData.java`
 ----
 
@@ -379,7 +379,7 @@ This document is the same as your current OpenAPI document with extra APIs for t
 
 [role="code_command hotspot file=1", subs="quotes"]
 ----
-#Update the configuration file.#
+#Replace the configuration file.#
 `src/main/resources/META-INF/microprofile-config.properties`
 ----
 
