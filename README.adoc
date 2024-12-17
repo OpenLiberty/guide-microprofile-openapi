@@ -181,7 +181,7 @@ endif::[]
       required: true
       schema:
         type: string
-      example: foo
+      example: localhost
     responses:
       "404":
         description: Missing description
