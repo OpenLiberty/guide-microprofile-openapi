@@ -5,7 +5,7 @@
     <platform>microprofile-7.0</platform>
     <feature>restfulWS</feature>
     <feature>jsonp</feature>
-     <feature>jsonb</feature>
+    <feature>jsonb</feature>
     <feature>cdi</feature>
     <feature>mpConfig</feature>
     <feature>mpRestClient</feature>
