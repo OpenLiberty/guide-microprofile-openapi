@@ -1,4 +1,4 @@
-// Copyright (c) 2017, 2024 IBM Corporation and others.
+// Copyright (c) 2017, 2025 IBM Corporation and others.
 // Licensed under Creative Commons Attribution-NoDerivatives
 // 4.0 International (CC BY-ND 4.0)
 //   https://creativecommons.org/licenses/by-nd/4.0/
@@ -181,7 +181,7 @@ endif::[]
       required: true
       schema:
         type: string
-      example: foo
+      example: localhost
     responses:
       "404":
         description: Missing description
@@ -347,7 +347,7 @@ responses:
       application/json: {}
 ----
 
-For more information about which elements you can filter, see the https://openliberty.io/docs/ref/microprofile/[MicroProfile API documentation^].
+For more information about which elements you can filter, see the https://openliberty.io/docs/latest/reference/javadoc/microprofile-7.0-javadoc.html[MicroProfile API documentation^].
 
 To learn more about MicroProfile Config, visit the MicroProfile Config https://github.com/eclipse/microprofile-config[GitHub repository^] and try one of the MicroProfile Config https://openliberty.io/guides/?search=Config[guides^].
 
