@@ -65,7 +65,7 @@ public class InventoryResource {
             description = "The host for whom to retrieve "
                 + "the JVM system properties for.",
             required = true,
-            example = "foo",
+            example = "localhost",
             schema = @Schema(type = SchemaType.STRING))
         // end::Parameter[]
         @PathParam("hostname") String hostname) {
