@@ -52,7 +52,7 @@ include::{common-includes}/gitclone.adoc[]
 // Try what you'll build
 // =================================================================================================
 [role='command']
-include::{common-includes}/twyb-intro.adoc[]
+include::{common-includes}/twyb-intro-mvnw.adoc[]
 
 
 ifndef::cloud-hosted[]
@@ -74,7 +74,7 @@ This UI is built from the [Open Source Swagger UI](https://swagger.io/tools/swag
 endif::[]
 
 [role='command']
-include::{common-includes}/twyb-end.adoc[]
+include::{common-includes}/twyb-end-mvnw.adoc[]
 
 // =================================================================================================
 // Generating APIs
@@ -93,7 +93,7 @@ cd /home/project/guide-microprofile-openapi/start
 endif::[]
 
 [role='command']
-include::{common-includes}/devmode-lmp33-start.adoc[]
+include::{common-includes}/devmode-mvnw-start.adoc[]
 
 Because the Jakarta Restful Web Services framework handles basic API generation for Jakarta Restful Web Services annotations, a skeleton OpenAPI tree will be generated from the `inventory` service. You can use this tree as a starting point and augment it with annotations and code to produce a complete OpenAPI document.
 
