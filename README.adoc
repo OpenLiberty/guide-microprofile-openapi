@@ -323,11 +323,14 @@ endif::[]
 ----
 info:
   title: Inventory App
+  version: "1.0"
   description: App for storing JVM system properties of various hosts.
   license:
     name: Eclipse Public License - v 2.0
     url: https://www.eclipse.org/legal/epl-2.0
-  version: "1.0"
+
+...
+
 servers:
 - url: "http://localhost:{port}"
   description: Simple Open Liberty.
