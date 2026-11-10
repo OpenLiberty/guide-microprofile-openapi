@@ -35,8 +35,8 @@ public class SystemData {
 
     @Override
     public boolean equals(Object host) {
-        if (host instanceof SystemData data) {
-            return hostname.equals(data.getHostname());
+        if (host instanceof SystemData) {
+            return hostname.equals(((SystemData) host).getHostname());
         }
         return false;
     }
