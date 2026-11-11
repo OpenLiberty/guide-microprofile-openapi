@@ -11,6 +11,8 @@
 // end::copyright[]
 package io.openliberty.guides.inventory;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.net.MalformedURLException;
@@ -30,7 +32,7 @@ public class InventoryUtils {
         try {
             String customUrlString = "http://" + hostname + ":"
                                       + SYSTEM_PORT + "/inventory";
-            URL customURL = new URL(customUrlString);
+            URL customURL = new URI(customUrlString).toURL();
             SystemClient customRestClient =
                                        RestClientBuilder.newBuilder()
                                         .baseUrl(customURL)
@@ -41,7 +43,7 @@ public class InventoryUtils {
             handleProcessingException(ex);
         } catch (UnknownUrlException ex) {
             System.err.println("The given URL is unreachable.");
-        } catch (MalformedURLException ex) {
+        } catch (MalformedURLException | URISyntaxException ex) {
             System.err.println("The given URL is not formatted correctly: "
                                + ex.getMessage());
         }
